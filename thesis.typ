@@ -31,21 +31,22 @@
   // the German abstract is optional, i.e. set to none.
   abstract-ge: [
     #lorem(180)#v(0.5cm)
-    #todo(
-      [TODO: Die Kurzfassung sollte das gesamte Werk enthalten, also das spannende
-        Problem, den gewählten – neuartigen – Lösungsansatz und natürlich vor allem die
-        erreichten Resultate.],
-    )
+    // #todo(
+    //   [TODO: Die Kurzfassung sollte das gesamte Werk enthalten, also das spannende
+    //     Problem, den gewählten – neuartigen – Lösungsansatz und natürlich vor allem die
+    //     erreichten Resultate.],
+    // )
   ], abstract-en: [
+    
     #lorem(180)#v(0.5cm)
-    #todo(
-      [TODO: Write the abstract in English and in German, called Kurzfassung. Describe
-        in about 250 to 350 words the problem, the innovation, the method, the results
-        and implications.],
-    )
+    // #todo(
+    //   [TODO: Write the abstract in English and in German, called Kurzfassung. Describe
+    //     in about 250 to 350 words the problem, the innovation, the method, the results
+    //     and implications.],
+    // )
   ],
   // Add some (3 to 7) keywords
-  keywords: ("FHJ", "SWD", "thesis",),
+  keywords: ("FHJ", "SWD", "iOS", "peer-to-peer", "ad-hoc", "smartphone", "Apple"),
   // Enable/disable outlines for "listings", "tables","equations", and/or "figures"
   show-list-of: ("listings", "tables", "figures"),
   // The *.bib file with the bibliography entries

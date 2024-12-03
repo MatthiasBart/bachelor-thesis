@@ -1,6 +1,6 @@
 #import "global.typ": *
 
-= Background
+= Background<background>
 
 #lorem(45)
 

@@ -8,21 +8,23 @@
 )
 #v(1em)
 
-This thesis analyses and measures the capabilities of new iOS devices to communicate via local peer to peer networks. Since most of current technology standards rely heavily on external infrastructure local communication is not yet wide spread or optimized to function over long distances. 
+This thesis analyses and measures the capabilities of new iOS devices to communicate via local peer to peer networks. Since most of current technology standards rely heavily on external infrastructure with powerful receiver antennas, direct peer to peer communication is not yet wide spread or optimized to function over long distances. It is unclear what 
 
-== Problem Statement
+== Motivation and Research Definition
+
+*Motivation*
 
 Modern mobile devices can make use of a wide variety of communication technologies. To achieve data transfers seamlessly, standards like Bluetooth, WiFi or 5G need to be wireless. The use cases are different and so is the applicability and protocol. Nevertheless the complexity of creating devices supporting all of these different standards, global economic demand has drastically impacted research and development in data transmission and hardware engineering to let humanity invent smartphones. Unfortunately most of the communication methods used on smartphones all demand on mediators. Be it a router in a local network or a cell tower in a cellular network, without these nodes a connection between two peers could not be established. However in scenarios where the required infrastructure is not available or in reach, communication between two mobile phones could be initiated through Bluetooth or peertopeer WiFi. Due to the latest advancements in these technologies and hardware, it is unclear how good of an option it is to replace mediator based with direct Peer to Peer (PtP) communication in various situations. This thesis tries to find and measure metrics that indicate the quality of direct PtP connections on Apple's mobile devices. This can help to evaluate the feasibility of alike projects. In particular the Multipeer Connectivity Framework accessible from iOS 7.0+ will be tested for its robustness considering metrics of quality in different scenarios and locations.
 
-== Research Questions
+*Research Questions*
 
-Can direct PtP connections between Apple devices improve connectivity in certain scenarios?
+Can direct PtP connections between Apple devices improve connectivity in contrast to commercial technologies to build new forms of mobile connections?
 
-== Hypothesis
+*Hypothesis*
 
 $H_1$
 
-Direct PtP connectivity on Apple devices can enhance connectivity in different scenarios.
+Direct PtP connectivity on Apple devices can enhance connectivity in different scenarios and therefore work as an alternative to mediator based communication technologies, for implementing ad-hoc mesh networks.
 
 
 // #todo(
@@ -30,13 +32,13 @@ Direct PtP connectivity on Apple devices can enhance connectivity in different s
 //     like. Explain, how to possibly solve a given problem. ],
 // )
 
-== Method
+*Method*
 
-A prototype application will be developed that will serve as a tool to measure quality metrics of connectivity. The metrics will be stated in the test protocol and different scenarios will be tested that indicate different characterisics to cover most areas of application.
+A prototype application will be developed that will serve as a tool to measure quality metrics of connectivity. The metrics will be defined in the test protocol. In addition, different scenarios, indicating various characteristics of real life scenarios will be tested to cover most areas of application. Measurement of connection quality will be purely based on values captured by the prototype app itself. The characteristics of the environment will be first described based on human perceive. Measuring distance will be done with .... TODO 
 
-== Summary
+*Summary*
 
-Since the latest smartphone technologies improved hardware and operating system for direct communications, it is unclear how well these tequniques can currently be implemented to support communication in various scenarios. Focusing on the Apple platform, an iOS App is developed, that also serves as testing utility. 
+Since the latest smartphone technologies improved hardware and operating system for direct communications, it is unclear how well these techniques can currently serve direct communication in different scenarios. Focusing on the Apple platform, an iOS App is developed, that also serves as testing utility. After discussing related work that summarizes past attempts, considerations and benefits of direct communication the @background will provide all required knowledge to understand the concepts of the design and decisions made to best answer the question, if or when latest technology is/will be ready to rely on direct PtP communication.
 
 // #todo(
 //   [
