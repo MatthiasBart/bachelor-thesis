@@ -8,50 +8,54 @@
 )
 #v(1em)
 
-*Problem Statement*
+This thesis analyses and measures the capabilities of new iOS devices to communicate via local peer to peer networks. Since most of current technology standards rely heavily on external infrastructure local communication is not yet wide spread or optimized to function over long distances. 
+
+== Problem Statement
 
 Modern mobile devices can make use of a wide variety of communication technologies. To achieve data transfers seamlessly, standards like Bluetooth, WiFi or 5G need to be wireless. The use cases are different and so is the applicability and protocol. Nevertheless the complexity of creating devices supporting all of these different standards, global economic demand has drastically impacted research and development in data transmission and hardware engineering to let humanity invent smartphones. Unfortunately most of the communication methods used on smartphones all demand on mediators. Be it a router in a local network or a cell tower in a cellular network, without these nodes a connection between two peers could not be established. However in scenarios where the required infrastructure is not available or in reach, communication between two mobile phones could be initiated through Bluetooth or peertopeer WiFi. Due to the latest advancements in these technologies and hardware, it is unclear how good of an option it is to replace mediator based with direct Peer to Peer (PtP) communication in various situations. This thesis tries to find and measure metrics that indicate the quality of direct PtP connections on Apple's mobile devices. This can help to evaluate the feasibility of alike projects. In particular the Multipeer Connectivity Framework accessible from iOS 7.0+ will be tested for its robustness considering metrics of quality in different scenarios and locations.
 
-*Research Questions*
+== Research Questions
 
 Can direct PtP connections between Apple devices improve connectivity in certain scenarios?
 
-*Hypothesis*
+== Hypothesis
 
 $H_1$
 
 Direct PtP connectivity on Apple devices can enhance connectivity in different scenarios.
 
 
-#todo(
-  [ State a hypothesis – a rough idea – of how you think a solution might look
-    like. Explain, how to possibly solve a given problem. ],
-)
+// #todo(
+//   [ State a hypothesis – a rough idea – of how you think a solution might look
+//     like. Explain, how to possibly solve a given problem. ],
+// )
 
-#pagebreak()
+== Method
 
-*Method*
+A prototype application will be developed that will serve as a tool to measure quality metrics of connectivity. The metrics will be stated in the test protocol and different scenarios will be tested that indicate different characterisics to cover most areas of application.
 
-A prototype application will be developed that will serve as a tool to measure metrics of quality of connectivity. Metrics of quality and different these are measured, will be defined in the testing protocol. 
+== Summary
 
-#todo(
-  [
-    Describe your structured, academic approach to find — and evaluate — a solution.
-    When you needed (large) data sets for you work, explain how you collected and
-    filtered raw data. For the validation (see Section Evaluation 6) you want to
-    describe the criteria for objective measurement.
-  ],
-)
+Since the latest smartphone technologies improved hardware and operating system for direct communications, it is unclear how well these tequniques can currently be implemented to support communication in various scenarios. Focusing on the Apple platform, an iOS App is developed, that also serves as testing utility. 
 
-#todo(
-  [
-    #v(3cm)
-    Note the so called "*Roter Faden*": At the end of one chapter you might sum up
-    the content. Then you give an outlook on the next chapter. For example, at the
-    end of the introduction you might start the text with:
+// #todo(
+//   [
+//     Describe your structured, academic approach to find — and evaluate — a solution.
+//     When you needed (large) data sets for you work, explain how you collected and
+//     filtered raw data. For the validation (see Section Evaluation 6) you want to
+//     describe the criteria for objective measurement.
+//   ],
+// )
 
-    _The remainder of the thesis is structured as follows:_
-    _The implementation is presented in @implementation (including the backend
-    @backend and the frontend @frontend). The evaluation ... ..._
-  ],
-)
+// #todo(
+//   [
+//     #v(3cm)
+//     Note the so called "*Roter Faden*": At the end of one chapter you might sum up
+//     the content. Then you give an outlook on the next chapter. For example, at the
+//     end of the introduction you might start the text with:
+
+//     _The remainder of the thesis is structured as follows:_
+//     _The implementation is presented in @implementation (including the backend
+//     @backend and the frontend @frontend). The evaluation ... ..._
+//   ],
+// )
