@@ -2,7 +2,11 @@
 
 = Background<background>
 
-#lorem(45)
+Describe that all of mobile connections use mediators and why this happend like it and why it is beneficial (bigger antennas that can handle weaker signals and send stronger signals) 
+describe what has changes in the last years on apples platform and why non-mediator communication got so important for apples ecosystem, apple watch pairing, clone app to mac (when opened on iphone, eg. calendar), cmd+c and cmd+v via across iphone and mac
+what is lorawan and how could it be used one day in smartphones and mobile computing
+describe why peertopeer wlan or bluetooth is not yet suitable for long distance communications, 
+also mention the longest wlan connection, 273km with bigger antennas
 
 #todo(
   [

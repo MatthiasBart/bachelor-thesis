@@ -7,6 +7,12 @@
 // which are used within all the chapters:
 #import "chapters/global.typ": *
 
+// Definitions for the glossary must be defined (i.e. registered)
+// before the main document is processed
+#import "chapters/glossary-definitions.typ": gls-entries
+#register-glossary(gls-entries)
+
+
 #show: doc => thesis(
   // Logo should be ok for a thesis at IIT, the
   // Institute of Software Design and Security (see https://www.fh-joanneum.at/iit)

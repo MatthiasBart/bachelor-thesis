@@ -19,7 +19,7 @@
 //         https://github.com/typst/packages/tree/main/packages/preview/fh-joanneum-iit-thesis)
 //    Copy the lib.typ to a (sub)folder of this project and
 //    set the path accordingly.
-#import "@preview/fh-joanneum-iit-thesis:1.2.3": *
+#import "@preview/fh-joanneum-iit-thesis:2.0.5": *
 
 // Anytime you might simply override custom macros, such as:
 // #let quote(message, by) = {
@@ -38,10 +38,25 @@
 //   )
 // }
 
+// Create your own custom format for being consistant in the text.
+//
+// E.g. format all file names monospaced: ./tmp/src/SecureMessage.py
+#let filename(it) = text(font:"PT Mono", size: 10pt,it)
+//
+// E.g. format shell commands and command line tools: git, Python, curl
+#let command(it) = [
+  #set text(font:"PT Mono",size: 10pt, style: "oblique")
+  #h(0.1em, weak: false)
+  '#it'
+  #h(0.3em, weak: true)
+]
+
+
+
 //
 // Other packages used:
 //
 
 // See https://github.com/typst/packages/tree/main/packages/preview/glossarium
-#import "@preview/glossarium:0.4.1": make-glossary, print-glossary, gls, glspl
-
+#import "@preview/glossarium:0.5.0": make-glossary, register-glossary, print-glossary, gls, glspl
+#show: make-glossary
