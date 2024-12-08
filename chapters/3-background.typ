@@ -8,6 +8,8 @@ what is lorawan and how could it be used one day in smartphones and mobile compu
 describe why peertopeer wlan or bluetooth is not yet suitable for long distance communications, 
 also mention the longest wlan connection, 273km with bigger antennas
 
+TODO: Maybe swap out background and related work 
+
 #todo(
   [
   In the background section you might give explanations which are necessary to
