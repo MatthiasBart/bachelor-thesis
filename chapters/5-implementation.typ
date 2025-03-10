@@ -4,6 +4,27 @@
 
 #lorem(35)#v(0.3cm)
 
+#figure(
+  align(
+    left,
+    // we use a custom template (style), defined in fh.typ
+    // the files are expected in subfolder "source"
+    // optionally, specify firstline/lastline
+    fhjcode(code: read("/code-snippets/save-task-reference.swift"), lastline: 7),
+  ),
+  // we use a custom flex-caption), to allow long and short captions
+  // (the short one appears in the outline List of Figures).
+  // This is defined in `lib.typ`.
+  caption: flex-caption(
+    [Saving the reference to the detached task, so it can be canceled when the viewmodel is dereferenced.], [Stored reference of detached task.],
+  ),
+) <lst:StoredTaskReference>
+
+
+https://developer.apple.com/documentation/swift/calling-functions-with-pointer-parameters
+how to pass pointers to functions 
+
+
 #todo(
   [ Describe what is relevant and special about your working prototype. State how
   single features help to solve problem(s) at hand. You might implement only the
