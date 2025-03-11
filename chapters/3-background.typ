@@ -2,13 +2,18 @@
 
 = Background<background>
 
+This should better be part of introduction
 Describe that all of mobile connections use mediators and why this happend like it and why it is beneficial (bigger antennas that can handle weaker signals and send stronger signals) 
 describe what has changes in the last years on apples platform and why non-mediator communication got so important for apples ecosystem, apple watch pairing, clone app to mac (when opened on iphone, eg. calendar), cmd+c and cmd+v via across iphone and mac
 what is lorawan and how could it be used one day in smartphones and mobile computing
 describe why peertopeer wlan or bluetooth is not yet suitable for long distance communications, 
 also mention the longest wlan connection, 273km with bigger antennas
 
-TODO: Maybe swap out background and related work 
+describe what was used on ios device what frameworks exist. how bluetooth was used and how wifi is now used for ptp connections
+
+== OSI Model
+
+The OSI Model is a well known abstraction of the networking stack, used in literature and teaching. This model helps to understand how and where measurements are taken. 
 
 #todo(
   [
