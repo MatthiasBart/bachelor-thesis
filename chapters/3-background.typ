@@ -2,6 +2,9 @@
 
 = Background<background>
 
+== Infrastructure Networks 
+
+== Ad-hoc Networks
 This should better be part of introduction
 Describe that all of mobile connections use mediators and why this happend like it and why it is beneficial (bigger antennas that can handle weaker signals and send stronger signals) 
 describe what has changes in the last years on apples platform and why non-mediator communication got so important for apples ecosystem, apple watch pairing, clone app to mac (when opened on iphone, eg. calendar), cmd+c and cmd+v via across iphone and mac
@@ -11,9 +14,40 @@ also mention the longest wlan connection, 273km with bigger antennas
 
 describe what was used on ios device what frameworks exist. how bluetooth was used and how wifi is now used for ptp connections
 
-== OSI Model
+== Satellite phones<satellite>
 
-The OSI Model is a well known abstraction of the networking stack, used in literature and teaching. This model helps to understand how and where measurements are taken. 
+== Starlink Direct to Cell<starlink>
+
+#figure(
+    box(stroke: gray, inset: 1em,
+      image("/figures/starlink.png", width: 25%)
+    ),
+    caption: [Abstract structure of Starlink's network.]
+  )<fig:starlink>
+
+== OSI Transport layer
+
+=== TCP 
+
+=== UDP 
+
+=== QUIC 
+
+== Ad-hoc technologies used on mobile devices
+
+While <satellite> and <starlink> solve the issue of dead spots, they also rely on infrastructure. 
+
+=== Bonjour
+
+=== WiFi
+
+=== Bluetooth
+
+=== LoraWan
+
+=== LTE-Direct 
+
+=== NFC
 
 #todo(
   [
