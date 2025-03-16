@@ -20,6 +20,8 @@ In recent years support for local peer-to-peer technologies, that allow devices 
 )
 #v(1em)
 
+As of 2024 4 billion people worldwide used smartphones @Statista_2024 and davon 27% iOS users (auch statista).  
+
 Apple Wireless Direct Link (AWDL) is Apple's implementation for direct one hop connections and is already used by Apple for applications like AirDrop, AirPlay or Gamekit. Until previously this has not been Apple's only option. Until iOS 11 the Multipeer Connectivity Framework also used Bluetooth on the physical layer, which was then removed and replaced by AWDL. Bluetooth can still be accessed by application developers, via the Bluetooth Core Framework, is more versatile and compatible also for non Apple devices. Although Bluetooth has improved range and speed in recent years, also for mobile end devices, AWDL is the recommended technology to establish direct links between iOS devices. Therefore the Networking Framework, included in the iOS SDK is used to establish and test the quality of connections between iOS devices, which exposes a transport layer interface to use and control protocols like UDP, TCP or QUIC. 
 
 This thesis analyses and measures the capabilities of the latest iOS devices to communicate via direct #gls("ptp") networks. Since most of current technology standards rely heavily on external infrastructure with powerful receiver antennas, direct #gls("ptp") communication is not yet wide spread or optimized to function over long distances. However it is unclear, where the boundaries of the current implementations lie and therefore which type of applications could be implemented with direct #gls("ptp"). The results aim to help assess feasibility of different implementations. 
