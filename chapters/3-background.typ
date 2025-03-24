@@ -29,16 +29,15 @@ describe what was used on ios device what frameworks exist. how bluetooth was us
 
 === TCP 
 
+==== Nagle's algorithm
+
 === UDP 
 
 === QUIC 
 
-== Ad-hoc technologies used on mobile devices
+== Ad-hoc technologies 
 
 While <satellite> and <starlink> solve the issue of dead spots, they also rely on infrastructure. 
-
-=== Bonjour
-
 === WiFi
 
 === Bluetooth
@@ -48,6 +47,16 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 === LTE-Direct 
 
 === NFC
+
+== Ad-hoc on iPhones
+
+=== Bonjour
+
+=== Multipeer Connectivity
+
+=== Networking Framework
+
+=== Websockets
 
 #todo(
   [

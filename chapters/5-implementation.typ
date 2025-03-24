@@ -2,7 +2,7 @@
 
 = Implementation <implementation>
 
-#lorem(35)#v(0.3cm)
+use mach_absolute_time to measure the jitter?
 
 #figure(
   align(
@@ -73,6 +73,8 @@ how to pass pointers to functions
 == Testing Protocol 
 
 What do I want to achieve? 
+Test one time with bluetooth off and one time with bluetooth on since iPhones use the same antenna for both, which has already caused slow wifi connections when peer to peer was enabled...
+Bluetooth doesnt turn off completely
 I want to test different scenarios, so I know which transport protocol performs best under certain circumstances and environments. I want to test different payload sizes, package count from perspective of !application level!. The metrics should be captured depending on distance and other environmental factors like obstacles. 
 
 capture:

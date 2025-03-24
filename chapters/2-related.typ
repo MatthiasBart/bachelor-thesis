@@ -8,6 +8,8 @@ TODO: LTE Direct mystery and 5G NR sidelink mystery, why do mobile phones not ha
 
 TODO: write a paragraph about newer approaches about wifi direct or bluetooth on smartphones and mobile devices 
 
+Open wireless link TU darmstadt
+
 This paragraph is just to showcase that i am capable of both including code listings in @implementation and also reference them correctly in other parts of the thesis. @lst:StoredTaskReference shows how important it is to be very alert when dealing with concurrency. 
 
 // #todo(
