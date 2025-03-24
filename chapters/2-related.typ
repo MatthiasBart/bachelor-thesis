@@ -2,7 +2,21 @@
 
 = Related Work<relatedwork>
 
-Already back 2001 the Proem project @Kortuem_Schneider_Preuitt_Thompson_Fickas_Segall_2002 examined different aspects of peer-to-peer applications for ad hoc networks. They already noticed the trend for a ever-larger becoming applicability of personal mobile devices for data sharing but listed resources of mobile devices among other possible limitations. This facet has fastly changed since then and several new ideas like ShAir @Dubois_Bando_Watanabe_Holtzman_2013, a middleware infrasructure for peer-to-peer sharing between mobile devices or mFerio @Balan_Ramasubbu_Prakobphol_Christin_Hong_2009, a peer-to-peer mobile payment system have emerged. The working group of mFerio already noticed the problem that mobile devices rely too heavily on static infrastructure. Fortunately hardware of modern smartphones has matured and has gotten support WiFi Direct which was used by #cite(<Newport_2017>, form: "author") in his approach to develop a new gossip algorithm for a local peer to peer communication system (#cite(<Newport_2017>, form: "year")). Though approaches existed to also introduce LTE-Direct, no support for this technology is given on mobile smartphones @Condoluci_Militano_Orsino_Alonso-Zarate_Araniti_2015. This is why this thesis will focus on the available technologies WiFi-Direct and Bluetooth, which work under the hood of Apple's Multipeer Connectivity. 
+Open it up again a bit for not only ios and then at the end going again deeper in the ios section with TU darmstadt 
+
+Already back 2001 the Proem project @Kortuem_Schneider_Preuitt_Thompson_Fickas_Segall_2002 examined different aspects of peer-to-peer applications for ad hoc networks. They already noticed the trend for a ever-larger becoming applicability of personal mobile devices for data sharing but listed resources of mobile devices among other possible limitations. This facet has vastly changed since then and several new ideas like ShAir @Dubois_Bando_Watanabe_Holtzman_2013, a middleware infrasructure for peer-to-peer sharing between mobile devices or mFerio @Balan_Ramasubbu_Prakobphol_Christin_Hong_2009, a peer-to-peer mobile payment system have emerged. The working group of mFerio already noticed the problem that mobile devices rely too heavily on static infrastructure. Fortunately hardware of modern smartphones has matured and has gotten support for WiFi Direct which was used by #cite(<Newport_2017>, form: "author") in his approach to develop a new gossip algorithm for a local peer to peer communication system (#cite(<Newport_2017>, form: "year")). Though approaches existed to also introduce LTE-Direct, no support for this technology is given on mobile smartphones @Condoluci_Militano_Orsino_Alonso-Zarate_Araniti_2015. 
+
+Focusing on the Apple ecosystem the Open Wireless Link (OWL) project form TU Darmstadt has made some important contributions to this research field. While reverse engineering the AWDL protocol and investigating Apples wireless ecosystem they found several security concerns and developed useful applications they published as open source software on GitHub. 
+
+
+One of these applications being OWL, an open source program that implements Apples AWDL. 
+
+OpenHaystack
+
+PivateDrop
+
+
+Welcome to the Open Wireless Link (OWL) project. We are researchers from the Secure Mobile Networking Lab at TU Darmstadt looking into Apple’s wireless ecosystem. Our goal is to assess security and privacy as well as enable cross-platform compatibility for next-generation wireless applications. We started by investigating the Apple Wireless Direct Link (AWDL) protocol and will go beyond. You can read our publications and use our open source code projects. If you have questions or would like to collaborate, feel free to contact us.
 
 TODO: LTE Direct mystery and 5G NR sidelink mystery, why do mobile phones not have access to these technologies? at least the app developers do not have access to that most of this technology is used in vehicles and autonomous driving, C-V2X, seems like these direct communication technologies are not available on modern smartphones and mostly used in public safety or automotive applications, look for sources and write a paragraph about this and its use cases
 
