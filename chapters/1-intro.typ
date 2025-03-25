@@ -54,6 +54,10 @@ A prototype application will be developed for the iOS platform that will serve a
 == Summary
 
 Smartphones mostly rely on infrasructure based networks. As this is a strong dependency that could vastly limit connectivity and advancements in direct connection software and hardware have emerged in recent years it is unclear which connection qualities these methods can produce. Therefore a prototype application developed for the iOS platform serves as a utility for measuring these metrics, with heavy use of the low level Networking Framework API.  
+
+== Notice on terminology
+
+peer-to-peer, manet, wifi direct, awdl, ad-hoc, 
 //Since the latest smartphones have improved hardware and operating system support for direct #gls("ptp"), it is unclear how well these technologies can currently serve direct communication under different conditions. Focusing on the Apple platform, an iOS application is developed, that serves as testing utility. After discussing related work that summarizes past attempts, considerations and benefits of direct communication in @relatedwork, @background will provide all required knowledge to understand the concepts of the design and decisions made to best answer if or when latest technology is/will be ready to rely on direct #gls("ptp") communication.
 
 // #todo(
