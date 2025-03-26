@@ -1,6 +1,6 @@
 #import "global.typ": *
 
-= Introduction
+= Introduction<introduction>
 
 Nowadays communicating via smartphones or tablets invariably relies on infrastructure. In most homes in developed countries one can find a local network advertised by WiFi technology and handled by a router. Being outside and not connected to a local network, mobile devices communicate with cellular towers that give access to a big underlying network managed by an ISP. Wherever we go, our mobile devices are connected, but relying on infrastructure that is not necessarily available all the time. Different reasons can lead to restricted or broken infrastructure which, in absence of ad-hoc technologies would break all communication. In countries with governmental protests cellular networks might be restricted or monitored. Another reason for disfunctioning infrastructure networks could be overwhelming usage, where a high number of people try to use the same cellular tower or environmental disasters which can take down power supply or network nodes itself. In all these cases users would highly profit from ad-hoc networks, that do not merely rely on any external dependencies.
 
