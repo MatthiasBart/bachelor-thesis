@@ -46,6 +46,8 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 
 === LTE-Direct 
 
+==== gNB
+
 === NFC
 
 == Ad-hoc on iPhones
@@ -55,6 +57,10 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 === Multipeer Connectivity
 
 === Networking Framework
+
+=== AWDL
+
+biggest kernel module in iOS 
 
 === Websockets
 
