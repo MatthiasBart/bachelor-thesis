@@ -2,7 +2,61 @@
 
 = Implementation <implementation>
 
-use mach_absolute_time to measure the jitter?
+== Application 
+The following builds upon the concepts described in the previous chapter but will describe further details and show code examples. The presentation of the inner workings of the application will be structured in the layers descirbed in the previous chapter, whereas the User Interface and the logic layers are outlined together to improve understanding of the connections of graphical layouts and corresponding logic. The measurement and networking layers are mentioned under the headings of the seperate screens where it is applicable. The Start screen for example, does not contain code for neither networking nor measurement. 
+
+=== Measurement and Networking
+
+Before diving into the seperate screens and their underlying workings, this section will introduce to the frameworks used and the abstract design these layers tend to. 
+
+Browser Advertiser and Connection classes, as well as interfaces...
+
+=== User Interface and Logic
+
+The user interface is implemented in SwiftUI, a descriptive framework used to build applications for the apple ecosystem. The application renounces optimizing the User interface and puts focus on reliability and flexibility, therefore consisting of only 3 screens and one sheet. 
+
+==== Navigation Overview 
+
+This graphic represents how the user can navigate the application to reach different screens.
+
+==== Start Screen 
+
+The start screen consists of two buttons that let the user choose if the underlying device should start the testing process as a client or a server, in particular browsing or advertising services respectively. Choosing to use the device as a server leads the user to the Testing Screen, choosing the client leads the user to the browsing screen.
+
+=== Testing Screen
+
+The testing screen consists of a list which displays test results grouped into the underlying transport protocol and two buttons in the top bar which differ depending on the type chosen in the start screen. 
+
+===== Client 
+
+The top bar of the client device features a reload button on the left side next to the back button and a settings button on the right side indicated by a gear icon. The reload button destructs all ongoing connections with a server and starts browsing again for nearby peers, which directs the user back to the browsing screen. 
+
+====== Measurement and Networking 
+
+
+===== Server
+
+The top bar of the server device features a reload button on the left side next to the back button, just like the client view and a get test results button on the right side. The reload button destructs all ongoing connections with a client and opens new ports to advertise the services. The get test results button actively calls the underlying layers to get the test results measured on the server side. This feature is needed because automatic solutions to indicate the end of testing would require more computational power when receiving data which could lead to delays that corrupt measurements. 
+
+====== Measurement and Networking
+
+==== Browsing Screen
+
+The browsing screen is only presented for client devices that want to connect to a nearby advertiser. 
+
+===== Networking
+
+==== Parameter Sheet
+
+The parameter sheet is only present on the testing client and lets the user change size parameters of the testing payload. The sheet consists fo two textfield. The first textfield represents the number of packages that will be sent during one duration of measurement, whereas the second textfield represents the number of bytes bundled in each package. 
+
+===== Networking
+
+
+
+QUic advertised via Bonjour, not working? 
+
+use mach_absolute_time to measure the jitter, done 
 
 #figure(
   align(
@@ -70,7 +124,32 @@ how to pass pointers to functions
   the navigation bar to provide _home_ functionality.
 ])
 
-== Testing Protocol 
+== Testing 
+
+After understanding how the prototype works and how the metrics are measured under 
+important: make pictures of the scenery
+
+=== Protocol 
+
+==== Scenarios 
+
+what different combinations will be tested, 
+100/1000/10_000/100_000 packages 
+128/4096/16_384 byte per package
+1m/10m/30m/maxm
+
+do every case 5 times, max meters are not done in every scenario, just how far it can go...
+
+==== metrics
+
+which metrics will be measured 
+
+=== Sceneries 
+which are representable for real life scenarios...
+underground 
+forrest 
+city
+field
 
 What do I want to achieve? 
 Test one time with bluetooth off and one time with bluetooth on since iPhones use the same antenna for both, which has already caused slow wifi connections when peer to peer was enabled...

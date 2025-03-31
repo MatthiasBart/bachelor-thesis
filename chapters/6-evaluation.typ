@@ -1,6 +1,6 @@
 #import "global.typ": *
 
-= Evaluation
+= Results and Evaluation 
 
 #lorem(30)#v(0.3cm)
 

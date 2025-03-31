@@ -37,14 +37,15 @@ describe what was used on ios device what frameworks exist. how bluetooth was us
 
 == Ad-hoc technologies 
 
-While <satellite> and <starlink> solve the issue of dead spots, they also rely on infrastructure. 
+While <satellite> and <starlink> solve the issue of dead spots, they also rely on infrastructure. The following is an incomprehensive list of ad hoc technologies.
+
 === WiFi
 
 === Bluetooth
 
 === LoraWan
 
-=== LTE-Direct 
+=== LTE-Direct and 5G Sidelink
 
 ==== gNB
 
@@ -63,6 +64,20 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 biggest kernel module in iOS 
 
 === Websockets
+
+== Wireless communication on iPhones 
+
+this heading will focus more on wireless communication in general not per se ad hoc so software here will include 
+
+=== Hardware 
+
+Differences of wifi antennas and cellular antennas, where they are located and how they operate
+power of cellular antennas vs wifi antennas of iphones, frequency spectrum of these technologies, what is the real difference which makes the one so much wider than the other, wifi and bluetooth go over the same chip/antenna on iphone
+
+=== Software 
+
+packages like Networking framework, BSD Sockets or URL Session...
+
 
 #todo(
   [
