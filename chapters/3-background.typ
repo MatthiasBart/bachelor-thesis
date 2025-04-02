@@ -16,6 +16,8 @@ describe what was used on ios device what frameworks exist. how bluetooth was us
 
 == Satellite phones<satellite>
 
+ESA organisation claims that more and more space junk destroys modern satellites and this can lead to outages too.
+
 == Starlink Direct to Cell<starlink>
 
 #figure(
