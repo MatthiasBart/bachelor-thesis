@@ -11,11 +11,11 @@ Nowadays many different technologies exist to gain access to wide area ad-hoc co
 
 
 
-#v(1em)
-#quote(
-  [Most smartphone communication leverages one hop radio links to cell towers or WiFi access points. In recent years, however, the major smartphone operating systems have included increasingly stable and useful support for local peer-to-peer communication that allows a device to talk directly to a nearby device (using local radio broadcast) while avoiding cellular and WiFi infrastructure. The ability to create these local links, combined with the ubiquity of smartphones, enables scenarios in which large groups of nearby smartphone users run applications that create peer-to-peer meshes supporting infrastructure-free networking. There are many possible motivations for these smartphone peer-to-peer networks. For example, they can support communication in settings where network infrastructure is censored (e.g., government protests), overwhelmed (e.g., a large festival or march), or unavailable (e.g., after a disaster or at a remote event). In addition, in developing countries, cellular data minutes are often bought in blocks and carefully conserved—increasing interest in networking operations that do not require cellular infrastructure.], [#cite(<Newport_2017>, form: "author"), #cite(<Newport_2017>, form: "year")],
-)
-#v(1em)
+// #v(1em)
+// #quote(
+//   [Most smartphone communication leverages one hop radio links to cell towers or WiFi access points. In recent years, however, the major smartphone operating systems have included increasingly stable and useful support for local peer-to-peer communication that allows a device to talk directly to a nearby device (using local radio broadcast) while avoiding cellular and WiFi infrastructure. The ability to create these local links, combined with the ubiquity of smartphones, enables scenarios in which large groups of nearby smartphone users run applications that create peer-to-peer meshes supporting infrastructure-free networking. There are many possible motivations for these smartphone peer-to-peer networks. For example, they can support communication in settings where network infrastructure is censored (e.g., government protests), overwhelmed (e.g., a large festival or march), or unavailable (e.g., after a disaster or at a remote event). In addition, in developing countries, cellular data minutes are often bought in blocks and carefully conserved—increasing interest in networking operations that do not require cellular infrastructure.], [#cite(<Newport_2017>, form: "author"), #cite(<Newport_2017>, form: "year")],
+// )
+// #v(1em)
 //MARK: This explains why i am using iOS and what I am using
 // 27 % ios shar https://de.statista.com/statistik/daten/studie/203584/umfrage/absatz-von-apple-iphones-seit-dem-geschaeftsjahr-2007/
 // Continuity https://support.apple.com/en-us/108046
@@ -29,49 +29,56 @@ As of 2024 4 billion people worldwide are carrying smartphones @Statista_Researc
 //MARK: https://developer.apple.com/forums/thread/38476?answerId=263873022#263873022 Bluetooth broken in MultiPeer Connectivity.
 //MARK: https://developer.apple.com/forums/thread/757385?answerId=791547022#791547022 source for is considered low level at Networking API, i have read something like this on forums
 //MARK: source for networking https://developer.apple.com/documentation/network
-Apples P2P WiFi implementation is called Apple Wireless Direct Link (AWDL) and is an undocumented protocol that is based on the 802.11 ad-hoc WiFi standard which did not live up to its expectations. This protocol is not only used by Continuity but is also accessible to iOS application developers via different frameworks that operate on different layers of abstraction. 
+Apples P2P WiFi implementation is called Apple Wireless Direct Link (AWDL) and is an undocumented protocol that is based on the 802.11 ad-hoc WiFi standard which did not live up to its expectations. This protocol is not only used internally by Continuity but is also accessible to iOS application developers via different frameworks that operate on different layers of abstraction. 
 
-One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<Newport_2017>, form: "year") in his article about gossip in smartphone P2P networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet." Contrary to this documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for P2P networking anymore. In an approach to give a brief overview about Apples networking APIs, Apple describes Multipeer Connectivity as a high-level interface to Apples P2P WiFi support and also introduces the Network Framework, which is considered as a low-level interface by Apple engineers. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. 
+One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<Newport_2017>, form: "year") in his article about gossip in smartphone P2P networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet." Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for P2P networking anymore and got disabled with the release of iOS 11. In an approach to give a brief overview about Apples networking APIs, Apple describes Multipeer Connectivity as a high-level interface to Apples P2P WiFi support and also introduces the Network Framework, which is considered as a low-level interface by Apple engineers. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework has opt-in support for P2P connection establishment and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. 
 
 //MARK: source for AWDL is recommended developer forums
 Although Bluetooth is more versatile, compatible with devices from other vendors and has improved range and speed in mobile end devices in recent years, AWDL is the recommended technology to establish direct links between iOS devices.
 
-//MARK: why use different transport layer protcols and compare them 
-Therefore the Networking Framework, included in the iOS SDK is used to establish and test the quality of connections between iOS devices, which exposes a transport layer interface to use and control protocols like UDP, TCP or QUIC. 
+//MARK: insert photo of tcp/ip stack 
+//MARK: TCP/IP https://datatracker.ietf.org/doc/html/rfc1122
+//MARK: TCP/IP https://datatracker.ietf.org/doc/html/rfc1123
+Most of networking in mobile devices relies on the TCP/IP protocol suite. It splits transferring data into Application, Transport, Internet, and Link Layers, each playing a specific role in ensuring data transmission.
 
-This thesis analyses and measures the capabilities of the latest iOS devices to communicate via direct #gls("ptp") networks. Since most of current technology standards rely heavily on external infrastructure with powerful receiver antennas, direct #gls("ptp") communication is not yet wide spread third party applications or optimized to function over long distances. However it is unclear, where the boundaries of the current implementations lie and which type of applications could be implemented with direct #gls("ptp"). The results aim to help assess feasibility of different applications that build upon AWDL. Examples vary from secure communication applications to city wide mesh networks or improved reachability in dangerous situations where no cellular network is in reach.
+The Application Layer is responsible for encapsulating domain specific data and is the top most of layers, which passes data down to the Transport Layer. It ensures that data is transmitted reliably using protocols like TCP for error-checked delivery and congestions control via Congestive-Avoidance Algorithms (CAA) or UDP for faster and connectionless communication. This layer breaks the data into smaller segments and passes them to the Internet Layer, which is responsible for logical addressing and routing network traffic. In 2012 another Transport protocol was developed by engineers at Google called QUIC. It is built upon UDP and is supposed to obsolete TCP for applications that rely on ordered and error checked data because of its faster connection establishment and built in encryption. Apple added support for QUIC to the Networking Framework starting form iOS 15.
+
+//MARK: why use different transport layer protcols and compare them 
+After all the described aspects have been taken into consideration, the Networking Framework, included in the iOS SDK is used to establish and test the quality of P2P AWDL connections between iOS devices. The tests will alternate using TCP, UDP and QUIC in different surroundings that represent typical locations, varying in crowd density or general ambient radiofrequency electromagnetic field (RF-EMF) levels.
+
+// This thesis analyses and measures the capabilities of the latest iOS devices to communicate via direct #gls("ptp") networks. Since most of current technology standards rely heavily on external infrastructure with powerful receiver antennas, direct #gls("ptp") communication is not yet wide spread third party applications or optimized to function over long distances. However it is unclear, where the boundaries of the current implementations lie and which type of applications could be implemented with direct #gls("ptp"). The results aim to help assess feasibility of different applications that build upon AWDL. Examples vary from secure communication applications to city wide mesh networks or improved reachability in dangerous situations where no cellular network is in reach.
 
 == Research Definition
 
-This research should help assess feasibility of applications that want to utilise AWDL. It will compare different transport layer protocols in different scenarios. This scenarios will vary in distance, surroundings and transmission data sizes. The Networking Framework is used to quantify the connection through metrics like RTT, jitter, package loss and more and is subsequently referred to as connection quality.
+This research should help assess feasibility of applications that want to utilise AWDL. It will compare different transport layer protocols (TCP, UDP and QUIC) in different locations that represent common places (City, Underground, Field and Forrest) to cover various characteristics of real life scenarios. The tests will vary in distance, size of packages and number of packages. The Networking Framework is used to quantify the connection quality through metrics like RTT, jitter, package loss and data transfer speed.
 
 *Research Questions*
 
-Which aspects influence the AWDL connection quality and how far can it reach?
+Which aspects influence the P2P AWDL connection quality on iOS devices and how far can it reach?
 
 *Hypothesis*
 
 $H_1$
 
-AWDL connection quality on Apple devices depends on the surroundings and functions worse in crowded surroundings.
+P2P AWDL connection quality on iOS devices depends on the surroundings and functions worse in crowded areas.
 
 $H_2$
 
-AWDL connection quality on Apple devices depends on the transport layer protocol.
+P2P AWDL connection quality on iOS devices depends on the transport layer protocol.
 
 *Method*
 
-A prototype application will be developed for the iOS platform that will serve as a tool to measure the connection quality. The metrics will be precisely defined in the test protocol in @implementation. In addition, different testing surroundings, indicating various characteristics of real life scenarios will be tested to cover most areas of application. Measurement of connection quality will be purely based on values captured by the prototype app itself. The characteristics of the environment will be described based on human perceive and measured with suitable methods.
+To measure the stated connection metrics a prototype application will be developed for the iOS platform that will serve as a tool to measure the connection quality. The metrics will be precisely defined in the test protocol in @implementation after describing the implementation details of the prototype. Measurement of connection quality will be purely based on values captured through the Network Framework by the prototype app itself. The characteristics of the environment will be described based on human perceive and measured with suitable methods.
 
 == Summary
 
-Smartphones mostly rely on infrasructure based networks. As this is a strong dependency that could vastly limit connectivity and advancements in direct connection software and hardware have emerged in recent years it is unclear which connection qualities these methods can produce. Therefore a prototype application developed for the iOS platform serves as a utility for measuring these metrics, with heavy use of the low level Networking Framework API.  
+Nowadays Smartphones mostly rely on infrastructure networks. As this is a strong dependency that could vastly limit access and advancements in P2P connection soft- and hardware have emerged in recent years it is unclear which connection qualities these methods can produce. Therefore a prototype application developed for the iOS platform serves as a utility for measuring  selected metrics.
 
-== Notice on terminology
+// == Notice on terminology
 
-peer-to-peer, manet, wifi direct, awdl, ad-hoc, 
+// peer-to-peer, manet, wifi direct, awdl, ad-hoc, 
 
-iOS machines... iOS can be used on macOS or iPadOS and so on...
+// iOS machines... iOS can be used on macOS or iPadOS and so on...
 //Since the latest smartphones have improved hardware and operating system support for direct #gls("ptp"), it is unclear how well these technologies can currently serve direct communication under different conditions. Focusing on the Apple platform, an iOS application is developed, that serves as testing utility. After discussing related work that summarizes past attempts, considerations and benefits of direct communication in @relatedwork, @background will provide all required knowledge to understand the concepts of the design and decisions made to best answer if or when latest technology is/will be ready to rely on direct #gls("ptp") communication.
 
 // #todo(
