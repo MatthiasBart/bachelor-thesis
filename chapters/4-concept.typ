@@ -1,22 +1,64 @@
 #import "global.typ": *
 
-= Concept
+= Concept 
 
-The following describes an overall concept on how the evaluation of measuring quality metrics of peer to peer connection between iOS devices is done. It will cover an abstract description of the application design and the used software packages, as well as how testing is implemented. 
+The following introduces the abstract design of how direct P2P communication between iOS devices is tested and measured for evaluation in this thesis. The measurement setup should try to systematically quantify how the performance of P2P iOS connection is and how it changes under different surroundings. Different approaches to solve this problem do exist, which are briefly evaluated and compared among each other. 
 
-== Overall Idea
+== Approaches
 
-The overall idea to evaluate the quality of direct connection between mobile iOS devices is to build a prototype application that measures data transfer on the OSI application layer.  During testing, the application is simultaniously run on two iOS machines that connect via AWDL and measure the connection metrics. The measurements taken during the data transfer will then be displayed, ready to be documented by the tester for later evaluation. 
-//The overall idea to evaluate the quality of direct connection between mobile iOS devices is to build a prototype application that measures data transfer on the OSI application layer. This application is built in the programming language `Swift` and in the IDE `XCode`. To access the Transport Layer of the OSI model the Networking Framework which is bundled in the iOS SDK was used. This SDK features a synchronous API to read and write data to the underlying networking stack. The measure interface lies directly on top of Networking Frameworks API which makes calculation overhead little.  
+=== Continuity Black Box Testing
 
+Using Apple's Continuity features to send and receive data on different iOS devices could be tested and analysed. In the simplest form this would involve selecting a particular file with a particular size and measuring the time it takes to transport this file from one device to another. The data transfer speed could be approximated using the file size and the time it took to transfer the file. Another approach to this black box testing could involve using a network sniffer to monitor connection establishment like local mDNS and security handshakes including recording and analysing the transmission process like congestion control and packet loss recovery. This could further be applied on different abstraction layers like measuring the physical radio frequency energy used or how many IP packages needed to be sent. 
+
+=== Jailbreaking //https://www.kaspersky.de/resource-center/definitions/what-is-jailbreaking
+// https://support.apple.com/en-gb/guide/iphone/iph9385bb26a/ios
+
+Jailbreaking is a term used to describe the bypassing of the security mechanism in iOS. This allows the user to install arbitrary third party software and gain full access to the operating system. This would allow to also access interfaces like the cellular antenna that is restricted and not accessible to a third party developer or turning off services that would interfere with testing. This however violates Apple's iOS Software License Agreement and testing could potentially disturb restricted frequency bands that are licensed. Additionally considering the current use cases of iOS devices and restrictions of the operating system it seems unlikely that developers other than Apple could have similar interfaces in near future.
+
+=== iOS Application
+
+iOS provides several application programming interfaces (API) that allow a third party developer to access various underlying technologies to establish P2P connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple is also an interface available to any third party developer and can therefore be implemented in any iOS application without the need to bypass any restrictions. 
+
+== Experiment Design
+
+After evaluating the aforementioned concepts the decision was taken to build an iOS Application as a measurement tool because it is the most practicable considering building an application for a wide mass. 
+The experiment design should capture the various scenarious in which P2P connection is needed and must therefore be tested in different surroundings. It should capture 
 
 #figure(
-    box(stroke: gray, inset: 1em,
-      image("/figures/concept.jpg", width: 75%)
-    ),
-    caption: [Abstract representation of scientific concept]
-  )<fig:concept>
+  box(stroke: gray, inset: 1em,
+    image("/figures/concept.jpg", width: 75%)
+  ),
+  caption: [Abstract representation of scientific concept]
+)<fig:concept>
 
+
+=== Prototype
+
+Evaluating direct P2P communication is done using an application prototype that can be installed on arbitrary iOS devices. The application should be used as both client and server. The client must be capable of discovering nearby peers and sending a connection request after user instruction. The server must be capable of advertising a service that clients can find and handling incoming connection requests. Both must be able to display the metrics that the applications measured to the user and should support a method to abort ongoing connections to start new advertisers/discoverers. 
+
+== 
+
+== Metrics of Interest
+
+From an abstract perspective the evaluation of the quality of direct connections between mobile iOS devices is done building a prototype application that measures data transfer on the TCP/IP application layer. During testing, the application is simultaniously run on two iOS machines that connect via AWDL and measure the connection metrics. The measurements taken during the data transfer will then be displayed, ready to be documented by the tester for later evaluation. 
+//The overall idea to evaluate the quality of direct connection between mobile iOS devices is to build a prototype application that measures data transfer on the OSI application layer. This application is built in the programming language `Swift` and in the IDE `XCode`. To access the Transport Layer of the OSI model the Networking Framework which is bundled in the iOS SDK was used. This SDK features a synchronous API to read and write data to the underlying networking stack. The measure interface lies directly on top of Networking Frameworks API which makes calculation overhead little.  
+
+// This section should explain the what and why of your experiment — your rationale and high-level design, without diving into exact tools or code yet.
+// You could include:
+// Objective of the Experiments
+// What are you trying to measure, observe, or prove? (e.g., how AWDL handles peer discovery, connection setup time, data throughput, etc.)
+// Experimental Design
+// Types of scenarios you're testing (e.g., proximity, number of devices, interference).
+// Whether you're testing static or dynamic conditions (e.g., walking with iPhones, varying network conditions).
+// Role of Each Device
+// e.g., One iPhone as sender, one as receiver.
+// MacBook with Wi-Fi adapter as sniffer.
+// Assumptions and Constraints
+// No access to private APIs.
+// Relying on reverse engineering and publicly observable behavior.
+// Limited visibility into Apple’s internal workings of AWDL.
+// Metrics of Interest
+// Packet timing, latency, signal strength, peer discovery time, channel switching patterns.
 
 == Prototype
 

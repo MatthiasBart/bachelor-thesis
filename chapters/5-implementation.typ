@@ -248,3 +248,77 @@ code -> test -> write thesis
   be changed by ... Note the usage of the special configured #gls("gc"). We
   compared many #glspl("gc") to find out .. ],
 )
+
+Great idea — splitting the experimental setup into **Concept** and **Implementation** makes your methodology clearer and more professional. Here’s how you can structure each:
+
+---
+
+// ## **4. Experimental Setup**
+
+// ### **4.1 Concept**
+// This section should explain the *what* and *why* of your experiment — your rationale and high-level design, without diving into exact tools or code yet.
+
+// You could include:
+
+// - **Objective of the Experiments**
+//   - What are you trying to measure, observe, or prove? (e.g., how AWDL handles peer discovery, connection setup time, data throughput, etc.)
+  
+// - **Experimental Design**
+//   - Types of scenarios you're testing (e.g., proximity, number of devices, interference).
+//   - Whether you're testing static or dynamic conditions (e.g., walking with iPhones, varying network conditions).
+  
+// - **Role of Each Device**
+//   - e.g., One iPhone as sender, one as receiver.
+//   - MacBook with Wi-Fi adapter as sniffer.
+  
+// - **Assumptions and Constraints**
+//   - No access to private APIs.
+//   - Relying on reverse engineering and publicly observable behavior.
+//   - Limited visibility into Apple’s internal workings of AWDL.
+
+// - **Metrics of Interest**
+//   - Packet timing, latency, signal strength, peer discovery time, channel switching patterns.
+
+// ---
+
+// ### **4.2 Implementation**
+// This section should go into the *how* — the actual setup, tools used, device configuration, and procedures followed.
+
+// You could cover:
+
+// - **Hardware**
+//   - List of devices used (iPhone models, MacBooks, Wi-Fi dongles like Atheros-based cards).
+//   - Placement and orientation if it’s relevant to signal behavior.
+
+// - **Software and Tools**
+//   - Wireshark with AWDL dissector.
+//   - CoreCapture framework on macOS (for system-level logs).
+//   - iOS tools (e.g., using Xcode instruments or jailbroken device tools like `tcpdump` or `Frida`).
+//   - Scripts or software for automating tests (e.g., file transfer over AirDrop).
+  
+// - **Configuration**
+//   - How Wi-Fi interfaces were configured.
+//   - How you ensured AWDL was active (AirDrop toggle, etc.).
+//   - Log collection setup, file sizes transferred, test duration.
+
+// - **Data Collection Process**
+//   - Step-by-step on how you recorded each test.
+//   - Any calibration or pre-test you did.
+//   - Number of repetitions for statistical validity.
+
+// - **Challenges Faced**
+//   - Difficulty in consistent packet capturing.
+//   - AWDL’s channel hopping causing capture issues.
+//   - Limited visibility into handshake mechanisms.
+
+// ---
+
+// So it ends up looking like:
+
+// ### **4. Experimental Setup**
+// - **4.1 Concept** — What you planned to test and why.
+// - **4.2 Implementation** — How you executed the plan, with tools, devices, and configuration.
+
+// ---
+
+// Would you like a sample write-up for one of those sections next?
