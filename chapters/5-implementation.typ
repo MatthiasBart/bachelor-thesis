@@ -24,14 +24,41 @@ The User Interface (UI) is developed using SwiftUI, a declarative way to build a
 
 This view is the first a tester sees when opening the application and is responsible for configuring the next steps of testing. Depending on the decision the tester makes the application is initialized as a client that browses for nearby services or as a server that advertises a service to nearby clients. 
 
+#figure(
+  image("/figures/decision.PNG", width: 20%),
+  caption: [Screenshot of decision screen.]
+)<fig:decision_view>
+
 ==== Server View
 
-The server view 
+The server views purpose is to present the user the state of each connection and the test results which were measured on the server. For this, the user has to tap the `Get Test Results` button in the right corner of the top tool bar. On the server view, the user can also tap the `Reload` button which aborts all ongoing connections, destructs the server objects and creates new ones which immediately start advertising again. 
+
+#figure(
+  image("/figures/server.PNG", width: 20%),
+  caption: [Screenshot of server screen.]
+)<fig:server_view>
 
 ==== Client Views
+
+The client view is split into to seperate steps since the client needs to find nearby peers and connect to them. Only after a successful connection was established the testing can begin.
+
 ===== Browser View 
 
+The browser view lists all nearby servers found. Through a tap on an item the client tries to connect to the advertiser and navigates to the testing view.
+
+#figure(
+  image("/figures/browser.PNG", width: 20%),
+  caption: [Screenshot of browser screen.]
+)<fig:browser_view>
+
 ===== Testing View
+
+The testing views purpose is to present the user the state of each connection and the test results which were measured on the client. Furthermore the buttons `Start Test` initiate the sending of the test data for the associated connection. The testing view, as well as the server view features a `Reload` button that aborts all ongoing connections, destructs and reintializes all client objects and navigates the user back to the browser view. There the user can select another server to connect to.
+
+#figure(
+  image("/figures/testing.PNG", width: 20%),
+  caption: [Screenshot of testing screen.]
+)<fig:testing_view>
 
 === Networking Frameworks 
 
@@ -47,6 +74,31 @@ Nearby Interaction is yet another framework to establish P2P connections. It use
 Following Apples recommendations documented in a technote about choosing the right networking API, the Networking framework is used for establishing a connection and transferring data. 
 
 === Configuration
+
+Different transport protocols can be used to establish a connection. Following the single responsibility principle the transport protocols and their configurations are injected into the server and client implementations to create the corresponding connections. The transport protocols for which a server and client will be created are configured in a central singleton also responsible for creating the server and clients that are used and injected to the view models. 
+
+```swift
+struct Config {
+    static let serviceProtocols: [TransportProtocol] = [.udp, .tcp, .quic]
+    
+    static var clients: [any Client] {
+        serviceProtocols.map { ClientImpl<ConnectionImpl>(transportProtocol: $0) }
+    }
+    
+    static var servers: [any Server] {
+       serviceProtocols.compactMap { try? ServerImpl<ConnectionImpl>(transportProtocol: $0) }
+    }
+}
+```
+
+```swift
+...
+    init(state: State = .init(), servers: [any Server] = Config.servers) {
+        self.state = state
+        self.servers = servers
+    }
+...
+```
 
 === Connection Establishment
 
@@ -299,6 +351,8 @@ code -> test -> write thesis
 )
 
 == Summary 
+
+maybe also include detailed UML diagram of application. 
 
 #figure(
   box(stroke: gray, inset: 1em,
