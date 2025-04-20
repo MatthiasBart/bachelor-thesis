@@ -42,7 +42,7 @@ The server views purpose is to present the user the state of each connection and
 
 The client view is split into to seperate steps since the client needs to find nearby peers and connect to them. Only after a successful connection was established the testing can begin.
 
-===== Browser View 
+===== Browser View
 
 The browser view lists all nearby servers found. Through a tap on an item the client tries to connect to the advertiser and navigates to the testing view.
 
@@ -75,7 +75,7 @@ Following Apples recommendations documented in a technote about choosing the rig
 
 === Configuration
 
-Different transport protocols can be used to establish a connection. Following the single responsibility principle the transport protocols and their configurations are injected into the server and client implementations to create the corresponding connections. The transport protocols for which a server and client will be created are configured in a central singleton also responsible for creating the server and clients that are used and injected to the view models. 
+Different transport protocols can be used to establish a connection. Following the single responsibility principle the transport protocols and their configurations are injected into the server and client implementations to create the corresponding connections. The transport protocols for which a server and client will be created are listed in a central singleton responsible for creating the server and client objects for each protocol which are injected to the view models. 
 
 ```swift
 struct Config {
@@ -100,10 +100,160 @@ struct Config {
 ...
 ```
 
+The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local mDNS name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. 
+
+```swift 
+   var parameters: NWParameters {
+        switch self {
+        case .udp:
+            let udpOptions = NWProtocolUDP.Options()
+            let parameters = NWParameters(dtls: nil, udp: udpOptions)
+            parameters.includePeerToPeer = true
+            return parameters
+            
+        case .tcp:
+            let tcpOptions = NWProtocolTCP.Options()
+            tcpOptions.enableKeepalive = true
+            tcpOptions.keepaliveIdle = 2
+            
+            let parameters = NWParameters(tls: nil, tcp: tcpOptions)
+            parameters.includePeerToPeer = true
+            return parameters
+            
+        case .quic:
+                    ...
+        }
+    }
+    
+    var type: String {
+        switch self {
+        case .udp:
+            "_txtchat._udp"
+        case .tcp:
+            "_txtchat._tcp"
+        case .quic:
+            "_txtchatquic._udp"
+        }
+    }
+```
+==== Secure Connection Establishment for QUIC
+
+describe what needed to be done for quic 
+
 === Connection Establishment
+
+Connection Establishment is done via Bonjour using the Network Framework. The servers register a listener using the `NWListener` class and the `NWParameters` and local mDNS record from the injected transport protocols to listen for incoming network connections to that service. Once an inbound connection is received the listener object calls the `newConnectionHandler` method previously set when configuring the listener object. When the method is invoked it cancels the previous connection, creates a new one and posts a message to the connection state subject, indicating that a connection has been established. When a listener is created a service object which represents the Bonjour service to advertise the endpoint on the local network is initialized and passed to the listener. 
+
+```swift 
+    init(transportProtocol: TransportProtocol) throws {
+        self.transportProtocol = transportProtocol
+        
+        listener = try NWListener(
+            service: .init(
+                name: UIDevice.current.name,
+                type: transportProtocol.type,
+                domain: nil
+            ),
+            using: transportProtocol.parameters
+        )
+    }
+    
+    func startAdvertising() {
+        listener.newConnectionHandler = { [weak self] connection in
+            self?.connection?.cancel()
+            self?.connection = nil
+            self?.connection = C(connection)
+            self?.connectionStatus.value = "Connection established"
+        }
+        
+        listener.stateUpdateHandler = { [weak self] state in
+            self?.connectionStatus.value = "\(state)"
+        }
+        
+        listener.start(queue: .global())
+    }
+```
+
+The clients instantiate a `NWBrowser` object used to browse for available network services. When the browser object finds new Bonjour services it calls the `browseResultsChangedHandler` method. This method is previously configured to write the results to `browserResults` subject which can be observed by the view model. Once the user selects a browse result in the `BrowserView` this instanz is passed to the `createConnection` method which cancels the old connections, sets the new one for further use and reports an error in case the connection failed. 
+
+```swift
+    func createConnection(with browserResult: NWBrowser.Result) -> Error? {
+        let nwConnection = NWConnection(to: browserResult.endpoint, using: transportProtocol.parameters)
+        
+        self.connection?.cancel()
+        self.connection = nil
+        self.connection = C(nwConnection)
+        
+        if case let .failed(error) = self.connection?.state {
+            return error
+        }
+        return nil
+    }
+```
+==== Injecting a concrete Implementation of a Protocol 
+
+injecting ConnectionImpl to Client and serverimpl so i can create a new object inside
+Bonjour, adding services to info.plist, adding two upd services for quic also
+
+==== Adding local domains to Info.plist 
+
+Bonjour services which are browsed for must be listed in the Info.plist using the `NSBonjourServices` key. The format is similar to the ones used to configure the `NWBrowser` and `NWListener` objects, composed of the application and transport protocol like "\_myservice.\_tcp". The Info.plist file is an information property list file that contains information and configuration about the application bundle. //https://developer.apple.com/documentation/bundleresources/information-property-list
+
+In the case of the test application the aforementioned key contains the following entries.
+
+- "\_txtchat.\_udp"
+- "\_txtchat.\_tcp"
+- "\_txtchatquic.\_udp"
+
+One can notice that two entries using UDP as the transport protocol exist. This is because the application should advertise and browse for UDP and the UDP based QUIC protocol simultaniously. Without using a second service entry Bonjour would automatically rename the service entry which would break the logic for displaying and selecting the browser results. 
+
+==== Displaying and Selecting Advertisers
+
+Local advertisers are displayed based on their human readable service instance name.
+
+#figure(
+  image("/figures/bonjour_naming.png", width: 75%),
+  caption: [Graphic showing the Bonjour naming convention.]
+)<fig:bonjour_naming>
+
+//https://developer.apple.com/documentation/uikit/uidevice/1620015-name
+In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in Listing NWListener. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
+
+```swift
+extension NWBrowser.Result {
+    var name: String? {
+        if case let NWEndpoint.service(name: name, type: _, domain: _, interface: _) = self.endpoint {
+            return name
+        }
+        return nil
+    }
+}
+```
+
+```swift
+                Task { @MainActor in
+                    for await browseResults in client.browserResults.values {
+                        state.advertiserNames.append(contentsOf: browseResults.compactMap { $0.name })
+                        state.advertiserNames = state.advertiserNames.removingDuplicates()
+                    }
+                }
+```
+//https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/NetServices/Articles/about.html#//apple_ref/doc/uid/TP40002458-TPXREF108
+Using the same service type like mentioned in the previous Section, Bonjour would automatically rename the service. 
+```
+iPad\\032(2)._txtchat._udp.local.
+iPad._txtchat._udp.local.
+```
+The human readable service instance name is not identical and users could not choose a single testing server for all advertised transport services anymore.
+
+#figure(
+  image("/figures/bonjour_same_service_issue.PNG", width: 20%),
+  caption: [Screenshot of UDP and QUIC services using the same Bonjour service type.]
+)<fig:bonjour_same_service_issue>
 
 === Measurement
 
+kernel time what is measured, 
 mach_absolute_time
 
 === Measurement and Networking

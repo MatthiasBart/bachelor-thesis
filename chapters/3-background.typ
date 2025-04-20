@@ -56,6 +56,8 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 == Ad-hoc on iPhones
 
 === Bonjour
+//https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/NetServices/Articles/about.html#//apple_ref/doc/uid/TP40002458-TPXREF108
+Bonjour is a mDNS protocol, Bonjour services are registered and handled by the mDNSdaemon from the underlying operating system so no message parsing and response handling must be conformed by the developer using this method. 
 
 === Multipeer Connectivity
 
