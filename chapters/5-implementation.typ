@@ -138,7 +138,25 @@ The `TransportProtocol` itself is an enum, where each case is representing a tra
 ```
 ==== Secure Connection Establishment for QUIC
 
-Since QUIC has built in support for secure connections and requires TLS v1.3 
+Since QUIC has built in support for secure connections and requires TLS v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
+
+```bash
+openssl command
+```
+
+After adding it to the bundle the application must read the secure identity and add it to QUIC's `NWParameters`  `securityProtocolOptions` for client and server.
+
+```swift
+        sec_protocol_options_set_local_identity(quicOptions.securityProtocolOptions, sec_identity_create(identity)!)
+```
+```swift 
+        sec_protocol_options_set_verify_block(quicOptions.securityProtocolOptions, { _, sec_trust, completion in
+          ... //check validity of sec_trust
+          completion(isTrusting)
+        }, .global())
+```
+
+This enables the application to establish a secure QUIC connection. 
 
 === Connection Establishment
 
@@ -191,9 +209,8 @@ The clients instantiate a `NWBrowser` object used to browse for available networ
     }
 ```
 ==== Injecting a concrete Implementation of a Protocol 
-
+//TODO
 injecting ConnectionImpl to Client and serverimpl so i can create a new object inside
-Bonjour, adding services to info.plist, adding two upd services for quic also
 
 ==== Adding local domains to Info.plist 
 
@@ -271,131 +288,6 @@ To transfer testing data the `NWConnection` class and its synchronous `send` and
 ```swift 
     func startTesting(numberOfPackages: Int, packageSizeInByte: Int) async
 ```
-
-=== Measurement
-
-what is measured, what is 
-
-kernel time what is measured, 
-mach_absolute_time
-
-=== Measurement and Networking
-
-Before diving into the seperate screens and their underlying workings, this section will introduce to the frameworks used and the abstract design these layers tend to. 
-
-Browser Advertiser and Connection classes, as well as interfaces...
-
-=== User Interface and Logic
-
-The user interface is implemented in SwiftUI, a descriptive framework used to build applications for the apple ecosystem. The application renounces optimizing the User interface and puts focus on reliability and flexibility, therefore consisting of only 3 screens and one sheet. 
-
-==== Navigation Overview 
-
-This graphic represents how the user can navigate the application to reach different screens.
-
-==== Start Screen 
-
-The start screen consists of two buttons that let the user choose if the underlying device should start the testing process as a client or a server, in particular browsing or advertising services respectively. Choosing to use the device as a server leads the user to the Testing Screen, choosing the client leads the user to the browsing screen.
-
-=== Testing Screen
-
-The testing screen consists of a list which displays test results grouped into the underlying transport protocol and two buttons in the top bar which differ depending on the type chosen in the start screen. 
-
-===== Client 
-
-The top bar of the client device features a reload button on the left side next to the back button and a settings button on the right side indicated by a gear icon. The reload button destructs all ongoing connections with a server and starts browsing again for nearby peers, which directs the user back to the browsing screen. 
-
-====== Measurement and Networking 
-
-
-===== Server
-
-The top bar of the server device features a reload button on the left side next to the back button, just like the client view and a get test results button on the right side. The reload button destructs all ongoing connections with a client and opens new ports to advertise the services. The get test results button actively calls the underlying layers to get the test results measured on the server side. This feature is needed because automatic solutions to indicate the end of testing would require more computational power when receiving data which could lead to delays that corrupt measurements. 
-
-====== Measurement and Networking
-
-==== Browsing Screen
-
-The browsing screen is only presented for client devices that want to connect to a nearby advertiser. 
-
-===== Networking
-
-==== Parameter Sheet
-
-The parameter sheet is only present on the testing client and lets the user change size parameters of the testing payload. The sheet consists fo two textfield. The first textfield represents the number of packages that will be sent during one duration of measurement, whereas the second textfield represents the number of bytes bundled in each package. 
-
-===== Networking
-
-QUic advertised via Bonjour, not working? 
-
-use mach_absolute_time to measure the jitter, done 
-
-#figure(
-  align(
-    left,
-    // we use a custom template (style), defined in fh.typ
-    // the files are expected in subfolder "source"
-    // optionally, specify firstline/lastline
-    fhjcode(code: read("/code-snippets/save-task-reference.swift"), lastline: 7),
-  ),
-  // we use a custom flex-caption), to allow long and short captions
-  // (the short one appears in the outline List of Figures).
-  // This is defined in `lib.typ`.
-  caption: flex-caption(
-    [Saving the reference to the detached task, so it can be canceled when the viewmodel is dereferenced.], [Stored reference of detached task.],
-  ),
-) <lst:StoredTaskReference>
-
-
-https://developer.apple.com/documentation/swift/calling-functions-with-pointer-parameters
-how to pass pointers to functions 
-
-
-#todo(
-  [ Describe what is relevant and special about your working prototype. State how
-  single features help to solve problem(s) at hand. You might implement only the
-  most relevant features. Features you select from your prioritised feature list
-  assembled in Chapter 4. Focus novel, difficult, or innovative aspects of your
-  prototype. Add visuals such as architectures, diagrams, flows, tables,
-  screenshots to illustrate your work. Select interesting code snippets, e.g. of
-  somewhat complicated algorithms, to present them as source code listings.
-
-  #v(1.4cm)
-  *For example*, you might explain your overall system, then the details of
-  the backend and frontend development in subsections as shown here:
-
-  == Overall System <architecture>
-
-  #lorem(35)#v(0.5cm)
-
-  *Hints for images in Typst*
-
-  Use vector graphic formats such as #gls("svg") for drawings and png for screenshots.
-  Using jpeg is only ok, if you need to show photographic images, such as a picture of a sunset.
-
-  For example, the following shows how an #gls("svg") image is references using the `image` Typst macro.
-  The image is furthermore embedded in a `figure` macro. The `flex-caption` allows to
-  include a full sentence as caption below the image and a short caption for the list of figures.
-  Also note the use of a label `<fig:companylogo>` which is later referenced with `@fig:companylogo`:
-
-])
-
-
-#figure(
-    box(stroke: gray, inset: 1em,
-      image("/figures/logo.svg", width: 25%)
-    ),
-    caption: flex-caption(
-        [The logo of the FH JOANNEUM, the University of Applied Sciences.],
-        [Company icon provides _Home_ navigation]
-    )
-  )<fig:companylogo>
-
-#todo([
-  The application uses the logo of the company, see @fig:companylogo, in
-  the navigation bar to provide _home_ functionality.
-])
-
 == Testing 
 
 As already 
@@ -605,3 +497,128 @@ maybe also include detailed UML diagram of application.
 // ---
 
 // Would you like a sample write-up for one of those sections next?
+
+
+// === Measurement
+
+// what is measured, what is 
+
+// kernel time what is measured, 
+// mach_absolute_time
+
+// === Measurement and Networking
+
+// Before diving into the seperate screens and their underlying workings, this section will introduce to the frameworks used and the abstract design these layers tend to. 
+
+// Browser Advertiser and Connection classes, as well as interfaces...
+
+// === User Interface and Logic
+
+// The user interface is implemented in SwiftUI, a descriptive framework used to build applications for the apple ecosystem. The application renounces optimizing the User interface and puts focus on reliability and flexibility, therefore consisting of only 3 screens and one sheet. 
+
+// ==== Navigation Overview 
+
+// This graphic represents how the user can navigate the application to reach different screens.
+
+// ==== Start Screen 
+
+// The start screen consists of two buttons that let the user choose if the underlying device should start the testing process as a client or a server, in particular browsing or advertising services respectively. Choosing to use the device as a server leads the user to the Testing Screen, choosing the client leads the user to the browsing screen.
+
+// === Testing Screen
+
+// The testing screen consists of a list which displays test results grouped into the underlying transport protocol and two buttons in the top bar which differ depending on the type chosen in the start screen. 
+
+// ===== Client 
+
+// The top bar of the client device features a reload button on the left side next to the back button and a settings button on the right side indicated by a gear icon. The reload button destructs all ongoing connections with a server and starts browsing again for nearby peers, which directs the user back to the browsing screen. 
+
+// ====== Measurement and Networking 
+
+
+// ===== Server
+
+// The top bar of the server device features a reload button on the left side next to the back button, just like the client view and a get test results button on the right side. The reload button destructs all ongoing connections with a client and opens new ports to advertise the services. The get test results button actively calls the underlying layers to get the test results measured on the server side. This feature is needed because automatic solutions to indicate the end of testing would require more computational power when receiving data which could lead to delays that corrupt measurements. 
+
+// ====== Measurement and Networking
+
+// ==== Browsing Screen
+
+// The browsing screen is only presented for client devices that want to connect to a nearby advertiser. 
+
+// ===== Networking
+
+// ==== Parameter Sheet
+
+// The parameter sheet is only present on the testing client and lets the user change size parameters of the testing payload. The sheet consists fo two textfield. The first textfield represents the number of packages that will be sent during one duration of measurement, whereas the second textfield represents the number of bytes bundled in each package. 
+
+// ===== Networking
+
+// QUic advertised via Bonjour, not working? 
+
+// use mach_absolute_time to measure the jitter, done 
+
+// #figure(
+//   align(
+//     left,
+//     // we use a custom template (style), defined in fh.typ
+//     // the files are expected in subfolder "source"
+//     // optionally, specify firstline/lastline
+//     fhjcode(code: read("/code-snippets/save-task-reference.swift"), lastline: 7),
+//   ),
+//   // we use a custom flex-caption), to allow long and short captions
+//   // (the short one appears in the outline List of Figures).
+//   // This is defined in `lib.typ`.
+//   caption: flex-caption(
+//     [Saving the reference to the detached task, so it can be canceled when the viewmodel is dereferenced.], [Stored reference of detached task.],
+//   ),
+// ) <lst:StoredTaskReference>
+
+
+// https://developer.apple.com/documentation/swift/calling-functions-with-pointer-parameters
+// how to pass pointers to functions 
+
+
+// #todo(
+//   [ Describe what is relevant and special about your working prototype. State how
+//   single features help to solve problem(s) at hand. You might implement only the
+//   most relevant features. Features you select from your prioritised feature list
+//   assembled in Chapter 4. Focus novel, difficult, or innovative aspects of your
+//   prototype. Add visuals such as architectures, diagrams, flows, tables,
+//   screenshots to illustrate your work. Select interesting code snippets, e.g. of
+//   somewhat complicated algorithms, to present them as source code listings.
+
+//   #v(1.4cm)
+//   *For example*, you might explain your overall system, then the details of
+//   the backend and frontend development in subsections as shown here:
+
+//   == Overall System <architecture>
+
+//   #lorem(35)#v(0.5cm)
+
+//   *Hints for images in Typst*
+
+//   Use vector graphic formats such as #gls("svg") for drawings and png for screenshots.
+//   Using jpeg is only ok, if you need to show photographic images, such as a picture of a sunset.
+
+//   For example, the following shows how an #gls("svg") image is references using the `image` Typst macro.
+//   The image is furthermore embedded in a `figure` macro. The `flex-caption` allows to
+//   include a full sentence as caption below the image and a short caption for the list of figures.
+//   Also note the use of a label `<fig:companylogo>` which is later referenced with `@fig:companylogo`:
+
+// ])
+
+
+// #figure(
+//     box(stroke: gray, inset: 1em,
+//       image("/figures/logo.svg", width: 25%)
+//     ),
+//     caption: flex-caption(
+//         [The logo of the FH JOANNEUM, the University of Applied Sciences.],
+//         [Company icon provides _Home_ navigation]
+//     )
+//   )<fig:companylogo>
+
+// #todo([
+//   The application uses the logo of the company, see @fig:companylogo, in
+//   the navigation bar to provide _home_ functionality.
+// ])
