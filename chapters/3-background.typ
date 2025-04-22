@@ -82,7 +82,6 @@ power of cellular antennas vs wifi antennas of iphones, frequency spectrum of th
 
 packages like Networking framework, BSD Sockets or URL Session...
 
-
 #todo(
   [
   In the background section you might give explanations which are necessary to

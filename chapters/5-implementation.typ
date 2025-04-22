@@ -100,7 +100,7 @@ struct Config {
 ...
 ```
 
-The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local mDNS name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. 
+The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local mDNS name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local AWDL broadcasting. 
 
 ```swift 
    var parameters: NWParameters {
@@ -138,7 +138,7 @@ The `TransportProtocol` itself is an enum, where each case is representing a tra
 ```
 ==== Secure Connection Establishment for QUIC
 
-describe what needed to be done for quic 
+Since QUIC has built in support for secure connections and requires TLS v1.3 
 
 === Connection Establishment
 
@@ -239,7 +239,8 @@ extension NWBrowser.Result {
                 }
 ```
 //https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/NetServices/Articles/about.html#//apple_ref/doc/uid/TP40002458-TPXREF108
-Using the same service type like mentioned in the previous Section, Bonjour would automatically rename the service. 
+Using the same service type like mentioned in the previous Section, Bonjour would automatically rename the service if it detects the same service on the local network.
+
 ```
 iPad\\032(2)._txtchat._udp.local.
 iPad._txtchat._udp.local.
@@ -251,7 +252,29 @@ The human readable service instance name is not identical and users could not ch
   caption: [Screenshot of UDP and QUIC services using the same Bonjour service type.]
 )<fig:bonjour_same_service_issue>
 
+=== Measuring and Networking
+
+Whenever a connection is ready a `DataTransferReport` is started which provides metrics about data being sent and received on a connection like data size in bytes, the number of IP packages or round trip time (RTT). 
+
+Besides that the application also measures the testing start and end time and implements an own approach to measure RTT since DataTransferReport only takes TCP's control packages into account. Before the configured number of packages with the configured number of bytes get sent 100 separate packages to measure RTT and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average RTT and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
+
+```swift 
+                    var now = mach_absolute_time()
+                    var elapsed = now - date
+                    var timebase: mach_timebase_info_data_t = .init()
+                    mach_timebase_info(&timebase)
+                    let latencyNanoSeconds = elapsed * UInt64(timebase.numer) / UInt64(timebase.denom)
+```
+
+To transfer testing data the `NWConnection` class and its synchronous `send` and `receive` methods are used. These methods are wrapped in an asynchronous `withCheckedContinuation` method to support Swift's `async await` concurrency. This testing application contains a wrapper class for the `NWConnection` which features an asynchronous `startTesting` that utilizes the aforementioned `send` method which is called from the client defining the number of packages to send and its size.
+
+```swift 
+    func startTesting(numberOfPackages: Int, packageSizeInByte: Int) async
+```
+
 === Measurement
+
+what is measured, what is 
 
 kernel time what is measured, 
 mach_absolute_time
@@ -302,8 +325,6 @@ The browsing screen is only presented for client devices that want to connect to
 The parameter sheet is only present on the testing client and lets the user change size parameters of the testing payload. The sheet consists fo two textfield. The first textfield represents the number of packages that will be sent during one duration of measurement, whereas the second textfield represents the number of bytes bundled in each package. 
 
 ===== Networking
-
-
 
 QUic advertised via Bonjour, not working? 
 
