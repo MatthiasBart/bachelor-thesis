@@ -290,132 +290,58 @@ To transfer testing data the `NWConnection` class and its synchronous `send` and
 ```
 == Testing 
 
-As already 
-After understanding how the prototype works and how the metrics are measured under 
-important: make pictures of the scenery
+Testing is done using an iPhone 12 mini and an iPhone 15 Pro both using the current iOS version 18.4.1. It is tested in various scenarios, which are defined below.
 
-=== Protocol 
+=== Places 
 
-==== Scenarios 
+Testing is done in four different places representing typical places for iPhone users. One testing environment will be the underground station which is dense in people on a small space. Another environment will be the inner city of vienna which is also dense in people but more open than the underground. The next environment will be a free field with perfect conditions for radio broadcasting since minimal other signals or objects like persons could disturb the signal. The last place that will be tested is the forest since it may have the same density of obstacles but also like the filed minimal radio frequency disturbances.
 
-what different combinations will be tested, 
-100/1000/10_000/100_000 packages 
-128/4096/16_384 byte per package
-1m/10m/30m/maxm
+=== Data sizes and distance
 
-do every case 5 times, max meters are not done in every scenario, just how far it can go...
+Data size of the whole testing process is composed of the number of packages that are sent and the size of each package. Both can vary as well as the distance between the connected devices. Testing will be done with the following values each combined with all values of the other categories. 
 
-==== metrics
-
-which metrics will be measured 
-
-=== Sceneries 
-which are representable for real life scenarios...
-underground 
-forrest 
-city
-field
-
-What do I want to achieve? 
-Test one time with bluetooth off and one time with bluetooth on since iPhones use the same antenna for both, which has already caused slow wifi connections when peer to peer was enabled...
-Bluetooth doesnt turn off completely
-I want to test different scenarios, so I know which transport protocol performs best under certain circumstances and environments. I want to test different payload sizes, package count from perspective of !application level!. The metrics should be captured depending on distance and other environmental factors like obstacles. 
-
-capture:
-distance
-obstacles 
-outside temperature
-
-different scenarious: 
-underground 
-forrest 
-city
-field
-
-do these different scenarios with: 
-100/1000/10_000/100_000 packages 
-128/4096/16_384 byte per package
-1m/10m/30m/maxm
-
-do every case 5 times, max meters are not done in every scenario, just how far it can go...
-
-also include seperately a comparison between tcp options, noDelay and noPush
-
-done -> inPr -> notStarted
-code -> test -> write thesis 
-
-#todo([
-  == Backend <backend>
-
-  #lorem(35)#v(1.3cm)
-
-    *Hints for code listings in Typst*:
-
-  The way to include source code in your document is
-  discussed and shown in #link("https://typst.app/docs/reference/text/raw/").
-  For this template we provide a custom macro/function _fhjcode_ to support listings with
-  code pulled in from external files and with line numbering. For example:
-
-  *For example:* We implemented a minimal #emph[script] in Python to manage a secure `Message`s
-  in object oriented ways. See @lst:Message and @lst:SecureMessage for a minimal `SecureMessage` class.
-  ])
-
-  #figure(
-    align(
-      left,
-      // we use a custom template (style), defined in fh.typ
-      // the files are expected in subfolder "source"
-      // optionally, specify firstline/lastline
-      fhjcode(code: read("/code-snippets/msg.py"), lastline: 5),
+#figure(
+  table(
+    columns: (auto, auto, auto),
+    inset: 10pt,
+    table.header(
+    [*Number of Packages*], [*Size of Package in Bytes*], [*Distance in Meters*]
     ),
-    // we use a custom flex-caption), to allow long and short captions
-    // (the short one appears in the outline List of Figures).
-    // This is defined in `lib.typ`.
-    caption: flex-caption(
-      [Defining a base class in Python. Here, the base class is named _Message_.], [Base class _Message_.],
+    [100], [128], [1],
+    [1000], [4096], [10],
+    [10 000], [16 384], [30], 
+    [100 000], [], [max]
+  ), caption: [Definition of test scenarios.],
+) 
+
+=== Protocols and Metrics
+
+Data transfer metrics of three different transport protocols will be tested. TCP, UDP and QUIC will be compared in the average round trip time (RTT), Jitter, data transfer speed. These metrics will be measured in all combinations of the above mentioned scenarios.  
+
+#figure(
+  table(
+    columns: (auto),
+    inset: 10pt,
+    table.header(
+    [*Protocols*]
     ),
-  ) <lst:Message>
+    [TCP], [UDP], [QUIC]
+  ), caption: [Transport Protocols used for testing.],
+) 
 
-
-  #figure(
-    align(
-      left, fhjcode(code: read("/code-snippets/msg.py"), firstline: 7, lastline: 17),
-    ), caption: flex-caption(
-      [For inheritance we might define a specialised class based on another class.
-        Here, the specialised class _SecureMessage_ is based on the class _Message_.],
-      [Specialised class _SecureMessage_.],
-    ),
-  ) <lst:SecureMessage>
-
-#todo([
-  *For example:* As shown in @lst:SecureMessage the secure version of the class is just a
-  stub where further improvements and extensions have to be applied.
-])
-
-
-#todo([
-
-  == Frontend <frontend>
-
-  #lorem(35)#v(1.3cm)
-
-
-  *Hints for abbreviations and glossary entries _gls(key)_ in Typst*:
-
-  Abbreviations should be written in full length on the first occurrence. Later
-  the short version can be used. Therefore, define glossary entries with a _key_ and
-  a _short_ as well as a _long_ description first (see file _glossary.typ_). In
-  the text you might use `#gls(<key>)` (and `#glspl(<key>)` for plural) usage of
-  an abbreviation. For example:
-
-  The system is using #gls("cow") for optimisation. The implementation of #gls("cow") can
-  be changed by ... Note the usage of the special configured #gls("gc"). We
-  compared many #glspl("gc") to find out .. ],
+#figure( 
+  table(
+    columns: (auto), 
+    inset: 10pt,
+    table.header([*Metrics*]),
+    [RTT], [Jitter], [Data Rate]
+  ),
+  caption: [Metrics used to evaluate protocols.]
 )
 
 == Summary 
 
-maybe also include detailed UML diagram of application. 
+Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (TCP, UDP and QUIC) separately and the metrics are displayed to the user ready for recording. Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices.
 
 #figure(
   box(stroke: gray, inset: 1em,
@@ -423,6 +349,137 @@ maybe also include detailed UML diagram of application.
   ),
   caption: [Abstract representation of scientific concept]
 )<fig:implementation>
+
+#figure( 
+  table(
+    columns: (auto, auto, auto, auto, auto, auto), 
+    inset: 10pt,
+    table.header([*Metrics*], [*Scenarios*], [*Protocols*], [*Distances in Meters*], [*Number of Packages*], [*Package size in Bytes*]),
+    [RTT], [Underground], [TCP], [1], [100], [128], 
+    [Jitter], [Inner City],  [UDP], [10], [1000], [4 096], 
+    [Data Rate], [Free Field], [QUIC], [30], [10 000], [16 384],
+    [], [Forest], [], [max], [100 000], []
+  ),
+  caption: [Definition of testing scenarios and variations.]
+)
+
+// === 
+
+// === Protocol 
+
+// ==== Scenarios 
+
+// what different combinations will be tested, 
+// 100/1000/10_000/100_000 packages 
+// 128/4096/16_384 byte per package
+// 1m/10m/30m/maxm
+
+// do every case 5 times, max meters are not done in every scenario, just how far it can go...
+
+// ==== metrics
+
+// which metrics will be measured 
+
+// === Sceneries 
+// which are representable for real life scenarios...
+// underground 
+// forrest 
+// city
+// field
+
+// What do I want to achieve? 
+// Test one time with bluetooth off and one time with bluetooth on since iPhones use the same antenna for both, which has already caused slow wifi connections when peer to peer was enabled...
+// Bluetooth doesnt turn off completely
+// I want to test different scenarios, so I know which transport protocol performs best under certain circumstances and environments. I want to test different payload sizes, package count from perspective of !application level!. The metrics should be captured depending on distance and other environmental factors like obstacles. 
+
+// capture:
+// distance
+// obstacles 
+// outside temperature
+
+// different scenarious: 
+// underground 
+// forrest 
+// city
+// field
+
+// do these different scenarios with: 
+// 100/1000/10_000/100_000 packages 
+// 128/4096/16_384 byte per package
+// 1m/10m/30m/maxm
+
+// do every case 5 times, max meters are not done in every scenario, just how far it can go...
+
+// also include seperately a comparison between tcp options, noDelay and noPush
+
+// done -> inPr -> notStarted
+// code -> test -> write thesis 
+
+// #todo([
+//   == Backend <backend>
+
+//   #lorem(35)#v(1.3cm)
+
+//     *Hints for code listings in Typst*:
+
+//   The way to include source code in your document is
+//   discussed and shown in #link("https://typst.app/docs/reference/text/raw/").
+//   For this template we provide a custom macro/function _fhjcode_ to support listings with
+//   code pulled in from external files and with line numbering. For example:
+
+//   *For example:* We implemented a minimal #emph[script] in Python to manage a secure `Message`s
+//   in object oriented ways. See @lst:Message and @lst:SecureMessage for a minimal `SecureMessage` class.
+//   ])
+
+//   #figure(
+//     align(
+//       left,
+//       // we use a custom template (style), defined in fh.typ
+//       // the files are expected in subfolder "source"
+//       // optionally, specify firstline/lastline
+//       fhjcode(code: read("/code-snippets/msg.py"), lastline: 5),
+//     ),
+//     // we use a custom flex-caption), to allow long and short captions
+//     // (the short one appears in the outline List of Figures).
+//     // This is defined in `lib.typ`.
+//     caption: flex-caption(
+//       [Defining a base class in Python. Here, the base class is named _Message_.], [Base class _Message_.],
+//     ),
+//   ) <lst:Message>
+
+//   #figure(
+//     align(
+//       left, fhjcode(code: read("/code-snippets/msg.py"), firstline: 7, lastline: 17),
+//     ), caption: flex-caption(
+//       [For inheritance we might define a specialised class based on another class.
+//         Here, the specialised class _SecureMessage_ is based on the class _Message_.],
+//       [Specialised class _SecureMessage_.],
+//     ),
+//   ) <lst:SecureMessage>
+
+// #todo([
+//   *For example:* As shown in @lst:SecureMessage the secure version of the class is just a
+//   stub where further improvements and extensions have to be applied.
+// ])
+
+// #todo([
+
+//   == Frontend <frontend>
+
+//   #lorem(35)#v(1.3cm)
+
+//   *Hints for abbreviations and glossary entries _gls(key)_ in Typst*:
+
+//   Abbreviations should be written in full length on the first occurrence. Later
+//   the short version can be used. Therefore, define glossary entries with a _key_ and
+//   a _short_ as well as a _long_ description first (see file _glossary.typ_). In
+//   the text you might use `#gls(<key>)` (and `#glspl(<key>)` for plural) usage of
+//   an abbreviation. For example:
+
+//   The system is using #gls("cow") for optimisation. The implementation of #gls("cow") can
+//   be changed by ... Note the usage of the special configured #gls("gc"). We
+//   compared many #glspl("gc") to find out .. ],
+// )
 
 // Great idea — splitting the experimental setup into **Concept** and **Implementation** makes your methodology clearer and more professional. Here’s how you can structure each:
 
