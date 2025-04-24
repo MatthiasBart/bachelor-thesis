@@ -2,7 +2,11 @@
 
 = Background<background>
 
+This section tries to describe and familiarize with concepts of networking topologies for mobile devices. From an abstract perspective networking can be categorized into infrastructure and ad-hoc networks, one relying on mediators while the other works without intermediary infrastructure letting the participants itself form the network.
+
 == Infrastructure Networks 
+
+Infrastructure networks are defined as wireless networks that require the use of an infrastructure device, like an access point or cellular base station to enable communication between clients no matter how close they might be (NIST). 
 
 == Ad-hoc Networks
 This should better be part of introduction
