@@ -59,7 +59,7 @@ WiFi is a trademark for IEEE wireless communication standard 802.11 based techno
   ) 
 )
 
-The WiFi Direct trademark enables WiFi devices to connect directly without underlying infrastructure. However this specification has not been widely adopted because of high energy consumption and lack of performance and is not available in iPhones. //paper owl, https://developer.apple.com/forums/thread/12885?utm_source=chatgpt.com
+The WiFi Direct trademark enables WiFi devices to connect directly without underlying infrastructure. However this specification has not been widely adopted because of high energy consumption and lack of performance where establishing a connection could take fro four to ten seconds. WiFi Direct is not available in iPhones. //paper owl, https://developer.apple.com/forums/thread/12885 Device-to-device communications with Wi-Fi Direct: overview and experimentation
 
 === Bluetooth
 
@@ -139,7 +139,7 @@ QUIC is a Transport Layer protocol that builds upon UDP and is oriented to repla
 === AWDL
 //One Billion Apples’ Secret Sauce:
 //https://patents.google.com/patent/US20180083858A1/en
-Apple Wireless Direct Link was developed by Apple due to concerns regarding WiFi Alliance's WiFi Direct specification and eventually got adopted by the WiFi Alliance as the basis for Neighbor Awareness Networking (NAN). It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform.
+Apple Wireless Direct Link was developed by Apple due to concerns regarding WiFi Alliance's WiFi Direct specification and eventually got adopted by the WiFi Alliance as the basis for Neighbor Awareness Networking (NAN). It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform. //Disrupting Continuity of Apple’s Wireless Ecosystem Security: New Tracking, DoS, and MitM Attacks on iOS and macOS Through Bluetooth Low Energy, AWDL, and Wi-Fi
 
 == Summary
 
