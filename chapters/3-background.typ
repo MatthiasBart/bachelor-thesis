@@ -101,29 +101,48 @@ Apple allows developers to access their Ultra Wideband (UWB) interface on iPhone
 
 == iOS
 
+The following part tries to familiarize with technologies used in the testing process of this thesis. 
+
 === Bonjour
 //https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/NetServices/Articles/about.html#//apple_ref/doc/uid/TP40002458-TPXREF108
-Bonjour is a mDNS protocol, Bonjour services are registered and handled by the mDNSdaemon from the underlying operating system so no message parsing and response handling must be conformed by the developer using this method. 
+Bonjour is a former proprietary zero-configuration network protocol suite over IP that Apple has submitted to the IETF. The proposed zero-configuration solutions covers IP addressing, name-to-address translation on local networks using mulitcast DNS (mDNS) and service discovery. Using Bonjour on Apple platforms is done via appropriate frameworks leaving the responding to mDNS queries to the mDNSResponder daemon. 
 
-=== Networking 
+=== IPS
 
-==== IPS layers
+The Internet Protocol Suite (IPS) is a set of networking protocols specified by the IETF also often referred to as "TCP/IP" protocol stack. It is split into five protocol layers -- Application, Transport, Internet, Network Interface and Network Hardware --, however for this thesis only the first two are relevant and listed below.
 
-===== Application Layer
+==== Application Layer
 
-===== Transport Layer
+The Application Layer covers the data the application program run by the user wants to transmit and only interacts with the next lower Transport Layer. Based on the applications needs data can be transferred as a continuous stream or package based where the Transport Layer handles interaction with the next Internet Layer.
 
-====== TCP 
+==== Transport Layer
 
-======= Nagles Algorithm
+The Transport Layer "divides application data into packets, adds a destination address to each, and communicates them end-to-end -- from one application program to another -- optionally regulating the flow and ensuring reliable (error-free and sequenced) delivery." 
 
-====== UDP
+===== Transport Control Protocol
+//https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api#TCP
+TCP is an internet standard, Transport layer protocol that reliably transmit data in the same order it was sent utilizing congestion and error controlling. It can be directly accessed on Apple platforms using the C based BSDSockets or the Networking Framework.
 
-====== QUIC
+====== Nagles Algorithm
+
+//https://developer.apple.com/documentation/network/nwprotocoltcp/options/nodelay https://www.rfc-editor.org/rfc/rfc896
+Due to the 20 byte TCP header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the TCP protocol. This algorithm inhibits the sending of new TCP segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on iOS systems and while testing the prototype has lead to highly reduced IP package number sent compared to the data slices sent from the Application Layer. 
+
+===== User Datagram Protocol
+
+UDP is a Transport Layer protocol that implements the "fire-and-forget" concept. Packages are sent whenever data is received from the Application Layer without guarantee that they will be delivered or that they will be received in the same order they had been sent. 
+
+===== QUIC
+
+QUIC is a Transport Layer protocol that builds upon UDP and is oriented to replace TCP based applications since it also features congestion and error control features. Compared to UDP and TCP QUIC has built in TLS 1.3 support and does not allow non encrypted connections. 
 
 === AWDL
+//One Billion Apples’ Secret Sauce:
+//https://patents.google.com/patent/US20180083858A1/en
+Apple Wireless Direct Link was developed by Apple due to concerns regarding WiFi Alliance's WiFi Direct specification and eventually got adopted by the WiFi Alliance as the basis for Neighbor Awareness Networking (NAN). It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform.
 
-biggest kernel module in iOS 
+== Summary
+
 
 // #todo(
 //   [
