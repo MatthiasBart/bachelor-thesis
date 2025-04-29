@@ -37,7 +37,7 @@ Although Bluetooth is more versatile, compatible with devices from other vendors
 //MARK: insert photo of tcp/ip stack 
 //MARK: TCP/IP https://datatracker.ietf.org/doc/html/rfc1122
 //MARK: TCP/IP https://datatracker.ietf.org/doc/html/rfc1123
-Most of networking in mobile devices relies on the TCP/IP protocol suite. It splits transferring data into Application, Transport, Internet, and Link Layers, each playing a specific role in ensuring data transmission.
+Most of networking in mobile devices relies on the TCP/IP protocol suite. It splits transferring data into Application, Transport, Internet, and Network Layers, each playing a specific role in ensuring data transmission.
 
 The Application Layer is responsible for encapsulating domain specific data and is the top most of layers, which passes data down to the Transport Layer. It ensures that data is transmitted reliably using protocols like TCP for error-checked delivery and congestions control via Congestive-Avoidance Algorithms (CAA) or UDP for faster and connectionless communication. This layer breaks the data into smaller segments and passes them to the Internet Layer, which is responsible for logical addressing and routing network traffic. In 2012 another Transport protocol was developed by engineers at Google called QUIC. It is built upon UDP and is supposed to obsolete TCP for applications that rely on ordered and error checked data because of its faster connection establishment and built in encryption. Apple added support for QUIC to the Networking Framework starting form iOS 15.
 

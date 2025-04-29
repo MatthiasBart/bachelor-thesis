@@ -108,7 +108,7 @@ The following part tries to familiarize with technologies used in the testing pr
 Bonjour is a former proprietary zero-configuration network protocol suite over IP that Apple has submitted to the IETF. The proposed zero-configuration solutions covers IP addressing, name-to-address translation on local networks using mulitcast DNS (mDNS) and service discovery. Using Bonjour on Apple platforms is done via appropriate frameworks leaving the responding to mDNS queries to the mDNSResponder daemon. 
 
 === IPS
-
+//https://www.rfc-editor.org/rfc/rfc4949.txt
 The Internet Protocol Suite (IPS) is a set of networking protocols specified by the IETF also often referred to as "TCP/IP" protocol stack. It is split into five protocol layers -- Application, Transport, Internet, Network Interface and Network Hardware --, however for this thesis only the first two are relevant and listed below.
 
 ==== Application Layer
