@@ -6,11 +6,11 @@ This section tries to describe and familiarize with concepts of networking topol
 
 == Infrastructure Networks 
 
-The national institute of standards and technology (NIST) defines infrastructure networks as "a wireless network that requires the use of an infrastructure device, such as an access point or a base station, to facilitate communication between client devices" @nist_infrastructure_nodate. Using underlying infrastructures that span over wide areas let users communicate to seemingly anywhere. This is achieved due to a widespread net of connected computers called the internet, which is defined by the internet engineering task force (IETF) as "the single, interconnected, worldwide system of commercial, governmental, educational, and other computer networks that share (a) the protocol suite specified by the IAB (RFC 2026) and (b) the name and address spaces managed by the ICANN" @shirey_internet_nodate. While the user is connected he can communicate to nearly anywhere but when out of reach of the next entry point the user can not even transfer data nearby device, no matter how close these might be. 
+The #gls("nist") defines infrastructure networks as "a wireless network that requires the use of an infrastructure device, such as an access point or a base station, to facilitate communication between client devices" @nist_infrastructure_nodate. Using underlying infrastructures that span over wide areas let users communicate to seemingly anywhere. This is achieved due to a widespread net of connected computers called the internet, which is defined by the #gls("ietf") as "the single, interconnected, worldwide system of commercial, governmental, educational, and other computer networks that share (a) the protocol suite specified by the #gls("iab") (#gls("rfc") 2026) and (b) the name and address spaces managed by the #gls("icann") @shirey_internet_2007. While the user is connected he can communicate to nearly anywhere but when out of reach of the next entry point the user can not even transfer data nearby device, no matter how close these might be. 
 
 == Ad-hoc Networks
 
-The NIST defines ad-hoc networks as "a wireless network that allows easy connection establishment between wireless client devices in the same physical area without the use of an infrastructure device, such as an access point or a base station" @nist_adhoc_nodate. Even when the next entry point to the internet is out of reach nearby devices can communicate with each other but are limited to the nodes that form this new separate network. 
+The #gls("nist") defines ad-hoc networks as "a wireless network that allows easy connection establishment between wireless client devices in the same physical area without the use of an infrastructure device, such as an access point or a base station" @nist_adhoc_nodate. Even when the next entry point to the internet is out of reach nearby devices can communicate with each other but are limited to the nodes that form this new separate network. 
 
 == Satellite phones<satellite>
 
@@ -18,7 +18,7 @@ While satellite phones seemingly solve the mentioned problems they are not widel
 
 === Starlink Direct to Cell<starlink>
 
-While Starlink operates on similar ideas they offer multiple advantages over normal geostationary satellites. While geostationary satellites orbit at 35.786 kilometers starlink satellites orbit much closer at about 550 km from the Earth reducing latency and decreasing space traffic in the geostationary field. Starlink also claims that their satellites include a collision avoidance system which notices potential collisions and actively dodges the other object @starlink_satellite_nodate.
+While Starlink operates on similar ideas they offer multiple advantages over normal geostationary satellites. While geostationary satellites orbit at 35.786 kilometers Starlink satellites orbit much closer at about 550 kilometers from the Earth reducing latency and decreasing space traffic in the geostationary field. Starlink also claims that their satellites include a collision avoidance system which notices potential collisions and actively dodges the other object @starlink_satellite_nodate.
 
 #figure(
     box(stroke: gray, inset: 1em,
@@ -35,7 +35,7 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 
 === WiFi
 
-WiFi is a trademark for IEEE wireless communication standard 802.11 based technologies which already exists for over two decades. The IEEE 802.11 standard defines the protocols that are used to establish a connection with current WiFi wireless nodes, including routers or access points whereas the correlating WiFi versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_nodate.
+WiFi is a trademark for #gls("ieee") wireless communication standard 802.11 based technologies which already exists for over two decades. The IEEE 802.11 standard defines the protocols that are used to establish a connection with current WiFi wireless nodes, including routers or access points whereas the correlating WiFi versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_nodate.
 
 #figure(
   table(
@@ -57,7 +57,7 @@ Bluetooth a short range wireless technology enables connection between two nearb
 
 === LoRaWan
 
-LoRaWan specification is a Low Power, Wide Area networking specification created to connect IoT devices to the internet. The specification features key requirements for the IoT use such as bi-directional communication, end-to-end security or location services. It usually operates in unlicensed frequency bands and is capable of communicating up to 15 km in rural areas. While this key features would also perfectly suit iOS peer-to-peer communication no support for this technology is given on iPhones @lora_alliance_what_nodate.
+LoRaWan specification is a Low Power, Wide Area networking specification created to connect #gls("iot") devices to the internet. The specification features key requirements for the #gls("iot") use such as bi-directional communication, end-to-end security or location services. It usually operates in unlicensed frequency bands and is capable of communicating up to 15 kilometers in rural areas. While this key features would also perfectly suit iOS #gls("ptp") communication no support for this technology is given on iPhones @lora_alliance_what_nodate.
 
 #figure(
     box(stroke: gray, inset: 1em,
@@ -67,24 +67,24 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
   )<fig:lorawan>
   //https://lora-alliance.org/wp-content/uploads/2021/10/LA-TC-Stack-01-1536x708.png
 
-=== 5G Sidelink
+=== 5G #gls("sl")
 
-5G Sidelink (SL) the successor of LTE-Direct is capable of connecting user equipments directly without an intermediate base station @vijitha_weerackody_who_2023. This is generally designed for public safety or military operations used for unmanned vehicles @barnes_how_2023 although approaches existed to introduce it into commercial markets @qualcomm_technologies_inc_lte_2014. Again iOS peer-to-peer communication would highly benefit from such technolgies but unfortunately no developer support for this technology is given @apple_inc_apple_2024. 
+5G #gls("sl") the successor of LTE-Direct is capable of connecting user equipments directly without an intermediate base station @vijitha_weerackody_who_2023. This is generally designed for public safety or military operations used for unmanned vehicles @barnes_how_2023 although approaches existed to introduce it into commercial markets @qualcomm_technologies_inc_lte_2014. Again iOS peer-to-peer communication would highly benefit from such technolgies but unfortunately no developer support for this technology is given @apple_inc_apple_2024. 
 //https://www.comsoc.org/sites/default/files/styles/768wide/public/images/2023-2023-02/ctn-feb-2023-figure5.png?itok=GVi73s6A
 #figure(
     box(stroke: gray, inset: 1em,
       image("/figures/sidelink5g.png", width: 75%)
     ),
-    caption: [Abstract structure of 5G SL network.]
+    caption: [Abstract structure of 5G #gls("sl") network.]
   )<fig:sidelink>
 
-=== NFC
+=== #gls("nfc")
 
-Near Field Communication is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_nodate. Apple makes this technology also accessible to iOS and iPadOS developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_nodate. 
+#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_nodate. Apple makes this technology also accessible to iOS and iPadOS developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_nodate. 
 
 === UWB
 
-Apple allows developers to access their Ultra Wideband (UWB) interface on iPhones and Apple Watches through the Nearby Interaction framework @apple_inc_nearby_nodate which is built to locate nearby devices also using the distance and direction. UWB in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. In Apples article about the advanced ranging capabilities of second generation UWB chips which are included in iPhone 15 and above they use a maximum distance of 50 meters @apple_inc_extending_nodate. 
+Apple allows developers to access their #gls("uwb") interface on iPhones and Apple Watches through the Nearby Interaction framework @apple_inc_nearby_nodate which is built to locate nearby devices also using the distance and direction. #gls("uwb") in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. In Apples article about the advanced ranging capabilities of second generation UWB chips which are included in iPhone 15 and above they use a maximum distance of 50 meters @apple_inc_extending_nodate. 
 
 == iOS
 
@@ -92,11 +92,11 @@ The following part tries to familiarize with technologies used in the testing pr
 
 === Bonjour
 
-Bonjour is a former proprietary zero-configuration network protocol suite over IP that Apple has submitted to the IETF. The proposed zero-configuration solutions covers IP addressing, name-to-address translation on local networks using #gls("mdns") and service discovery. Using Bonjour on Apple platforms is done via appropriate frameworks leaving the responding to #gls("mdns") queries to the mDNSResponder daemon @apple_inc_bonjour_2013. 
+Bonjour is a former proprietary zero-configuration network protocol suite over #gls("ip") that Apple has submitted to the #gls("ietf"). The proposed zero-configuration solutions covers #gls("ip") addressing, name-to-address translation on local networks using #gls("mdns") and service discovery. Using Bonjour on Apple platforms is done via appropriate frameworks leaving the responding to #gls("mdns") queries to the #gls("mdns")Responder daemon @apple_inc_bonjour_2013. 
 
-=== IPS
+=== #gls("ips")
 
-The Internet Protocol Suite (IPS) is a set of networking protocols specified by the IETF also often referred to as "TCP/IP" protocol stack. It is split into five protocol layers -- Application, Transport, Internet, Network Interface and Network Hardware --, however for this thesis only the first two are relevant and listed below @shirey_internet_nodate.
+The #gls("ips") is a set of networking protocols specified by the #gls("ietf") also often referred to as "#gls("tcp")/#gls("ip")" protocol stack. It is split into five protocol layers -- Application, Transport, Internet, Network Interface and Network Hardware --, however for this thesis only the first two are relevant and listed below @shirey_internet_2007.
 
 #figure(
     align(
@@ -104,7 +104,7 @@ The Internet Protocol Suite (IPS) is a set of networking protocols specified by 
       fhjcode(code: read("/code-snippets/ips_layers.txt")),
     ),
     caption: flex-caption(
-      [Textual graphic showing the defined layers of the Internet Protocol Suite.], [Layers of the Internet Protocol Suite.],
+      [Textual graphic showing the defined layers of the #gls("ips").], [Layers of the #gls("ips").],
     ),
 ) <lst:ips_layers>
 
@@ -116,17 +116,17 @@ The Application Layer covers the data the application program run by the user wa
 
 The Transport Layer "divides application data into packets, adds a destination address to each, and communicates them end-to-end -- from one application program to another -- optionally regulating the flow and ensuring reliable (error-free and sequenced) delivery." 
 
-===== Transport Control Protocol
+===== #gls("tcp")
 
-TCP is an internet standard, Transport layer protocol that reliably transmit data in the same order it was sent utilizing congestion and error controlling. It can be directly accessed on Apple platforms using the C based BSDSockets or the Networking Framework @apple_inc_tn3151_2023.
+#gls("tcp") is an internet standard, transport layer protocol that reliably transmit data in the same order it was sent utilizing congestion and error controlling. It can be directly accessed on Apple platforms using the C based #gls("bsd")Sockets or the Networking Framework @apple_inc_tn3151_2023.
 
 ====== Nagles Algorithm
 
 Due to the 20 byte TCP header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the TCP protocol. This algorithm inhibits the sending of new TCP segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on iOS systems @apple_inc_network_nodate-1 and while testing the prototype has lead to highly reduced IP package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
 
-===== User Datagram Protocol
+===== #gls("udp")
 
-UDP is a Transport Layer protocol that implements the "fire-and-forget" concept. Packages are sent whenever data is received from the Application Layer without guarantee that they will be delivered or that they will be received in the same order they had been sent. 
+#gls("udp") is a Transport Layer protocol that implements the "fire-and-forget" concept. Packages are sent whenever data is received from the Application Layer without guarantee that they will be delivered or that they will be received in the same order they had been sent. 
 
 ===== QUIC
 
@@ -134,7 +134,7 @@ QUIC is a Transport Layer protocol that builds upon UDP and is oriented to repla
 
 === #gls("awdl")
 
-Apple Wireless Direct Link was developed by Apple due to concerns regarding WiFi Alliance's WiFi Direct specification and eventually got adopted by the WiFi Alliance as the basis for Neighbor Awareness Networking (NAN) @cheshire_proximity_2018. It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform @stute_disrupting_2021. 
+#gls("awdl") was developed by Apple due to concerns regarding WiFi Alliance's WiFi Direct specification and eventually got adopted by the WiFi Alliance as the basis for Neighbor Awareness Networking (NAN) @cheshire_proximity_2018. It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform @stute_disrupting_2021. 
 
 == Summary
 

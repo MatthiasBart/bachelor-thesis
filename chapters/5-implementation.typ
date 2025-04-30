@@ -11,11 +11,11 @@
 
 == Prototype 
 
-The application is written in `Swift` using the integrated development environment (IDE) `XCode`, which is the suggested way to build iOS application by Apple. The built artifact is distributed via TestFlight, an online service for installing and testing apps for Apple devices and can be downloaded via an URL or directly installed by the developer machine. The application is written using a modified version of the MVVM GUI design pattern. The application must feature a mechanism to find local peers, connect them and intercept data transfer to measure metrics. The technologies used to achieve these features are described in the following sections. 
+The application is written in `Swift` using the  #gls("ide") `XCode`, which is the suggested way to build iOS application by Apple. The built artifact is distributed via TestFlight, an online service for installing and testing apps for Apple devices and can be downloaded via an #gls("url") or directly installed by the developer machine. The application is written using a modified version of the #gls("mvvm") #gls("gui") design pattern. The application must feature a mechanism to find local peers, connect them and intercept data transfer to measure metrics. The technologies used to achieve these features are described in the following sections. 
 
 === User Interface
 
-The User Interface (UI) is developed using SwiftUI @apple_inc_swiftui_nodate, a declarative way to build applications across all Apple platforms. Considering the aforementioned features the application is split into five different screens each one serving a specific purpose in the process of establishing the connection and transferring data. The screens are listed below in the order the user would walk through during a testing procedure and are called views to match terminology of the MVVM pattern. 
+The #gls("gui") is developed using SwiftUI @apple_inc_swiftui_nodate, a declarative way to build applications across all Apple platforms. Considering the aforementioned features the application is split into five different screens each one serving a specific purpose in the process of establishing the connection and transferring data. The screens are listed below in the order the user would walk through during a testing procedure and are called views to match terminology of the #gls("mvvm") pattern. 
 
 ==== Decision View
 
@@ -50,7 +50,7 @@ The browser view lists all nearby servers found. Through a tap on an item the cl
 
 ===== Testing View
 
-The testing views purpose is to present the user the state of each connection and the test results which were measured on the client. Furthermore the buttons `Start Test` initiate the sending of the test data for the associated connection. The testing view, as well as the server view features a `Reload` button that aborts all ongoing connections, destructs and reintializes all client objects and navigates the user back to the browser view. There the user can select another server to connect to.
+The testing views purpose is to present the user the state of each connection and the test results which were measured on the client. Furthermore the buttons `Start Test` initiate the sending of the test data for the associated connection. The testing view, as well as the server view features a `Reload` button that aborts all ongoing connections, destructs and reinitializes all client objects and navigates the user back to the browser view. There the user can select another server to connect to.
 
 #figure(
   image("/figures/testing.PNG", width: 20%),
@@ -63,7 +63,7 @@ Apple provides different frameworks for #gls("ptp") connections using different 
 
 In an approach to give a brief overview about Apples networking #gls("api")s, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
-Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones ultra wideband (UWB) chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples world wide developer conference (WWDC) distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
+Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones #gls("uwb") chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples #gls("wwdc") distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
 
 Following Apples recommendations documented in a technote about choosing the right networking #gls("api"), the Networking framework is used for establishing a connection and transferring data. @apple_inc_tn3151_2023
 
@@ -177,7 +177,7 @@ In the case of the test application the aforementioned key contains the followin
 - "\_txtchat.\_tcp"
 - "\_txtchatquic.\_udp"
 
-One can notice that two entries using UDP as the transport protocol exist. This is because the application should advertise and browse for UDP and the UDP based QUIC protocol simultaniously. Without using a second service entry Bonjour would automatically rename the service entry which would break the logic for displaying and selecting the browser results. 
+One can notice that two entries using UDP as the transport protocol exist. This is because the application should advertise and browse for UDP and the UDP based QUIC protocol simultaneously. Without using a second service entry Bonjour would automatically rename the service entry which would break the logic for displaying and selecting the browser results. 
 
 ==== Displaying and Selecting Advertisers
 
@@ -310,7 +310,7 @@ Data transfer metrics of three different transport protocols will be tested. TCP
 
 == Summary 
 
-Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (TCP, UDP and QUIC) separately and the metrics are displayed to the user ready for recording. Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices.
+Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (TCP, UDP and QUIC) separately and the metrics are displayed to the user ready for recording. Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of Vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices.
 
 #figure(
   box(stroke: gray, inset: 1em,
