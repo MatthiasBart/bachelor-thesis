@@ -28,6 +28,12 @@
     (
       key: "gnb", short: "gNB", long: "Next Generation Node B", desc: [A base station in 5G networks.]
     ), 
+    (
+      key: "owl", short: "OWL", long: "Open Wireless Link", desc: [A project by students of TU Darmstadt studying Apple's wireless protocols.]
+    ), 
+    (
+      key: "seemoo", short: "SEEMOO", long: "Secure Mobile Networking Lab", desc: [Part of CS Department at TU Darmstadt working on intersection of mobile and wireless communication and IT security.]
+    )
 )
 
 // Hints:

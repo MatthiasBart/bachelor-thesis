@@ -98,6 +98,16 @@ Bonjour is a former proprietary zero-configuration network protocol suite over I
 
 The Internet Protocol Suite (IPS) is a set of networking protocols specified by the IETF also often referred to as "TCP/IP" protocol stack. It is split into five protocol layers -- Application, Transport, Internet, Network Interface and Network Hardware --, however for this thesis only the first two are relevant and listed below @shirey_internet_nodate.
 
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/ips_layers.txt")),
+    ),
+    caption: flex-caption(
+      [Textual graphic showing the defined layers of the Internet Protocol Suite.], [Layers of the Internet Protocol Suite.],
+    ),
+) <lst:ips_layers>
+
 ==== Application Layer
 
 The Application Layer covers the data the application program run by the user wants to transmit and only interacts with the next lower Transport Layer. Based on the applications needs data can be transferred as a continuous stream or package based where the Transport Layer handles interaction with the next Internet Layer.

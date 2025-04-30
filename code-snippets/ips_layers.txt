@@ -1,0 +1,22 @@
+ IPS Layers     Examples
+--------------- --------------
+Message Format: ARPA (RFC 822)
++-------------+
+| Application | SMTP (RFC 821)
+|             |
+|             |
+|             |
++-------------+
+|  Transport  | TCP  (RFC 793)
+|             |
++-------------+
+|  Internet   | IP   (RFC 791)
++-------------+
+|   Network   | IP over IEEE
+|  Interface  | 802 (RFC 1042)
++-------------+
+-   Network   - The IPS does
+-  Hardware   - not include
+- (or Network - standards for
+-  Substrate) - this layer.
++ - - - - - - +
