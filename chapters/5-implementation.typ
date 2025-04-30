@@ -74,7 +74,7 @@ Different transport protocols can be used to establish a connection. Following t
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/configuration.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/configuration.swift")),
     ),
     caption: flex-caption(
       [Configuration of transport protocols used while testing.], [Configuration of transport protocols.],
@@ -84,7 +84,7 @@ Different transport protocols can be used to establish a connection. Following t
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/configuration_injection.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/configuration_injection.swift")),
     ),
     caption: flex-caption(
       [Injection of configured servers to view models.], [Injection of configured servers.],
@@ -97,7 +97,7 @@ The `TransportProtocol` itself is an enum, where each case is representing a tra
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/configuration_transport_protocols.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/configuration_transport_protocols.swift")),
     ),
     caption: flex-caption(
       [Configuration of transport protocol parameters that can be used for testing.], [Configuration of transport protocol parameters.],
@@ -118,7 +118,7 @@ After adding it to the bundle the application must read the secure identity and 
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/setting_local_identity_server.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/setting_local_identity_server.swift")),
     ),
     caption: flex-caption(
       [Setting the local identity used while TLS 1.3 handshake on server.], [Setting local identity on server.],
@@ -128,7 +128,7 @@ After adding it to the bundle the application must read the secure identity and 
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/setting_verify_block_client.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/setting_verify_block_client.swift")),
     ),
     caption: flex-caption(
       [Setting the verify block used while TLS 1.3 handshake on client.], [Setting verify block used on client.],
@@ -144,7 +144,7 @@ Connection Establishment is done via Bonjour using the Network Framework. The se
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/start_listener.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/start_listener.swift")),
     ),
     caption: flex-caption(
       [Initialization and starting of network listener for injected transport protocol.], [Initialization and starting of network listener.],
@@ -156,7 +156,7 @@ The clients instantiate a `NWBrowser` object used to browse for available networ
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/start_connection_client.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/start_connection_client.swift")),
     ),
     caption: flex-caption(
       [Initialization of connection on client using a browser result.], [Initialization of connection on client.],
@@ -193,7 +193,7 @@ In case of this test application the Bonjour service name is configured using th
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/network_browser_name.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/network_browser_name.swift")),
     ),
     caption: flex-caption(
       [Extension for extracting the name of the Bonjour service string.], [Extension for extracting the name of the Bonjour service string.],
@@ -203,7 +203,7 @@ In case of this test application the Bonjour service name is configured using th
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/listening_for_browser_result_changes.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/listening_for_browser_result_changes.swift")),
     ),
     caption: flex-caption(
       [How the view model listens to the browser result changes of the client object.], [Listening to browser result changes.],
@@ -215,7 +215,7 @@ Using the same service type like mentioned in the previous Section, Bonjour woul
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/duplicate_bonjour_names.txt"), lastline: 5),
+      fhjcode(code: read("/code-snippets/duplicate_bonjour_names.txt")),
     ),
     caption: flex-caption(
       [Comparison of Bonjour services that tried to use the same name and transport protocol.], [Comparison of Bonjour services.],
@@ -238,7 +238,7 @@ Besides that the application also measures the testing start and end time and im
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/duration_calculation.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/duration_calculation.swift")),
     ),
     caption: flex-caption(
       [How the time span is precisely calculated using kernel functions that return tick count.], [How the time span is precisely calculated.],
@@ -250,7 +250,7 @@ To transfer testing data the `NWConnection` class and its synchronous `send` and
 #figure(
     align(
       left,
-      fhjcode(code: read("/code-snippets/startTesting_signature.swift"), lastline: 5),
+      fhjcode(code: read("/code-snippets/startTesting_signature.swift")),
     ),
     caption: flex-caption(
       [Signature of the startTesting method that is provided by client objects.], [Signature of the startTesting methods.],
