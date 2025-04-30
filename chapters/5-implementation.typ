@@ -59,11 +59,11 @@ The testing views purpose is to present the user the state of each connection an
 
 === Networking Frameworks 
 
-Apple provides different frameworks for P2P connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone P2P networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for P2P networking anymore and got disabled with the release of iOS 11 @quinn_the_eskimo_ios_2017. 
+Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of iOS 11 @quinn_the_eskimo_ios_2017. 
 
-In an approach to give a brief overview about Apples networking APIs, Apple describes Multipeer Connectivity as a high-level interface to Apples P2P WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for P2P connection establishment via AWDL and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
+In an approach to give a brief overview about Apples networking APIs, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
-Nearby Interaction is yet another framework to establish P2P connections. It uses the iPhones ultra wideband (UWB) chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples world wide developer conference (WWDC) distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
+Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones ultra wideband (UWB) chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples world wide developer conference (WWDC) distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
 
 Following Apples recommendations documented in a technote about choosing the right networking API, the Networking framework is used for establishing a connection and transferring data. @apple_inc_tn3151_2023
 
@@ -91,7 +91,7 @@ Different transport protocols can be used to establish a connection. Following t
     ),
 ) <lst:configuration_injection>
 
-The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local mDNS name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local AWDL broadcasting. 
+The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local mDNS name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local #gls("awdl") broadcasting. 
 
 
 #figure(
@@ -333,7 +333,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 )
 
 
-//MARK: The QUIC protocol has significant advantages over TCP. If you’re building a custom network protocol, consider using QUIC instead of TCP. https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
+//The QUIC protocol has significant advantages over TCP. If you’re building a custom network protocol, consider using QUIC instead of TCP. https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
 
 // === 
 // general: QUIC, TCP, UDP...
@@ -389,7 +389,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 // done -> inPr -> notStarted
 // code -> test -> write thesis 
 
-// #todo([
+// #([
 //   == Backend <backend>
 
 //   #lorem(35)#v(1.3cm)
@@ -431,12 +431,12 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 //     ),
 //   ) <lst:SecureMessage>
 
-// #todo([
+// #([
 //   *For example:* As shown in @lst:SecureMessage the secure version of the class is just a
 //   stub where further improvements and extensions have to be applied.
 // ])
 
-// #todo([
+// #([
 
 //   == Frontend <frontend>
 
@@ -467,7 +467,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 // You could include:
 
 // - **Objective of the Experiments**
-//   - What are you trying to measure, observe, or prove? (e.g., how AWDL handles peer discovery, connection setup time, data throughput, etc.)
+//   - What are you trying to measure, observe, or prove? (e.g., how #gls("awdl") handles peer discovery, connection setup time, data throughput, etc.)
   
 // - **Experimental Design**
 //   - Types of scenarios you're testing (e.g., proximity, number of devices, interference).
@@ -480,7 +480,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 // - **Assumptions and Constraints**
 //   - No access to private APIs.
 //   - Relying on reverse engineering and publicly observable behavior.
-//   - Limited visibility into Apple’s internal workings of AWDL.
+//   - Limited visibility into Apple’s internal workings of #gls("awdl").
 
 // - **Metrics of Interest**
 //   - Packet timing, latency, signal strength, peer discovery time, channel switching patterns.
@@ -497,14 +497,14 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 //   - Placement and orientation if it’s relevant to signal behavior.
 
 // - **Software and Tools**
-//   - Wireshark with AWDL dissector.
+//   - Wireshark with #gls("awdl") dissector.
 //   - CoreCapture framework on macOS (for system-level logs).
 //   - iOS tools (e.g., using Xcode instruments or jailbroken device tools like `tcpdump` or `Frida`).
 //   - Scripts or software for automating tests (e.g., file transfer over AirDrop).
   
 // - **Configuration**
 //   - How Wi-Fi interfaces were configured.
-//   - How you ensured AWDL was active (AirDrop toggle, etc.).
+//   - How you ensured #gls("awdl") was active (AirDrop toggle, etc.).
 //   - Log collection setup, file sizes transferred, test duration.
 
 // - **Data Collection Process**
@@ -514,7 +514,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 
 // - **Challenges Faced**
 //   - Difficulty in consistent packet capturing.
-//   - AWDL’s channel hopping causing capture issues.
+//   - #gls("awdl")’s channel hopping causing capture issues.
 //   - Limited visibility into handshake mechanisms.
 
 // ---
@@ -609,7 +609,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 // how to pass pointers to functions 
 
 
-// #todo(
+// #(
 //   [ Describe what is relevant and special about your working prototype. State how
 //   single features help to solve problem(s) at hand. You might implement only the
 //   most relevant features. Features you select from your prioritised feature list
@@ -649,7 +649,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 //     )
 //   )<fig:companylogo>
 
-// #todo([
+// #([
 //   The application uses the logo of the company, see @fig:companylogo, in
 //   the navigation bar to provide _home_ functionality.
 // ])
