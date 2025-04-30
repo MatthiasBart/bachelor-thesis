@@ -20,7 +20,7 @@ Nowadays many different technologies exist to gain access to wide area ad-hoc co
 // 27 % ios shar https://de.statista.com/statistik/daten/studie/203584/umfrage/absatz-von-apple-iphones-seit-dem-geschaeftsjahr-2007/
 // Continuity https://support.apple.com/en-us/108046
 // 
-As of 2024 4 billion people worldwide are carrying smartphones @statista_research_department_number_2024 with them. Twenty seven percent of them are developed and manufactured by one of the most valuable companies in the world. Since 2007, when the first iPhone was released on 27th of June Apple has sold more than 2.3 billion devices. This makes iOS one of the most used mobile operating systems worldwide with a current market share of 27%. iOS also utilizes its own implementation of a P2P WiFi protocol which is strongly used by Apples Continuity which bundles applications like AirDrop or AirPlay, Universal Clipboard, Handoff or WiFi password sharing for contacts that want to join your network. 
+As of 2024 4 billion people worldwide are carrying smartphones @statista_research_department_number_2024 with them. Twenty seven percent of them are developed and manufactured by one of the most valuable companies in the world. Since 2007, when the first iPhone was released on 27th of June Apple has sold more than 2.3 billion devices. This makes iOS one of the most used mobile operating systems worldwide with a current market share of 27%. iOS also utilizes its own implementation of a P2P WiFi protocol which is strongly used by Apples Continuity @apple_inc_continuity_2024 which bundles applications like AirDrop or AirPlay, Universal Clipboard, Handoff or WiFi password sharing for contacts that want to join your network. 
 
 //MARK: source for 802.11 based, OWL paper
 //MARK: https://developer.apple.com/documentation/multipeerconnectivity source for Multipeer Connectivity
@@ -32,12 +32,10 @@ As of 2024 4 billion people worldwide are carrying smartphones @statista_researc
 Apples P2P WiFi implementation is called Apple Wireless Direct Link (AWDL) and is an undocumented protocol that is based on the 802.11 ad-hoc WiFi standard which did not live up to its expectations. This protocol is not only used internally by Continuity but is also accessible to iOS application developers via various frameworks that operate on different layers of abstraction. 
 
 //MARK: source for AWDL is recommended developer forums
-Although Bluetooth is more versatile, compatible with devices from other vendors and has improved range and speed in mobile end devices in recent years, AWDL is the recommended technology to establish direct links between iOS devices.
+Although Bluetooth is more versatile, compatible with devices from other vendors and has improved range and speed in mobile end devices in recent years, AWDL is the recommended technology to establish direct links between iOS devices @apple_inc_peer--peer_2023.
 
 //MARK: insert photo of tcp/ip stack 
-//MARK: TCP/IP https://datatracker.ietf.org/doc/html/rfc1122
-//MARK: TCP/IP https://datatracker.ietf.org/doc/html/rfc1123
-Most of networking in mobile devices relies on the TCP/IP protocol suite. It splits transferring data into Application, Transport, Internet, and Network Layers, each playing a specific role in ensuring data transmission.
+Most of networking in mobile devices relies on the TCP/IP protocol suite. It splits transferring data into Application, Transport, Internet, and Network Layers, each playing a specific role in ensuring data transmission @network_working_group_requirements_1989 @network_working_group_requirements_1989-1.
 
 The Application Layer is responsible for encapsulating domain specific data and is the top most of layers, which passes data down to the Transport Layer. It ensures that data is transmitted reliably using protocols like TCP for error-checked delivery and congestions control via Congestive-Avoidance Algorithms (CAA) or UDP for faster and connectionless communication. This layer breaks the data into smaller segments and passes them to the Internet Layer, which is responsible for logical addressing and routing network traffic. In 2012 another Transport protocol was developed by engineers at Google called QUIC. It is built upon UDP and is supposed to obsolete TCP for applications that rely on ordered and error checked data because of its faster connection establishment and built in encryption. Apple added support for QUIC to the Networking Framework starting form iOS 15.
 

@@ -14,10 +14,9 @@ Using Apple's Continuity features to send and receive data on different iOS devi
 
 iOS provides several application programming interfaces (API) that allow a third party developer to access various underlying technologies to establish P2P connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple is also an interface available to any third party developer and can therefore be implemented in any iOS application without the need to bypass any restrictions.
 
-=== Jailbreaking //https://www.kaspersky.de/resource-center/definitions/what-is-jailbreaking
-// https://support.apple.com/en-gb/guide/iphone/iph9385bb26a/ios
+=== Jailbreaking 
 
-Jailbreaking is a term used to describe the bypassing of the security mechanism in iOS. This allows the user to install arbitrary third party software and gain full access to the operating system. This would allow to also access interfaces like the cellular antenna that is restricted and not accessible to a third party developer or turning off services that would interfere with testing. This however violates Apple's iOS Software License Agreement and testing could potentially disturb restricted frequency bands that are licensed. Additionally considering the current use cases of iOS devices and restrictions of the operating system it seems unlikely that developers other than Apple could have similar interfaces in near future.
+Jailbreaking is a term used to describe the bypassing of the security mechanism in iOS. This allows the user to install arbitrary third party software and gain full access to the operating system. This would allow to also access interfaces like the cellular antenna that is restricted and not accessible to a third party developer or turning off services that would interfere with testing @ao_kaspersky_lab_jailbreaking_nodate. This however violates Apple's iOS Software License Agreement and testing could potentially disturb restricted frequency bands that are licensed @apple_inc_unauthorized_nodate. Additionally considering the current use cases of iOS devices and restrictions of the operating system it seems unlikely that developers other than Apple could have similar interfaces in near future.
 
 == Experiment Design
 

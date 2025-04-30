@@ -1,6 +1,5 @@
 #import "global.typ": *
 
-//MARK: The QUIC protocol has significant advantages over TCP. If you’re building a custom network protocol, consider using QUIC instead of TCP. https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
 = Implementation <implementation>
 
 #figure(
@@ -13,12 +12,10 @@
 == Prototype 
 
 The application is written in `Swift` using the integrated development environment (IDE) `XCode`, which is the suggested way to build iOS application by Apple. The built artifact is distributed via TestFlight, an online service for installing and testing apps for Apple devices and can be downloaded via an URL or directly installed by the developer machine. The application is written using a modified version of the MVVM GUI design pattern. The application must feature a mechanism to find local peers, connect them and intercept data transfer to measure metrics. The technologies used to achieve these features are described in the following sections. 
-// general: QUIC, TCP, UDP...
-// The following builds upon the concepts described in the previous chapter but will describe further details and show code examples. The presentation of the inner workings of the application will be structured in the layers descirbed in the previous chapter, whereas the User Interface and the logic layers are outlined together to improve understanding of the connections of graphical layouts and corresponding logic. The measurement and networking layers are mentioned under the headings of the seperate screens where it is applicable. The Start screen for example, does not contain code for neither networking nor measurement. 
 
 === User Interface
-//MARK: https://developer.apple.com/xcode/swiftui/
-The User Interface (UI) is developed using SwiftUI, a declarative way to build applications across all Apple platforms. Considering the aforementioned features the application is split into five different screens each one serving a specific purpose in the process of establishing the connection and transferring data. The screens are listed below in the order the user would walk through during a testing procedure and are called views to match terminology of the MVVM pattern. 
+
+The User Interface (UI) is developed using SwiftUI @apple_inc_swiftui_nodate, a declarative way to build applications across all Apple platforms. Considering the aforementioned features the application is split into five different screens each one serving a specific purpose in the process of establishing the connection and transferring data. The screens are listed below in the order the user would walk through during a testing procedure and are called views to match terminology of the MVVM pattern. 
 
 ==== Decision View
 
@@ -62,13 +59,11 @@ The testing views purpose is to present the user the state of each connection an
 
 === Networking Frameworks 
 
-// Apple provides different frameworks for P2P connections using different layers of abstraction or different underlying technolgies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<Newport_2017>, form: "year") in his article about gossip in smartphone P2P networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet." Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for P2P networking anymore and got disabled with the release of iOS 11. 
+Apple provides different frameworks for P2P connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone P2P networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for P2P networking anymore and got disabled with the release of iOS 11 @quinn_the_eskimo_ios_2017. 
 
 In an approach to give a brief overview about Apples networking APIs, Apple describes Multipeer Connectivity as a high-level interface to Apples P2P WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for P2P connection establishment via AWDL and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
-//MARK: https://developer.apple.com/documentation/nearbyinteraction
-//MARL: https://developer.apple.com/videos/play/wwdc2021/10165/?time=1249 distances in video 1.5m -3m 
-Nearby Interaction is yet another framework to establish P2P connections. It uses the iPhones ultra wideband (UWB) chip to "locate and interact with nearby devices using identifiers, distance, and direction." These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples world wide developer conference (WWDC) distances of one and a half to three meters are shown which does not meet the requirements for this experiments.
+Nearby Interaction is yet another framework to establish P2P connections. It uses the iPhones ultra wideband (UWB) chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples world wide developer conference (WWDC) distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
 
 Following Apples recommendations documented in a technote about choosing the right networking API, the Networking framework is used for establishing a connection and transferring data. @apple_inc_tn3151_2023
 
@@ -213,7 +208,7 @@ injecting ConnectionImpl to Client and serverimpl so i can create a new object i
 
 ==== Adding local domains to Info.plist 
 
-Bonjour services which are browsed for must be listed in the Info.plist using the `NSBonjourServices` key. The format is similar to the ones used to configure the `NWBrowser` and `NWListener` objects, composed of the application and transport protocol like "\_myservice.\_tcp". The Info.plist file is an information property list file that contains information and configuration about the application bundle. //https://developer.apple.com/documentation/bundleresources/information-property-list
+Bonjour services which are browsed for must be listed in the Info.plist using the `NSBonjourServices` key. The format is similar to the ones used to configure the `NWBrowser` and `NWListener` objects, composed of the application and transport protocol like "\_myservice.\_tcp". The Info.plist file is an information property list file that contains information and configuration about the application bundle @apple_inc_information_nodate. 
 
 In the case of the test application the aforementioned key contains the following entries.
 
@@ -232,8 +227,7 @@ Local advertisers are displayed based on their human readable service instance n
   caption: [Graphic showing the Bonjour naming convention.]
 )<fig:bonjour_naming>
 
-//https://developer.apple.com/documentation/uikit/uidevice/1620015-name
-In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in Listing NWListener. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
+In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in Listing NWListener @apple_inc_uikit_nodate. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
 
 ```swift
 extension NWBrowser.Result {
@@ -254,8 +248,8 @@ extension NWBrowser.Result {
                     }
                 }
 ```
-//https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/NetServices/Articles/about.html#//apple_ref/doc/uid/TP40002458-TPXREF108
-Using the same service type like mentioned in the previous Section, Bonjour would automatically rename the service if it detects the same service on the local network.
+
+Using the same service type like mentioned in the previous Section, Bonjour would automatically rename the service if it detects the same service on the local network @apple_inc_bonjour_2013.
 
 ```
 iPad\\032(2)._txtchat._udp.local.
@@ -362,8 +356,13 @@ Testing is done using a prototype application written in SwiftUI enabling the us
   caption: [Definition of testing scenarios and variations.]
 )
 
-// === 
 
+//MARK: The QUIC protocol has significant advantages over TCP. If you’re building a custom network protocol, consider using QUIC instead of TCP. https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
+
+// === 
+// general: QUIC, TCP, UDP...
+// The following builds upon the concepts described in the previous chapter but will describe further details and show code examples. The presentation of the inner workings of the application will be structured in the layers descirbed in the previous chapter, whereas the User Interface and the logic layers are outlined together to improve understanding of the connections of graphical layouts and corresponding logic. The measurement and networking layers are mentioned under the headings of the seperate screens where it is applicable. The Start screen for example, does not contain code for neither networking nor measurement. 
+// 
 // === Protocol 
 
 // ==== Scenarios 
