@@ -18,14 +18,14 @@
 
   #lorem(35)#v(0.5cm)
 
-  *For example*: During the setup the #gls("gc") was configured for the parallel version
+  *For example*: During the setup the was configured for the parallel version
   using the value `+UseParallelGC` for the command line argument `-XX` (`java -XX:+UseParallelGC`).
 
   #v(0.3cm)
   *Hints on dynamically reading in external data for tables in Typst:*
 
   Using the custom macro `fhjtable` it is possible to include data dynamically for
-  table generation. The data has to be specified in #gls("csv")
+  table generation. The data has to be specified in
   as shown below:
 ])
 
@@ -86,7 +86,7 @@
   #lorem(35)#v(0.3cm)
 
 
-  *For example*: The customisation of the #gls("gc") seem to have following positive and negative
+  *For example*: The customisation of the seem to have following positive and negative
   consequences....
 
 
