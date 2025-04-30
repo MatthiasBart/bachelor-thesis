@@ -92,7 +92,7 @@ The following part tries to familiarize with technologies used in the testing pr
 
 === Bonjour
 
-Bonjour is a former proprietary zero-configuration network protocol suite over IP that Apple has submitted to the IETF. The proposed zero-configuration solutions covers IP addressing, name-to-address translation on local networks using mulitcast DNS (mDNS) and service discovery. Using Bonjour on Apple platforms is done via appropriate frameworks leaving the responding to mDNS queries to the mDNSResponder daemon @apple_inc_bonjour_2013. 
+Bonjour is a former proprietary zero-configuration network protocol suite over IP that Apple has submitted to the IETF. The proposed zero-configuration solutions covers IP addressing, name-to-address translation on local networks using #gls("mdns") and service discovery. Using Bonjour on Apple platforms is done via appropriate frameworks leaving the responding to #gls("mdns") queries to the mDNSResponder daemon @apple_inc_bonjour_2013. 
 
 === IPS
 
@@ -122,7 +122,7 @@ UDP is a Transport Layer protocol that implements the "fire-and-forget" concept.
 
 QUIC is a Transport Layer protocol that builds upon UDP and is oriented to replace TCP based applications since it also features congestion and error control features. Compared to UDP and TCP QUIC has built in TLS 1.3 support and does not allow non encrypted connections. 
 
-=== AWDL
+=== #gls("awdl")
 
 Apple Wireless Direct Link was developed by Apple due to concerns regarding WiFi Alliance's WiFi Direct specification and eventually got adopted by the WiFi Alliance as the basis for Neighbor Awareness Networking (NAN) @cheshire_proximity_2018. It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform @stute_disrupting_2021. 
 

@@ -61,11 +61,11 @@ The testing views purpose is to present the user the state of each connection an
 
 Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of iOS 11 @quinn_the_eskimo_ios_2017. 
 
-In an approach to give a brief overview about Apples networking APIs, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
+In an approach to give a brief overview about Apples networking #gls("api")s, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
 Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones ultra wideband (UWB) chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples world wide developer conference (WWDC) distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
 
-Following Apples recommendations documented in a technote about choosing the right networking API, the Networking framework is used for establishing a connection and transferring data. @apple_inc_tn3151_2023
+Following Apples recommendations documented in a technote about choosing the right networking #gls("api"), the Networking framework is used for establishing a connection and transferring data. @apple_inc_tn3151_2023
 
 === Configuration
 
@@ -91,7 +91,7 @@ Different transport protocols can be used to establish a connection. Following t
     ),
 ) <lst:configuration_injection>
 
-The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local mDNS name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local #gls("awdl") broadcasting. 
+The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local #gls("mdns") name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local #gls("awdl") broadcasting. 
 
 
 #figure(
@@ -139,7 +139,7 @@ This enables the application to establish a secure QUIC connection.
 
 === Connection Establishment
 
-Connection Establishment is done via Bonjour using the Network Framework. The servers register a listener using the `NWListener` class and the `NWParameters` and local mDNS record from the injected transport protocols to listen for incoming network connections to that service. Once an inbound connection is received the listener object calls the `newConnectionHandler` method previously set when configuring the listener object. When the method is invoked it cancels the previous connection, creates a new one and posts a message to the connection state subject, indicating that a connection has been established. When a listener is created a service object which represents the Bonjour service to advertise the endpoint on the local network is initialized and passed to the listener. 
+Connection Establishment is done via Bonjour using the Network Framework. The servers register a listener using the `NWListener` class and the `NWParameters` and local #gls("mdns") record from the injected transport protocols to listen for incoming network connections to that service. Once an inbound connection is received the listener object calls the `newConnectionHandler` method previously set when configuring the listener object. When the method is invoked it cancels the previous connection, creates a new one and posts a message to the connection state subject, indicating that a connection has been established. When a listener is created a service object which represents the Bonjour service to advertise the endpoint on the local network is initialized and passed to the listener. 
 
 #figure(
     align(
@@ -231,9 +231,9 @@ The human readable service instance name is not identical and users could not ch
 
 === Measuring and Networking
 
-Whenever a connection is ready a `DataTransferReport` is started which provides metrics about data being sent and received on a connection like data size in bytes, the number of IP packages or round trip time (RTT). 
+Whenever a connection is ready a `DataTransferReport` is started which provides metrics about data being sent and received on a connection like data size in bytes, the number of IP packages or #gls("rtt"). 
 
-Besides that the application also measures the testing start and end time and implements an own approach to measure RTT since DataTransferReport only takes TCP's control packages into account. Before the configured number of packages with the configured number of bytes get sent 100 separate packages to measure RTT and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average RTT and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
+Besides that the application also measures the testing start and end time and implements an own approach to measure #gls("rtt") since DataTransferReport only takes TCP's control packages into account. Before the configured number of packages with the configured number of bytes get sent 100 separate packages to measure #gls("rtt") and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average #gls("rtt") and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
 
 #figure(
     align(
@@ -285,7 +285,7 @@ Data size of the whole testing process is composed of the number of packages tha
 
 === Protocols and Metrics
 
-Data transfer metrics of three different transport protocols will be tested. TCP, UDP and QUIC will be compared in the average round trip time (RTT), Jitter, data transfer speed. These metrics will be measured in all combinations of the above mentioned scenarios.  
+Data transfer metrics of three different transport protocols will be tested. TCP, UDP and QUIC will be compared in the average #gls("rtt"), Jitter, data transfer speed. These metrics will be measured in all combinations of the above mentioned scenarios.  
 
 #figure(
   table(
@@ -303,7 +303,7 @@ Data transfer metrics of three different transport protocols will be tested. TCP
     columns: (auto), 
     inset: 10pt,
     table.header([*Metrics*]),
-    [RTT], [Jitter], [Data Rate]
+    [#gls("rtt")], [Jitter], [Data Rate]
   ),
   caption: [Metrics used to evaluate protocols.]
 )
@@ -324,7 +324,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
     columns: (auto, auto, auto, auto, auto, auto), 
     inset: 10pt,
     table.header([*Metrics*], [*Scenarios*], [*Protocols*], [*Distances in Meters*], [*Number of Packages*], [*Package size in Bytes*]),
-    [RTT], [Underground], [TCP], [1], [100], [128], 
+    [#gls("rtt")], [Underground], [TCP], [1], [100], [128], 
     [Jitter], [Inner City],  [UDP], [10], [1000], [4 096], 
     [Data Rate], [Free Field], [QUIC], [30], [10 000], [16 384],
     [], [Forest], [], [max], [100 000], []
