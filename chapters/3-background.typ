@@ -129,7 +129,7 @@ Apple Wireless Direct Link was developed by Apple due to concerns regarding WiFi
 == Summary
 
 
-// #todo(
+// #(
 //   [
 //   In the background section you might give explanations which are necessary to
 //   read the remainder of the thesis. For example define and/or explain the terms
@@ -171,7 +171,7 @@ Apple Wireless Direct Link was developed by Apple due to concerns regarding WiFi
 //   ) <eq:phidef>
 
 
-// #todo([
+// #([
 //   The @eq:phidef explains (for the single steps see @diff and @ratio) how the
 //   overall $phi.alt$ is calculated to be used in the upcoming formulas of this
 //   thesis.

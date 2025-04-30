@@ -2,7 +2,7 @@
 
 = Concept 
 
-The following introduces the abstract design of how direct P2P communication between iOS devices is tested and measured for evaluation in this thesis. The measurement setup should try to systematically quantify how the performance of P2P iOS connection is and how it changes under different surroundings. Different approaches to solve this problem do exist, which are briefly evaluated and compared among each other. 
+The following introduces the abstract design of how direct #gls("ptp") communication between iOS devices is tested and measured for evaluation in this thesis. The measurement setup should try to systematically quantify how the performance of #gls("ptp") iOS connection is and how it changes under different surroundings. Different approaches to solve this problem do exist, which are briefly evaluated and compared among each other. 
 
 == Approaches
 
@@ -12,7 +12,7 @@ Using Apple's Continuity features to send and receive data on different iOS devi
 
 === iOS Application
 
-iOS provides several application programming interfaces (API) that allow a third party developer to access various underlying technologies to establish P2P connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple is also an interface available to any third party developer and can therefore be implemented in any iOS application without the need to bypass any restrictions.
+iOS provides several application programming interfaces (API) that allow a third party developer to access various underlying technologies to establish #gls("ptp") connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple is also an interface available to any third party developer and can therefore be implemented in any iOS application without the need to bypass any restrictions.
 
 === Jailbreaking 
 
@@ -20,7 +20,7 @@ Jailbreaking is a term used to describe the bypassing of the security mechanism 
 
 == Experiment Design
 
-After evaluating the aforementioned concepts the decision was taken to build an iOS Application establishing and intercepting the P2P connection to measure connection metrics. It is the most practicable considering the use for a wide mass, because staying in the boundaries imposed by Apple and using only first party frameworks makes developing and distributing in the App Store easier. The application needs to be installed on two nearby devices to establish a connection and transfer data. Furthermore since iPhones are typically used under various circumstances and surroundings testing should also cover representable scenarios for common places visited by iPhone users. 
+After evaluating the aforementioned concepts the decision was taken to build an iOS Application establishing and intercepting the #gls("ptp") connection to measure connection metrics. It is the most practicable considering the use for a wide mass, because staying in the boundaries imposed by Apple and using only first party frameworks makes developing and distributing in the App Store easier. The application needs to be installed on two nearby devices to establish a connection and transfer data. Furthermore since iPhones are typically used under various circumstances and surroundings testing should also cover representable scenarios for common places visited by iPhone users. 
 
 === Prototype
 
@@ -34,13 +34,13 @@ Capturing the data of interest is done by the prototype itself. However general 
 
 // ==== Metrics of Interest
 
-// From an abstract perspective the evaluation of the quality of direct connections between mobile iOS devices is done building a prototype application that measures data transfer on the TCP/IP application layer. During testing, the application is simultaniously run on two iOS machines that connect via AWDL and measure the connection metrics. The measurements taken during the data transfer will then be displayed, ready to be documented by the tester for later evaluation. 
+// From an abstract perspective the evaluation of the quality of direct connections between mobile iOS devices is done building a prototype application that measures data transfer on the TCP/IP application layer. During testing, the application is simultaniously run on two iOS machines that connect via #gls("awdl") and measure the connection metrics. The measurements taken during the data transfer will then be displayed, ready to be documented by the tester for later evaluation. 
 //The overall idea to evaluate the quality of direct connection between mobile iOS devices is to build a prototype application that measures data transfer on the OSI application layer. This application is built in the programming language `Swift` and in the IDE `XCode`. To access the Transport Layer of the OSI model the Networking Framework which is bundled in the iOS SDK was used. This SDK features a synchronous API to read and write data to the underlying networking stack. The measure interface lies directly on top of Networking Frameworks API which makes calculation overhead little.  
 
 // This section should explain the what and why of your experiment — your rationale and high-level design, without diving into exact tools or code yet.
 // You could include:
 // Objective of the Experiments
-// What are you trying to measure, observe, or prove? (e.g., how AWDL handles peer discovery, connection setup time, data throughput, etc.)
+// What are you trying to measure, observe, or prove? (e.g., how #gls("awdl") handles peer discovery, connection setup time, data throughput, etc.)
 // Experimental Design
 // Types of scenarios you're testing (e.g., proximity, number of devices, interference).
 // Whether you're testing static or dynamic conditions (e.g., walking with iPhones, varying network conditions).
@@ -50,7 +50,7 @@ Capturing the data of interest is done by the prototype itself. However general 
 // Assumptions and Constraints
 // No access to private APIs.
 // Relying on reverse engineering and publicly observable behavior.
-// Limited visibility into Apple’s internal workings of AWDL.
+// Limited visibility into Apple’s internal workings of #gls("awdl").
 // Metrics of Interest
 // Packet timing, latency, signal strength, peer discovery time, channel switching patterns.
 
@@ -106,9 +106,9 @@ Capturing the data of interest is done by the prototype itself. However general 
 
 // == Notes on security
 
-// as OWL project found out over several papers there are several vulnerabilities even when no service is advertised or port is open so when apps open a port for peer to peer connectivity it is on the one hand the responsibility of the developer to create a secure connection with services. on the other hand the awdl itself has some vulnerabilities that can not be eliminated by the developer itself, since they reside in the operating system iOS itself. as already mentioned the encryption of the connection itself is the responsibility of the developer since one can also open up unecrypted ports. to mitigate this responsibility one can use the mulitpeer connectivity framework which builds upon these low level apis and abstracts encryption and establishing the connection away from the developer. also security issues in ad hoc networks itslef are more present then in infrastructure networks since there is no central authority like used by the certificate chains in SSL encryption.
+// as OWL project found out over several papers there are several vulnerabilities even when no service is advertised or port is open so when apps open a port for peer to peer connectivity it is on the one hand the responsibility of the developer to create a secure connection with services. on the other hand the #gls("awdl") itself has some vulnerabilities that can not be eliminated by the developer itself, since they reside in the operating system iOS itself. as already mentioned the encryption of the connection itself is the responsibility of the developer since one can also open up unecrypted ports. to mitigate this responsibility one can use the mulitpeer connectivity framework which builds upon these low level apis and abstracts encryption and establishing the connection away from the developer. also security issues in ad hoc networks itslef are more present then in infrastructure networks since there is no central authority like used by the certificate chains in SSL encryption.
 
-// #todo(
+// #(
 //   [ Describe an overall concept of a solution, which could possibly solve a given
 //     problem. Design a novel solution and visualise the architecture and relevant
 //     (data) flows. Compare and relate your approach to possible alternatives and
@@ -116,7 +116,7 @@ Capturing the data of interest is done by the prototype itself. However general 
 // )
 
 
-// #todo(
+// #(
 //   [
 //   #v(3cm)
 
