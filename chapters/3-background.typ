@@ -57,7 +57,7 @@ Bluetooth a short range wireless technology enables connection between two nearb
 
 === LoRaWan
 
-LoRaWan specification is a Low Power, Wide Area networking specification created to connect #gls("iot") devices to the internet. The specification features key requirements for the #gls("iot") use such as bi-directional communication, end-to-end security or location services. It usually operates in unlicensed frequency bands and is capable of communicating up to 15 kilometers in rural areas. While this key features would also perfectly suit iOS #gls("ptp") communication no support for this technology is given on iPhones @lora_alliance_what_nodate.
+LoRaWan specification is a Low Power, Wide Area networking specification created to connect #gls("iot") devices to the internet. The specification features key requirements for the #gls("iot") use such as bi-directional communication, end-to-end security or location services. It usually operates in unlicensed frequency bands and is capable of communicating up to 15 kilometers in rural areas. While this key features would also perfectly suit #gls("ios") #gls("ptp") communication no support for this technology is given on iPhones @lora_alliance_what_nodate.
 
 #figure(
     box(stroke: gray, inset: 1em,
@@ -69,7 +69,7 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
 
 === 5G #gls("sl")
 
-5G #gls("sl") the successor of LTE-Direct is capable of connecting user equipments directly without an intermediate base station @vijitha_weerackody_who_2023. This is generally designed for public safety or military operations used for unmanned vehicles @barnes_how_2023 although approaches existed to introduce it into commercial markets @qualcomm_technologies_inc_lte_2014. Again iOS peer-to-peer communication would highly benefit from such technolgies but unfortunately no developer support for this technology is given @apple_inc_apple_2024. 
+5G #gls("sl") the successor of LTE-Direct is capable of connecting user equipments directly without an intermediate base station @vijitha_weerackody_who_2023. This is generally designed for public safety or military operations used for unmanned vehicles @barnes_how_2023 although approaches existed to introduce it into commercial markets @qualcomm_technologies_inc_lte_2014. Again #gls("ios") peer-to-peer communication would highly benefit from such technolgies but unfortunately no developer support for this technology is given @apple_inc_apple_2024. 
 //https://www.comsoc.org/sites/default/files/styles/768wide/public/images/2023-2023-02/ctn-feb-2023-figure5.png?itok=GVi73s6A
 #figure(
     box(stroke: gray, inset: 1em,
@@ -80,13 +80,13 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
 
 === #gls("nfc")
 
-#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_nodate. Apple makes this technology also accessible to iOS and iPadOS developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_nodate. 
+#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_nodate. Apple makes this technology also accessible to #gls("ios") and iPadOS developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_nodate. 
 
 === UWB
 
 Apple allows developers to access their #gls("uwb") interface on iPhones and Apple Watches through the Nearby Interaction framework @apple_inc_nearby_nodate which is built to locate nearby devices also using the distance and direction. #gls("uwb") in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. In Apples article about the advanced ranging capabilities of second generation UWB chips which are included in iPhone 15 and above they use a maximum distance of 50 meters @apple_inc_extending_nodate. 
 
-== iOS
+== #gls("ios")
 
 The following part tries to familiarize with technologies used in the testing process of this thesis. 
 
@@ -122,7 +122,7 @@ The Transport Layer "divides application data into packets, adds a destination a
 
 ====== Nagles Algorithm
 
-Due to the 20 byte TCP header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the TCP protocol. This algorithm inhibits the sending of new TCP segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on iOS systems @apple_inc_network_nodate-1 and while testing the prototype has lead to highly reduced IP package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
+Due to the 20 byte TCP header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the TCP protocol. This algorithm inhibits the sending of new TCP segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on #gls("ios") systems @apple_inc_network_nodate-1 and while testing the prototype has lead to highly reduced IP package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
 
 ===== #gls("udp")
 

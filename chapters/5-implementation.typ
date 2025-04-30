@@ -11,7 +11,7 @@
 
 == Prototype 
 
-The application is written in `Swift` using the  #gls("ide") `XCode`, which is the suggested way to build iOS application by Apple. The built artifact is distributed via TestFlight, an online service for installing and testing apps for Apple devices and can be downloaded via an #gls("url") or directly installed by the developer machine. The application is written using a modified version of the #gls("mvvm") #gls("gui") design pattern. The application must feature a mechanism to find local peers, connect them and intercept data transfer to measure metrics. The technologies used to achieve these features are described in the following sections. 
+The application is written in `Swift` using the  #gls("ide") `XCode`, which is the suggested way to build #gls("ios") application by Apple. The built artifact is distributed via TestFlight, an online service for installing and testing apps for Apple devices and can be downloaded via an #gls("url") or directly installed by the developer machine. The application is written using a modified version of the #gls("mvvm") #gls("gui") design pattern. The application must feature a mechanism to find local peers, connect them and intercept data transfer to measure metrics. The technologies used to achieve these features are described in the following sections. 
 
 === User Interface
 
@@ -59,7 +59,7 @@ The testing views purpose is to present the user the state of each connection an
 
 === Networking Frameworks 
 
-Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In iOS, the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of iOS 11 @quinn_the_eskimo_ios_2017. 
+Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In #gls("ios"), the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of #gls("ios") 11 @quinn_the_eskimo_ios_2017. 
 
 In an approach to give a brief overview about Apples networking #gls("api")s, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
@@ -259,7 +259,7 @@ To transfer testing data the `NWConnection` class and its synchronous `send` and
 
 == Testing 
 
-Testing is done using an iPhone 12 mini and an iPhone 15 Pro both using the current iOS version 18.4.1. It is tested in various scenarios, which are defined below.
+Testing is done using an iPhone 12 mini and an iPhone 15 Pro both using the current #gls("ios") version 18.4.1. It is tested in various scenarios, which are defined below.
 
 === Places 
 
@@ -499,7 +499,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 // - **Software and Tools**
 //   - Wireshark with #gls("awdl") dissector.
 //   - CoreCapture framework on macOS (for system-level logs).
-//   - iOS tools (e.g., using Xcode instruments or jailbroken device tools like `tcpdump` or `Frida`).
+//   - #gls("ios") tools (e.g., using Xcode instruments or jailbroken device tools like `tcpdump` or `Frida`).
 //   - Scripts or software for automating tests (e.g., file transfer over AirDrop).
   
 // - **Configuration**

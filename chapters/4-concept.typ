@@ -2,29 +2,29 @@
 
 = Concept 
 
-The following introduces the abstract design of how direct #gls("ptp") communication between iOS devices is tested and measured for evaluation in this thesis. The measurement setup should try to systematically quantify how the performance of #gls("ptp") iOS connection is and how it changes under different surroundings. Different approaches to solve this problem do exist, which are briefly evaluated and compared among each other. 
+The following introduces the abstract design of how direct #gls("ptp") communication between #gls("ios") devices is tested and measured for evaluation in this thesis. The measurement setup should try to systematically quantify how the performance of #gls("ptp") #gls("ios") connection is and how it changes under different surroundings. Different approaches to solve this problem do exist, which are briefly evaluated and compared among each other. 
 
 == Approaches
 
 === Continuity Black Box Testing
 
-Using Apple's Continuity features to send and receive data on different iOS devices could be tested and analyzed. In the simplest form this would involve selecting a particular file with a particular size and measuring the time it takes to transport this file from one device to another. The data transfer speed could be approximated using the file size and the time it took to transfer the file. Another approach to this black box testing could involve using a network sniffer to monitor connection establishment like local #gls("mdns") and security handshakes including recording and analyzing the transmission process like congestion control and packet loss recovery. This could further be applied on different abstraction layers like measuring the physical radio frequency energy used or how many IP packages needed to be sent. 
+Using Apple's Continuity features to send and receive data on different #gls("ios") devices could be tested and analyzed. In the simplest form this would involve selecting a particular file with a particular size and measuring the time it takes to transport this file from one device to another. The data transfer speed could be approximated using the file size and the time it took to transfer the file. Another approach to this black box testing could involve using a network sniffer to monitor connection establishment like local #gls("mdns") and security handshakes including recording and analyzing the transmission process like congestion control and packet loss recovery. This could further be applied on different abstraction layers like measuring the physical radio frequency energy used or how many IP packages needed to be sent. 
 
-=== iOS Application
+=== #gls("ios") Application
 
-iOS provides several #gls("api") that allow a third party developer to access various underlying technologies to establish #gls("ptp") connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple is also an interface available to any third party developer and can therefore be implemented in any iOS application without the need to bypass any restrictions.
+#gls("ios") provides several #gls("api") that allow a third party developer to access various underlying technologies to establish #gls("ptp") connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple is also an interface available to any third party developer and can therefore be implemented in any #gls("ios") application without the need to bypass any restrictions.
 
 === Jailbreaking 
 
-Jailbreaking is a term used to describe the bypassing of the security mechanism in iOS. This allows the user to install arbitrary third party software and gain full access to the operating system. This would allow to also access interfaces like the cellular antenna that is restricted and not accessible to a third party developer or turning off services that would interfere with testing @ao_kaspersky_lab_jailbreaking_nodate. This however violates Apple's iOS Software License Agreement and testing could potentially disturb restricted frequency bands that are licensed @apple_inc_unauthorized_nodate. Additionally considering the current use cases of iOS devices and restrictions of the operating system it seems unlikely that developers other than Apple could have similar interfaces in near future.
+Jailbreaking is a term used to describe the bypassing of the security mechanism in #gls("ios"). This allows the user to install arbitrary third party software and gain full access to the operating system. This would allow to also access interfaces like the cellular antenna that is restricted and not accessible to a third party developer or turning off services that would interfere with testing @ao_kaspersky_lab_jailbreaking_nodate. This however violates Apple's #gls("ios") Software License Agreement and testing could potentially disturb restricted frequency bands that are licensed @apple_inc_unauthorized_nodate. Additionally considering the current use cases of #gls("ios") devices and restrictions of the operating system it seems unlikely that developers other than Apple could have similar interfaces in near future.
 
 == Experiment Design
 
-After evaluating the aforementioned concepts the decision was taken to build an iOS Application establishing and intercepting the #gls("ptp") connection to measure connection metrics. It is the most practicable considering the use for a wide mass, because staying in the boundaries imposed by Apple and using only first party frameworks makes developing and distributing in the App Store easier. The application needs to be installed on two nearby devices to establish a connection and transfer data. Furthermore since iPhones are typically used under various circumstances and surroundings testing should also cover representable scenarios for common places visited by iPhone users. 
+After evaluating the aforementioned concepts the decision was taken to build an #gls("ios") Application establishing and intercepting the #gls("ptp") connection to measure connection metrics. It is the most practicable considering the use for a wide mass, because staying in the boundaries imposed by Apple and using only first party frameworks makes developing and distributing in the App Store easier. The application needs to be installed on two nearby devices to establish a connection and transfer data. Furthermore since iPhones are typically used under various circumstances and surroundings testing should also cover representable scenarios for common places visited by iPhone users. 
 
 === Prototype
 
-The prototype should be installable on arbitrary iOS devices and should serve as both client and server. The client must be capable of discovering nearby peers and sending a connection request after user instruction. The server must be capable of advertising a service that clients can find and handling incoming connection requests. Both must be able to display the metrics that the applications measured to the user and should support a method to abort ongoing connections to start new advertisers/discoverers. 
+The prototype should be installable on arbitrary #gls("ios") devices and should serve as both client and server. The client must be capable of discovering nearby peers and sending a connection request after user instruction. The server must be capable of advertising a service that clients can find and handling incoming connection requests. Both must be able to display the metrics that the applications measured to the user and should support a method to abort ongoing connections to start new advertisers/discoverers. 
 
 === Testing
 
@@ -34,8 +34,8 @@ Capturing the data of interest is done by the prototype itself. However general 
 
 // ==== Metrics of Interest
 
-// From an abstract perspective the evaluation of the quality of direct connections between mobile iOS devices is done building a prototype application that measures data transfer on the TCP/IP application layer. During testing, the application is simultaniously run on two iOS machines that connect via #gls("awdl") and measure the connection metrics. The measurements taken during the data transfer will then be displayed, ready to be documented by the tester for later evaluation. 
-//The overall idea to evaluate the quality of direct connection between mobile iOS devices is to build a prototype application that measures data transfer on the OSI application layer. This application is built in the programming language `Swift` and in the IDE `XCode`. To access the Transport Layer of the OSI model the Networking Framework which is bundled in the iOS SDK was used. This SDK features a synchronous API to read and write data to the underlying networking stack. The measure interface lies directly on top of Networking Frameworks API which makes calculation overhead little.  
+// From an abstract perspective the evaluation of the quality of direct connections between mobile #gls("ios") devices is done building a prototype application that measures data transfer on the TCP/IP application layer. During testing, the application is simultaniously run on two #gls("ios") machines that connect via #gls("awdl") and measure the connection metrics. The measurements taken during the data transfer will then be displayed, ready to be documented by the tester for later evaluation. 
+//The overall idea to evaluate the quality of direct connection between mobile #gls("ios") devices is to build a prototype application that measures data transfer on the OSI application layer. This application is built in the programming language `Swift` and in the IDE `XCode`. To access the Transport Layer of the OSI model the Networking Framework which is bundled in the #gls("ios") SDK was used. This SDK features a synchronous API to read and write data to the underlying networking stack. The measure interface lies directly on top of Networking Frameworks API which makes calculation overhead little.  
 
 // This section should explain the what and why of your experiment — your rationale and high-level design, without diving into exact tools or code yet.
 // You could include:
@@ -78,13 +78,13 @@ Capturing the data of interest is done by the prototype itself. However general 
 
 // === Networking
 
-// The networking layer is built to abstract the communication with the wifi module via the networking framework which is included in the iOS SDK. The measuremnt logic is tightly integrated but the sole responsibility of the networking layer is to parse raw data to communicate with the Networkign API and read header lengths to distinguish between different package types. These different package types will be more precisely covered in implementation. 
+// The networking layer is built to abstract the communication with the wifi module via the networking framework which is included in the #gls("ios") SDK. The measuremnt logic is tightly integrated but the sole responsibility of the networking layer is to parse raw data to communicate with the Networkign API and read header lengths to distinguish between different package types. These different package types will be more precisely covered in implementation. 
 
 // == Server and Client in one App
 
 // == Technical scope
 
-// As already mentioned in the @introduction the prototype will compare several transport protocols and their effects on data transfer between two iOS devices. In particular TCP, UDP and QUIC will be compared side by side under the same conditions and with the same connections metrics. 
+// As already mentioned in the @introduction the prototype will compare several transport protocols and their effects on data transfer between two #gls("ios") devices. In particular TCP, UDP and QUIC will be compared side by side under the same conditions and with the same connections metrics. 
 
 
 // I am testing quic, tcp, udp and comparing them...
@@ -106,7 +106,7 @@ Capturing the data of interest is done by the prototype itself. However general 
 
 // == Notes on security
 
-// as OWL project found out over several papers there are several vulnerabilities even when no service is advertised or port is open so when apps open a port for peer to peer connectivity it is on the one hand the responsibility of the developer to create a secure connection with services. on the other hand the #gls("awdl") itself has some vulnerabilities that can not be eliminated by the developer itself, since they reside in the operating system iOS itself. as already mentioned the encryption of the connection itself is the responsibility of the developer since one can also open up unecrypted ports. to mitigate this responsibility one can use the mulitpeer connectivity framework which builds upon these low level apis and abstracts encryption and establishing the connection away from the developer. also security issues in ad hoc networks itslef are more present then in infrastructure networks since there is no central authority like used by the certificate chains in SSL encryption.
+// as OWL project found out over several papers there are several vulnerabilities even when no service is advertised or port is open so when apps open a port for peer to peer connectivity it is on the one hand the responsibility of the developer to create a secure connection with services. on the other hand the #gls("awdl") itself has some vulnerabilities that can not be eliminated by the developer itself, since they reside in the operating system #gls("ios") itself. as already mentioned the encryption of the connection itself is the responsibility of the developer since one can also open up unecrypted ports. to mitigate this responsibility one can use the mulitpeer connectivity framework which builds upon these low level apis and abstracts encryption and establishing the connection away from the developer. also security issues in ad hoc networks itslef are more present then in infrastructure networks since there is no central authority like used by the certificate chains in SSL encryption.
 
 // #(
 //   [ Describe an overall concept of a solution, which could possibly solve a given
