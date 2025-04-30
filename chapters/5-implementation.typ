@@ -71,84 +71,69 @@ Following Apples recommendations documented in a technote about choosing the rig
 
 Different transport protocols can be used to establish a connection. Following the single responsibility principle the transport protocols and their configurations are injected into the server and client implementations to create the corresponding connections. The transport protocols for which a server and client will be created are listed in a central singleton responsible for creating the server and client objects for each protocol which are injected to the view models. 
 
-```swift
-struct Config {
-    static let serviceProtocols: [TransportProtocol] = [.udp, .tcp, .quic]
-    
-    static var clients: [any Client] {
-        serviceProtocols.map { ClientImpl<ConnectionImpl>(transportProtocol: $0) }
-    }
-    
-    static var servers: [any Server] {
-       serviceProtocols.compactMap { try? ServerImpl<ConnectionImpl>(transportProtocol: $0) }
-    }
-}
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/configuration.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Configuration of transport protocols used while testing.], [Configuration of transport protocols.],
+    ),
+) <lst:configuration>
 
-```swift
-...
-    init(state: State = .init(), servers: [any Server] = Config.servers) {
-        self.state = state
-        self.servers = servers
-    }
-...
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/configuration_injection.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Injection of configured servers to view models.], [Injection of configured servers.],
+    ),
+) <lst:configuration_injection>
 
 The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local mDNS name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local AWDL broadcasting. 
 
-```swift 
-   var parameters: NWParameters {
-        switch self {
-        case .udp:
-            let udpOptions = NWProtocolUDP.Options()
-            let parameters = NWParameters(dtls: nil, udp: udpOptions)
-            parameters.includePeerToPeer = true
-            return parameters
-            
-        case .tcp:
-            let tcpOptions = NWProtocolTCP.Options()
-            tcpOptions.enableKeepalive = true
-            tcpOptions.keepaliveIdle = 2
-            
-            let parameters = NWParameters(tls: nil, tcp: tcpOptions)
-            parameters.includePeerToPeer = true
-            return parameters
-            
-        case .quic:
-                    ...
-        }
-    }
-    
-    var type: String {
-        switch self {
-        case .udp:
-            "_txtchat._udp"
-        case .tcp:
-            "_txtchat._tcp"
-        case .quic:
-            "_txtchatquic._udp"
-        }
-    }
-```
+
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/configuration_transport_protocols.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Configuration of transport protocol parameters that can be used for testing.], [Configuration of transport protocol parameters.],
+    ),
+) <lst:configuration_transport_protocols>
+
 ==== Secure Connection Establishment for QUIC
 
 Since QUIC has built in support for secure connections and requires TLS v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
 
+//MARK: add openssl command to create root CA and p12 file
 ```bash
 openssl command
 ```
 
 After adding it to the bundle the application must read the secure identity and add it to QUIC's `NWParameters`  `securityProtocolOptions` for client and server.
 
-```swift
-        sec_protocol_options_set_local_identity(quicOptions.securityProtocolOptions, sec_identity_create(identity)!)
-```
-```swift 
-        sec_protocol_options_set_verify_block(quicOptions.securityProtocolOptions, { _, sec_trust, completion in
-          ... //check validity of sec_trust
-          completion(isTrusting)
-        }, .global())
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/setting_local_identity_server.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Setting the local identity used while TLS 1.3 handshake on server.], [Setting local identity on server.],
+    ),
+) <lst:local_identity>
+
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/setting_verify_block_client.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Setting the verify block used while TLS 1.3 handshake on client.], [Setting verify block used on client.],
+    ),
+) <lst:verify_block>
 
 This enables the application to establish a secure QUIC connection. 
 
@@ -156,52 +141,28 @@ This enables the application to establish a secure QUIC connection.
 
 Connection Establishment is done via Bonjour using the Network Framework. The servers register a listener using the `NWListener` class and the `NWParameters` and local mDNS record from the injected transport protocols to listen for incoming network connections to that service. Once an inbound connection is received the listener object calls the `newConnectionHandler` method previously set when configuring the listener object. When the method is invoked it cancels the previous connection, creates a new one and posts a message to the connection state subject, indicating that a connection has been established. When a listener is created a service object which represents the Bonjour service to advertise the endpoint on the local network is initialized and passed to the listener. 
 
-```swift 
-    init(transportProtocol: TransportProtocol) throws {
-        self.transportProtocol = transportProtocol
-        
-        listener = try NWListener(
-            service: .init(
-                name: UIDevice.current.name,
-                type: transportProtocol.type,
-                domain: nil
-            ),
-            using: transportProtocol.parameters
-        )
-    }
-    
-    func startAdvertising() {
-        listener.newConnectionHandler = { [weak self] connection in
-            self?.connection?.cancel()
-            self?.connection = nil
-            self?.connection = C(connection)
-            self?.connectionStatus.value = "Connection established"
-        }
-        
-        listener.stateUpdateHandler = { [weak self] state in
-            self?.connectionStatus.value = "\(state)"
-        }
-        
-        listener.start(queue: .global())
-    }
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/start_listener.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Initialization and starting of network listener for injected transport protocol.], [Initialization and starting of network listener.],
+    ),
+) <lst:start_listener>
 
 The clients instantiate a `NWBrowser` object used to browse for available network services. When the browser object finds new Bonjour services it calls the `browseResultsChangedHandler` method. This method is previously configured to write the results to `browserResults` subject which can be observed by the view model. Once the user selects a browse result in the `BrowserView` this instanz is passed to the `createConnection` method which cancels the old connections, sets the new one for further use and reports an error in case the connection failed. 
 
-```swift
-    func createConnection(with browserResult: NWBrowser.Result) -> Error? {
-        let nwConnection = NWConnection(to: browserResult.endpoint, using: transportProtocol.parameters)
-        
-        self.connection?.cancel()
-        self.connection = nil
-        self.connection = C(nwConnection)
-        
-        if case let .failed(error) = self.connection?.state {
-            return error
-        }
-        return nil
-    }
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/start_connection_client.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Initialization of connection on client using a browser result.], [Initialization of connection on client.],
+    ),
+) <lst:start_connection>
+
 ==== Injecting a concrete Implementation of a Protocol 
 //TODO
 injecting ConnectionImpl to Client and serverimpl so i can create a new object inside
@@ -229,32 +190,38 @@ Local advertisers are displayed based on their human readable service instance n
 
 In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in Listing NWListener @apple_inc_uikit_nodate. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
 
-```swift
-extension NWBrowser.Result {
-    var name: String? {
-        if case let NWEndpoint.service(name: name, type: _, domain: _, interface: _) = self.endpoint {
-            return name
-        }
-        return nil
-    }
-}
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/network_browser_name.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Extension for extracting the name of the Bonjour service string.], [Extension for extracting the name of the Bonjour service string.],
+    ),
+) <lst:network_browser_name>
 
-```swift
-                Task { @MainActor in
-                    for await browseResults in client.browserResults.values {
-                        state.advertiserNames.append(contentsOf: browseResults.compactMap { $0.name })
-                        state.advertiserNames = state.advertiserNames.removingDuplicates()
-                    }
-                }
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/listening_for_browser_result_changes.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [How the view model listens to the browser result changes of the client object.], [Listening to browser result changes.],
+    ),
+) <lst:listening_browser_result_changes>
 
 Using the same service type like mentioned in the previous Section, Bonjour would automatically rename the service if it detects the same service on the local network @apple_inc_bonjour_2013.
 
-```
-iPad\\032(2)._txtchat._udp.local.
-iPad._txtchat._udp.local.
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/duplicate_bonjour_names.txt"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Comparison of Bonjour services that tried to use the same name and transport protocol.], [Comparison of Bonjour services.],
+    ),
+) <lst:duplicate_bonjour_services>
+
 The human readable service instance name is not identical and users could not choose a single testing server for all advertised transport services anymore.
 
 #figure(
@@ -268,26 +235,35 @@ Whenever a connection is ready a `DataTransferReport` is started which provides 
 
 Besides that the application also measures the testing start and end time and implements an own approach to measure RTT since DataTransferReport only takes TCP's control packages into account. Before the configured number of packages with the configured number of bytes get sent 100 separate packages to measure RTT and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average RTT and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
 
-```swift 
-                    var now = mach_absolute_time()
-                    var elapsed = now - date
-                    var timebase: mach_timebase_info_data_t = .init()
-                    mach_timebase_info(&timebase)
-                    let latencyNanoSeconds = elapsed * UInt64(timebase.numer) / UInt64(timebase.denom)
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/duration_calculation.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [How the time span is precisely calculated using kernel functions that return tick count.], [How the time span is precisely calculated.],
+    ),
+) <lst:duplicate_bonjour_services>
 
 To transfer testing data the `NWConnection` class and its synchronous `send` and `receive` methods are used. These methods are wrapped in an asynchronous `withCheckedContinuation` method to support Swift's `async await` concurrency. This testing application contains a wrapper class for the `NWConnection` which features an asynchronous `startTesting` that utilizes the aforementioned `send` method which is called from the client defining the number of packages to send and its size.
 
-```swift 
-    func startTesting(numberOfPackages: Int, packageSizeInByte: Int) async
-```
+#figure(
+    align(
+      left,
+      fhjcode(code: read("/code-snippets/startTesting_signature.swift"), lastline: 5),
+    ),
+    caption: flex-caption(
+      [Signature of the startTesting method that is provided by client objects.], [Signature of the startTesting methods.],
+    ),
+) <lst:startTesting_method>
+
 == Testing 
 
 Testing is done using an iPhone 12 mini and an iPhone 15 Pro both using the current iOS version 18.4.1. It is tested in various scenarios, which are defined below.
 
 === Places 
 
-Testing is done in four different places representing typical places for iPhone users. One testing environment will be the underground station which is dense in people on a small space. Another environment will be the inner city of vienna which is also dense in people but more open than the underground. The next environment will be a free field with perfect conditions for radio broadcasting since minimal other signals or objects like persons could disturb the signal. The last place that will be tested is the forest since it may have the same density of obstacles but also like the filed minimal radio frequency disturbances.
+Testing is done in four different places representing typical places for iPhone users. One testing environment will be the underground station which is dense in people on a small space. Another environment will be the inner city of vienna which is also dense in people but more open than the underground. The next environment will be a free field with perfect conditions for radio broadcasting since minimal other signals or objects like persons could disturb the signal. The last place that will be tested is the forest since it may have the same density of obstacles but also like the filed minimal radio frequency disturbances. @loizeau_comparison_2023
 
 === Data sizes and distance
 

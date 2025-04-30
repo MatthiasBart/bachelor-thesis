@@ -5,18 +5,29 @@
       key: "ptp", short: "P2P", long: "Peer to Peer", desc: [Peer to Peer is a term for direct communication between nodes, where no underlying infrastructure is needed.],
     ),
     (
-      key: "gc", short: "GC", long: "Garbage Collection", desc: [Garbage collection is the common name for the term automatic memory management.],
+      key: "rtt", short: "RTT", long: "Round Trip Time", desc: [A time measurement that indicates how long a package travels between sender, receiver and back to sender again.]
+    ), 
+    (
+      key: "awdl", short: "AWDL", long: "Apple Wireless Direct Link", desc: [An Apple proprietary protocol used for peer-to-peer communication.]
+    ), 
+    (
+      key: "api", short: "API", long: "Application Programming Interface", desc: [A defined interface used to plug software components/applications together.]
     ),
     (
-      key: "cow", short: "COW", long: "Copy on Write", desc: [Copy on Write is a memory allocation strategy where arrays are copied if they
-        are to be modified.],
-    ),
+      key: "mdns", short: "mDNS", long: "multicast Domain Name System", desc: [Network protocol to resolve hostnames wihin local network without relying on central DNS server.]
+    ), 
     (
-      key: "svg", short: "SVG", long: "Scalable Vector Graphics", desc: [A vector image format.],
-    ),
+      key: "manet", short: "MANET", long: "Mobile Ad Hoc Networks", desc: [Decentralized type of a wireless network. Each node participates in routing.]
+    ), 
     (
-      key: "csv", short: "CSV", long: "Comma-separated Values ", desc: [A human readable, plain text file format using commas to separate the values.],
-    ),
+      key: "d2d", short: "D2D", long: "device-to-device", desc: [Used to describe communication between user equipments in cellular networks without using an intermediary base station.]
+    ), 
+    (
+      key: "ue", short: "UE", long: "User Equipment", desc: [Any device used directly by an end user in cellular networks.]
+    ), 
+    (
+      key: "gnb", short: "gNB", long: "Next Generation Node B", desc: [A base station in 5G networks.]
+    ), 
 )
 
 // Hints:
