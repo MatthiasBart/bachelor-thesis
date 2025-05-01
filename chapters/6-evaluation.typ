@@ -2,7 +2,60 @@
 
 = Results and Evaluation 
 
-#lorem(30)#v(0.3cm)
+The following section shows the scenarios the testings were executed and presents the metrics individually before discussing the hypothesis. Testing has been done on 1.Mai 2025 in Vienna around noon. The weather was sunny and it had around 25 degrees celsius.
+
+#figure(
+  image("/figures/weather.png", width: 60%),
+  caption: [Weather at day of testing.]
+)<fig:weather>
+
+== Field
+
+Testing on the field started at around 11:38 and ended at around 12:15 at the coordinates `48,22695° N, 16,24221° E`. 
+
+#figure(
+  image("/figures/field.jpeg", width: 60%),
+  caption: [Field at time of testing.]
+)<fig:field>
+
+== Forest 
+
+Testing in the forest started at around 12:21 and ended at around 12:37 at the coordinates `48,22605° N, 16,24379° E`.
+
+#figure(
+  image("/figures/forest.jpeg", width: 60%),
+  caption: [Forest at time of testing.]
+)<fig:forest>
+
+== Inner City of Vienna
+
+Testing in the inner city of Vienna started at around 13:31 and ended at around 13:47 at the coordinates `48,20837° N, 16,37043° E`.
+
+#figure(
+  image("/figures/inner_city.jpeg", width: 60%),
+  caption: [Inner city of vienna at time of testing.]
+)<fig:inner_city>
+
+== Underground
+
+Testing in the Underground started at around 14:02 and ended at around 14:12 at the coordinates `48,20815° N, 16,37162° E`.
+
+#figure(
+  image("/figures/underground.jpeg", width: 60%),
+  caption: [Underground at time of testing.]
+)<fig:underground>
+
+== Hypothesis
+
+== Other findings
+
+=== Establishing or finding Bonjour service much more difficult than holding connection
+
+=== the iphone 15 Pro lost more energy than the iphone 12 mini
+
+=== after having quite big issues on field with 10m we switched to 1/5/10 event though 30 was planned but when testing in underground easily 35m
+
+maybe because of heat on the field and the good reflectors in the underground
 
 #todo([
   Describe (proof) how your implementation really solved the stated problem. I.e.
