@@ -104,16 +104,11 @@ The `TransportProtocol` itself is an enum, where each case is representing a tra
     ),
 ) <lst:configuration_transport_protocols>
 
-==== Secure Connection Establishment for QUIC
+==== Secure Connection Establishment for #gls("quic")
 
-Since QUIC has built in support for secure connections and requires #gls("tls") v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
+Since #gls("quic") has built in support for secure connections and requires #gls("tls") v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
 
-//MARK: add openssl command to create root CA and p12 file
-```bash
-openssl command
-```
-
-After adding it to the bundle the application must read the secure identity and add it to QUIC's `NWParameters`  `securityProtocolOptions` for client and server.
+After adding it to the bundle the application must read the secure identity and add it to #gls("quic")'s `NWParameters`  `securityProtocolOptions` for client and server.
 
 #figure(
     align(
@@ -226,7 +221,7 @@ The human readable service instance name is not identical and users could not ch
 
 #figure(
   image("/figures/bonjour_same_service_issue.PNG", width: 20%),
-  caption: [Screenshot of #gls("udp") and QUIC services using the same Bonjour service type.]
+  caption: [Screenshot of #gls("udp") and #gls("quic") services using the same Bonjour service type.]
 )<fig:bonjour_same_service_issue>
 
 === Measuring and Networking
