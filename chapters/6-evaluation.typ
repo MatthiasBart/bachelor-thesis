@@ -45,7 +45,7 @@ Testing in the Underground started at around 14:02 and ended at around 14:12 at 
   caption: [Underground at time of testing.]
 )<fig:underground>
 
-== Hypothesis
+== Interpretation
 
 == Other findings
 

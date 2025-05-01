@@ -102,7 +102,7 @@ The #gls("ips") is a set of networking protocols specified by the #gls("ietf") a
       fhjcode(code: read("/code-snippets/ips_layers.txt")),
     ),
     caption: flex-caption(
-      [Textual graphic showing the defined layers of the #gls("ips").], [Layers of the #gls("ips").],
+      [Textual graphic showing the defined layers of the #gls("ips") @shirey_internet_2007.], [Layers of the #gls("ips") @shirey_internet_2007.],
     ),
 ) <lst:ips_layers>
 
@@ -116,7 +116,7 @@ The Transport Layer "divides application data into packets, adds a destination a
 
 ===== #gls("tcp")
 
-#gls("tcp") is an internet standard, transport layer protocol that reliably transmit data in the same order it was sent utilizing congestion and error controlling. It can be directly accessed on Apple platforms using the C based #gls("bsd")Sockets or the Networking Framework @apple_inc_tn3151_2023.
+#gls("tcp") is an internet standard, transport layer protocol that reliably transmit data in the same order it was sent utilizing congestion and error controlling. It can be directly accessed on Apple platforms using the C based #gls("bsd", long: false)Sockets or the Networking Framework @apple_inc_tn3151_2023.
 
 ====== Nagles Algorithm
 
