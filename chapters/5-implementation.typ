@@ -302,6 +302,9 @@ Data transfer metrics of three different transport protocols will be tested. #gl
   caption: [Metrics used to evaluate protocols.]
 )
 
+$ overline(R T T) =  1 / N sum_(i=0)^N R T T_i$
+
+$ J i t t e r = sqrt(1/N sum_(i=0)^N (R T T_i - overline(R T T))^2)$
 == Summary 
 
 Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (#gls("tcp"), #gls("udp") and #gls("quic")) separately and the metrics are displayed to the user ready for recording. Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of Vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices.
