@@ -34,7 +34,7 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 
 === #gls("wifi")
 
-#gls("wifi") is a trademark for #gls("ieee") wireless communication standard 802.11 based technologies which already exists for over two decades. The IEEE 802.11 standard defines the protocols that are used to establish a connection with current #gls("wifi") wireless nodes, including routers or access points whereas the correlating #gls("wifi") versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_nodate.
+#gls("wifi") is a trademark for #gls("ieee") wireless communication standard 802.11 based technologies which already exists for over two decades. The #gls("ieee") 802.11 standard defines the protocols that are used to establish a connection with current #gls("wifi") wireless nodes, including routers or access points whereas the correlating #gls("wifi") versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_nodate.
 
 #figure(
   table(
@@ -136,7 +136,7 @@ Due to the 20 byte #gls("tcp") header there has been a relatively high overhead 
 
 == Summary
 
-//TODO
+Although all wireless communication technologies serve the same purpose a lot of variants have emerged that are fine tuned for more precise use cases. Since infrastructure networking has nowadays proved its worth upcoming ad-hoc solutions tend to be compatible with the overlaying #gls("ips") like #gls("awdl"). 
 
 // #(
 //   [
