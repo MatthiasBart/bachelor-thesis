@@ -24,9 +24,8 @@ While Starlink operates on similar ideas they offer multiple advantages over nor
     box(stroke: gray, inset: 1em,
       image("/figures/starlink.png", width: 25%)
     ),
-    caption: [Abstract structure of Starlink's network.]
+    caption: [Abstract structure of Starlink's network. @starlink_satellite_nodate]
   )<fig:starlink>
-
 
 
 == Specific Ad-hoc technologies 
@@ -63,19 +62,18 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
     box(stroke: gray, inset: 1em,
       image("/figures/lorawan.png", width: 75%)
     ),
-    caption: [Abstract structure of LoRaWan network.]
+    caption: [Abstract structure of LoRaWan network. @lora_alliance_lorawan_2021]
   )<fig:lorawan>
-  //https://lora-alliance.org/wp-content/uploads/2021/10/LA-TC-Stack-01-1536x708.png
 
 === #gls("5g") #gls("sl")
 
 #gls("5g") #gls("sl") the successor of #gls("lte")-Direct is capable of connecting user equipments directly without an intermediate base station @vijitha_weerackody_who_2023. This is generally designed for public safety or military operations used for #gls("uva")s @barnes_how_2023 although approaches existed to introduce it into commercial markets @qualcomm_technologies_inc_lte_2014. Again #gls("ios") peer-to-peer communication would highly benefit from such technologies but unfortunately no developer support for this technology is given @apple_inc_apple_2024. 
-//https://www.comsoc.org/sites/default/files/styles/768wide/public/images/2023-2023-02/ctn-feb-2023-figure5.png?itok=GVi73s6A
+
 #figure(
     box(stroke: gray, inset: 1em,
       image("/figures/sidelink5g.png", width: 75%)
     ),
-    caption: [Abstract structure of 5G #gls("sl") network.]
+    caption: [Abstract structure of 5G #gls("sl") network. @ieee_communication_society_5g_2023]
   )<fig:sidelink>
 
 === #gls("nfc")

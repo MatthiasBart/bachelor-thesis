@@ -185,7 +185,7 @@ Local advertisers are displayed based on their human readable service instance n
 
 #figure(
   image("/figures/bonjour_naming.png", width: 75%),
-  caption: [Graphic showing the Bonjour naming convention.]
+  caption: [Graphic showing the Bonjour naming convention. @apple_inc_bonjour_2013]
 )<fig:bonjour_naming>
 
 In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in Listing NWListener @apple_inc_uikit_nodate. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 

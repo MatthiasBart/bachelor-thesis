@@ -29,22 +29,22 @@
   as shown below:
 ])
 
-#figure(
-    fhjtable(
-      tabledata: csv("/data/recordings.csv"),
-      header-row: white,
-      odd-row: luma(240),
-      even-row: white,
-      columns: 3),
-    caption: flex-caption(
-      [Professional experience of the test users with databases.],
-      [DB expertise in years.],
-    )
-) <users>
-#todo([
-  Find in @users the years a user has worked with different relational or nosql
-  databases in a professional context.
-])
+// #figure(
+//     fhjtable(
+//       tabledata: csv("/data/recordings.csv"),
+//       header-row: white,
+//       odd-row: luma(240),
+//       even-row: white,
+//       columns: 3),
+//     caption: flex-caption(
+//       [Professional experience of the test users with databases.],
+//       [DB expertise in years.],
+//     )
+// ) <users>
+// #todo([
+//   Find in @users the years a user has worked with different relational or nosql
+//   databases in a professional context.
+// ])
 
 #todo([
   == Measurement <measure>
@@ -101,14 +101,14 @@
   shown below.
 ])
 
-#box(height: 124pt, columns(2, gutter: 11pt)[
-  #for x in range(1, 3) [
-    #let imagename = "/figures/chart-" + str(x) + ".svg"
-    #figure(image(imagename, width: 75%), caption: [
-      Compared source code by metric #(x).
-    ])
-  ]
-])
+// #box(height: 124pt, columns(2, gutter: 11pt)[
+//   #for x in range(1, 3) [
+//     #let imagename = "/figures/chart-" + str(x) + ".svg"
+//     #figure(image(imagename, width: 75%), caption: [
+//       Compared source code by metric #(x).
+//     ])
+//   ]
+// ])
 
 
 #todo([
