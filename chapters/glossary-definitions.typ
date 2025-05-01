@@ -50,6 +50,9 @@
       key: "udp", short: "UDP", long: "User Datagram Protocol", desc: [Connectionless Transport Layer protocol used to transfer data.]
     ),
     (
+      key: "quic", short: "QUIC", desc: [Transport protocol built upon UDP that offers faster and more secure data transfers.]
+    ),
+    (
       key: "sdk", short: "SDK", long: "Software Development Kit", desc: [Collection of software tools developers use to create applications.]
     ), 
     (

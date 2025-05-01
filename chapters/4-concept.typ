@@ -8,7 +8,7 @@ The following introduces the abstract design of how direct #gls("ptp") communica
 
 === Continuity Black Box Testing
 
-Using Apple's Continuity features to send and receive data on different #gls("ios") devices could be tested and analyzed. In the simplest form this would involve selecting a particular file with a particular size and measuring the time it takes to transport this file from one device to another. The data transfer speed could be approximated using the file size and the time it took to transfer the file. Another approach to this black box testing could involve using a network sniffer to monitor connection establishment like local #gls("mdns") and security handshakes including recording and analyzing the transmission process like congestion control and packet loss recovery. This could further be applied on different abstraction layers like measuring the physical radio frequency energy used or how many IP packages needed to be sent. 
+Using Apple's Continuity features to send and receive data on different #gls("ios") devices could be tested and analyzed. In the simplest form this would involve selecting a particular file with a particular size and measuring the time it takes to transport this file from one device to another. The data transfer speed could be approximated using the file size and the time it took to transfer the file. Another approach to this black box testing could involve using a network sniffer to monitor connection establishment like local #gls("mdns") and security handshakes including recording and analyzing the transmission process like congestion control and packet loss recovery. This could further be applied on different abstraction layers like measuring the physical radio frequency energy used or how many #gls("ip") packages needed to be sent. 
 
 === #gls("ios") Application
 
@@ -78,16 +78,16 @@ Capturing the data of interest is done by the prototype itself. However general 
 
 // === Networking
 
-// The networking layer is built to abstract the communication with the wifi module via the networking framework which is included in the #gls("ios") SDK. The measuremnt logic is tightly integrated but the sole responsibility of the networking layer is to parse raw data to communicate with the Networkign API and read header lengths to distinguish between different package types. These different package types will be more precisely covered in implementation. 
+// The networking layer is built to abstract the communication with the #gls("wifi") module via the networking framework which is included in the #gls("ios") SDK. The measuremnt logic is tightly integrated but the sole responsibility of the networking layer is to parse raw data to communicate with the Networkign API and read header lengths to distinguish between different package types. These different package types will be more precisely covered in implementation. 
 
 // == Server and Client in one App
 
 // == Technical scope
 
-// As already mentioned in the @introduction the prototype will compare several transport protocols and their effects on data transfer between two #gls("ios") devices. In particular TCP, UDP and QUIC will be compared side by side under the same conditions and with the same connections metrics. 
+// As already mentioned in the @introduction the prototype will compare several transport protocols and their effects on data transfer between two #gls("ios") devices. In particular TCP, #gls("udp") and QUIC will be compared side by side under the same conditions and with the same connections metrics. 
 
 
-// I am testing quic, tcp, udp and comparing them...
+// I am testing quic, tcp, #gls("udp") and comparing them...
 
 //The `User Interface` layer serves the presentation of the different elements that the tester can interact with and is not pertinent for this experiment. The next underlying layer is that of `Logic` which handles the interaction between the user interface, the measuring and networking layer. The measuring layer collects the metrics based on the application data exposed by the networking layer. The networking layer itself is responsible for interacting with the synchronous Networking Framework API, subsequently wrapping it in asynchronous functions.
 

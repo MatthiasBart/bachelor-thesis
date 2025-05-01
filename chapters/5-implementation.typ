@@ -11,7 +11,7 @@
 
 == Prototype 
 
-The application is written in `Swift` using the  #gls("ide") `XCode`, which is the suggested way to build #gls("ios") application by Apple. The built artifact is distributed via TestFlight, an online service for installing and testing apps for Apple devices and can be downloaded via an #gls("url") or directly installed by the developer machine. The application is written using a modified version of the #gls("mvvm") #gls("gui") design pattern. The application must feature a mechanism to find local peers, connect them and intercept data transfer to measure metrics. The technologies used to achieve these features are described in the following sections. 
+The application is written in #gls("swift") using the  #gls("ide") #gls("xcode"), which is the suggested way to build #gls("ios") application by Apple. The built artifact is distributed via TestFlight, an online service for installing and testing apps for Apple devices and can be downloaded via an #gls("url") or directly installed by the developer machine. The application is written using a modified version of the #gls("mvvm") #gls("gui") design pattern. The application must feature a mechanism to find local peers, connect them and intercept data transfer to measure metrics. The technologies used to achieve these features are described in the following sections. 
 
 === User Interface
 
@@ -59,9 +59,9 @@ The testing views purpose is to present the user the state of each connection an
 
 === Networking Frameworks 
 
-Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In #gls("ios"), the framework uses infrastructure Wi-Fi networks, peer-to-peer Wi-Fi, and Bluetooth personal area networks for the underlying transport. In macOS and tvOS, it uses infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of #gls("ios") 11 @quinn_the_eskimo_ios_2017. 
+Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In #gls("ios"), the framework uses infrastructure #gls("wifi") networks, #gls("ptp") Wi-Fi, and Bluetooth personal area networks for the underlying transport. In #gls("macos") and #gls("tvos"), it uses infrastructure #gls("wifi"), #gls("ptp") #gls("wifi"), and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of #gls("ios") 11 @quinn_the_eskimo_ios_2017. 
 
-In an approach to give a brief overview about Apples networking #gls("api")s, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") WiFi support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like TLS, TCP, and UDP for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
+In an approach to give a brief overview about Apples networking #gls("api")s, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") #gls("wifi") support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like #gls("tls"), #gls("tcp"), and #gls("udp") for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
 Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones #gls("uwb") chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples #gls("wwdc") distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
 
@@ -91,7 +91,7 @@ Different transport protocols can be used to establish a connection. Following t
     ),
 ) <lst:configuration_injection>
 
-The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of TCP, UDP and QUIC cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local #gls("mdns") name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local #gls("awdl") broadcasting. 
+The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of #gls("tcp"), #gls("udp") and #gls("quic") cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local #gls("mdns") name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local #gls("awdl") broadcasting. 
 
 
 #figure(
@@ -106,7 +106,7 @@ The `TransportProtocol` itself is an enum, where each case is representing a tra
 
 ==== Secure Connection Establishment for QUIC
 
-Since QUIC has built in support for secure connections and requires TLS v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
+Since QUIC has built in support for secure connections and requires #gls("tls") v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
 
 //MARK: add openssl command to create root CA and p12 file
 ```bash
@@ -121,7 +121,7 @@ After adding it to the bundle the application must read the secure identity and 
       fhjcode(code: read("/code-snippets/setting_local_identity_server.swift")),
     ),
     caption: flex-caption(
-      [Setting the local identity used while TLS 1.3 handshake on server.], [Setting local identity on server.],
+      [Setting the local identity used while #gls("tls") 1.3 handshake on server.], [Setting local identity on server.],
     ),
 ) <lst:local_identity>
 
@@ -131,7 +131,7 @@ After adding it to the bundle the application must read the secure identity and 
       fhjcode(code: read("/code-snippets/setting_verify_block_client.swift")),
     ),
     caption: flex-caption(
-      [Setting the verify block used while TLS 1.3 handshake on client.], [Setting verify block used on client.],
+      [Setting the verify block used while #gls("tls") 1.3 handshake on client.], [Setting verify block used on client.],
     ),
 ) <lst:verify_block>
 
@@ -151,7 +151,7 @@ Connection Establishment is done via Bonjour using the Network Framework. The se
     ),
 ) <lst:start_listener>
 
-The clients instantiate a `NWBrowser` object used to browse for available network services. When the browser object finds new Bonjour services it calls the `browseResultsChangedHandler` method. This method is previously configured to write the results to `browserResults` subject which can be observed by the view model. Once the user selects a browse result in the `BrowserView` this instanz is passed to the `createConnection` method which cancels the old connections, sets the new one for further use and reports an error in case the connection failed. 
+The clients instantiate a `NWBrowser` object used to browse for available network services. When the browser object finds new Bonjour services it calls the `browseResultsChangedHandler` method. This method is previously configured to write the results to `browserResults` subject which can be observed by the view model. Once the user selects a browse result in the `BrowserView` this instance is passed to the `createConnection` method which cancels the old connections, sets the new one for further use and reports an error in case the connection failed. 
 
 #figure(
     align(
@@ -177,7 +177,7 @@ In the case of the test application the aforementioned key contains the followin
 - "\_txtchat.\_tcp"
 - "\_txtchatquic.\_udp"
 
-One can notice that two entries using UDP as the transport protocol exist. This is because the application should advertise and browse for UDP and the UDP based QUIC protocol simultaneously. Without using a second service entry Bonjour would automatically rename the service entry which would break the logic for displaying and selecting the browser results. 
+One can notice that two entries using #gls("udp") as the transport protocol exist. This is because the application should advertise and browse for #gls("udp") and the #gls("udp") based QUIC protocol simultaneously. Without using a second service entry Bonjour would automatically rename the service entry which would break the logic for displaying and selecting the browser results. 
 
 ==== Displaying and Selecting Advertisers
 
@@ -226,14 +226,14 @@ The human readable service instance name is not identical and users could not ch
 
 #figure(
   image("/figures/bonjour_same_service_issue.PNG", width: 20%),
-  caption: [Screenshot of UDP and QUIC services using the same Bonjour service type.]
+  caption: [Screenshot of #gls("udp") and QUIC services using the same Bonjour service type.]
 )<fig:bonjour_same_service_issue>
 
 === Measuring and Networking
 
-Whenever a connection is ready a `DataTransferReport` is started which provides metrics about data being sent and received on a connection like data size in bytes, the number of IP packages or #gls("rtt"). 
+Whenever a connection is ready a `DataTransferReport` is started which provides metrics about data being sent and received on a connection like data size in bytes, the number of #gls("ip") packages or #gls("rtt"). 
 
-Besides that the application also measures the testing start and end time and implements an own approach to measure #gls("rtt") since DataTransferReport only takes TCP's control packages into account. Before the configured number of packages with the configured number of bytes get sent 100 separate packages to measure #gls("rtt") and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average #gls("rtt") and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
+Besides that the application also measures the testing start and end time and implements an own approach to measure #gls("rtt") since DataTransferReport only takes #gls("tcp")'s control packages into account. Before the configured number of packages with the configured number of bytes get sent 100 separate packages to measure #gls("rtt") and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average #gls("rtt") and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
 
 #figure(
     align(
@@ -259,7 +259,7 @@ To transfer testing data the `NWConnection` class and its synchronous `send` and
 
 == Testing 
 
-Testing is done using an iPhone 12 mini and an iPhone 15 Pro both using the current #gls("ios") version 18.4.1. It is tested in various scenarios, which are defined below.
+Testing is done using an iPhone 12 mini and an iPhone 15 Pro both using the current #gls("ios") version 18.4.1. It is tested in various scenarios, which are defined below, using the iPhone 12 mini as sender/client and the iPhone 15 Pro as receiver/server.
 
 === Places 
 
@@ -277,15 +277,14 @@ Data size of the whole testing process is composed of the number of packages tha
     [*Number of Packages*], [*Size of Package in Bytes*], [*Distance in Meters*]
     ),
     [100], [128], [1],
-    [1000], [4096], [10],
-    [10 000], [16 384], [30], 
-    [100 000], [], [max]
+    [1000], [4096], [5],
+    [10 000], [9216], [10], 
   ), caption: [Definition of test scenarios.],
 ) 
 
 === Protocols and Metrics
 
-Data transfer metrics of three different transport protocols will be tested. TCP, UDP and QUIC will be compared in the average #gls("rtt"), Jitter, data transfer speed. These metrics will be measured in all combinations of the above mentioned scenarios.  
+Data transfer metrics of three different transport protocols will be tested. #gls("tcp"), #gls("udp") and #gls("quic") will be compared in the average #gls("rtt"), Jitter, data transfer speed. These metrics will be measured in all combinations of the above mentioned scenarios.  
 
 #figure(
   table(
@@ -294,7 +293,7 @@ Data transfer metrics of three different transport protocols will be tested. TCP
     table.header(
     [*Protocols*]
     ),
-    [TCP], [UDP], [QUIC]
+    [#gls("tcp")], [#gls("udp")], [#gls("quic")]
   ), caption: [Transport Protocols used for testing.],
 ) 
 
@@ -310,7 +309,7 @@ Data transfer metrics of three different transport protocols will be tested. TCP
 
 == Summary 
 
-Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (TCP, UDP and QUIC) separately and the metrics are displayed to the user ready for recording. Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of Vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices.
+Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (#gls("tcp"), #gls("udp") and #gls("quic")) separately and the metrics are displayed to the user ready for recording. Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of Vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices.
 
 #figure(
   box(stroke: gray, inset: 1em,
@@ -324,19 +323,19 @@ Testing is done using a prototype application written in SwiftUI enabling the us
     columns: (auto, auto, auto, auto, auto, auto), 
     inset: 10pt,
     table.header([*Metrics*], [*Scenarios*], [*Protocols*], [*Distances in Meters*], [*Number of Packages*], [*Package size in Bytes*]),
-    [#gls("rtt")], [Underground], [TCP], [1], [100], [128], 
-    [Jitter], [Inner City],  [UDP], [10], [1000], [4 096], 
-    [Data Rate], [Free Field], [QUIC], [30], [10 000], [16 384],
-    [], [Forest], [], [max], [100 000], []
+    [#gls("rtt")], [Underground], [#gls("tcp")], [1], [100], [128], 
+    [Jitter], [Inner City],  [#gls("udp")], [5], [1000], [4 096], 
+    [Data Rate], [Free Field], [#gls("quic")], [10], [10 000], [9216],
+    [], [Forest], [], [], [], []
   ),
   caption: [Definition of testing scenarios and variations.]
 )
 
 
-//The QUIC protocol has significant advantages over TCP. If you’re building a custom network protocol, consider using QUIC instead of TCP. https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
+//The QUIC protocol has significant advantages over #gls("tcp"). If you’re building a custom network protocol, consider using QUIC instead of #gls("tcp"). https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
 
 // === 
-// general: QUIC, TCP, UDP...
+// general: QUIC, #gls("tcp"), #gls("udp")...
 // The following builds upon the concepts described in the previous chapter but will describe further details and show code examples. The presentation of the inner workings of the application will be structured in the layers descirbed in the previous chapter, whereas the User Interface and the logic layers are outlined together to improve understanding of the connections of graphical layouts and corresponding logic. The measurement and networking layers are mentioned under the headings of the seperate screens where it is applicable. The Start screen for example, does not contain code for neither networking nor measurement. 
 // 
 // === Protocol 
@@ -362,7 +361,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 // field
 
 // What do I want to achieve? 
-// Test one time with bluetooth off and one time with bluetooth on since iPhones use the same antenna for both, which has already caused slow wifi connections when peer to peer was enabled...
+// Test one time with bluetooth off and one time with bluetooth on since iPhones use the same antenna for both, which has already caused slow #gls("wifi") connections when peer to peer was enabled...
 // Bluetooth doesnt turn off completely
 // I want to test different scenarios, so I know which transport protocol performs best under certain circumstances and environments. I want to test different payload sizes, package count from perspective of !application level!. The metrics should be captured depending on distance and other environmental factors like obstacles. 
 
@@ -384,7 +383,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 
 // do every case 5 times, max meters are not done in every scenario, just how far it can go...
 
-// also include seperately a comparison between tcp options, noDelay and noPush
+// also include seperately a comparison between #gls("tcp") options, noDelay and noPush
 
 // done -> inPr -> notStarted
 // code -> test -> write thesis 
@@ -499,7 +498,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
 // - **Software and Tools**
 //   - Wireshark with #gls("awdl") dissector.
 //   - CoreCapture framework on macOS (for system-level logs).
-//   - #gls("ios") tools (e.g., using Xcode instruments or jailbroken device tools like `tcpdump` or `Frida`).
+//   - #gls("ios") tools (e.g., using Xcode instruments or jailbroken device tools like `#gls("tcp")dump` or `Frida`).
 //   - Scripts or software for automating tests (e.g., file transfer over AirDrop).
   
 // - **Configuration**

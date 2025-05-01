@@ -33,27 +33,27 @@ While Starlink operates on similar ideas they offer multiple advantages over nor
 
 While <satellite> and <starlink> solve the issue of dead spots, they also rely on infrastructure. The following is an incomprehensive list of ad hoc technologies.
 
-=== WiFi
+=== #gls("wifi")
 
-WiFi is a trademark for #gls("ieee") wireless communication standard 802.11 based technologies which already exists for over two decades. The IEEE 802.11 standard defines the protocols that are used to establish a connection with current WiFi wireless nodes, including routers or access points whereas the correlating WiFi versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_nodate.
+#gls("wifi") is a trademark for #gls("ieee") wireless communication standard 802.11 based technologies which already exists for over two decades. The IEEE 802.11 standard defines the protocols that are used to establish a connection with current #gls("wifi") wireless nodes, including routers or access points whereas the correlating #gls("wifi") versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_nodate.
 
 #figure(
   table(
     columns: (auto, auto),
     inset: 10pt, 
     table.header([*Generational name*], [*Technology supported*]), 
-    [WiFi 7], [802.11be],
-    [WiFi 6], [802.11ax],
-    [WiFi 5], [802.11ac],
-    [WiFi 4], [802.11n],
+    [#gls("wifi") 7], [802.11be],
+    [#gls("wifi") 6], [802.11ax],
+    [#gls("wifi") 5], [802.11ac],
+    [#gls("wifi") 4], [802.11n],
   ) 
 )
 
-The WiFi Direct trademark enables WiFi devices to connect directly without underlying infrastructure. However this specification has not been widely adopted because of high energy consumption and lack of performance where establishing a connection could take fro four to ten seconds @camps-mur_device--device_2013. WiFi Direct is not available in iPhones @quinn_the_eskimo_ios_2015.
+The #gls("wifi") Direct trademark enables #gls("wifi") devices to connect directly without underlying infrastructure. However this specification has not been widely adopted because of high energy consumption and lack of performance where establishing a connection could take four to ten seconds @camps-mur_device--device_2013. #gls("wifi") Direct is not available in iPhones @quinn_the_eskimo_ios_2015.
 
 === Bluetooth
 
-Bluetooth a short range wireless technology enables connection between two nearby devices without relying on supporting infrastructure very similar to WiFi Direct. The protocol operates on 2.4 GHz and is features two separate standards today, Bluetooth Classic and Bluetooth Low Energy which is optimized for low energy consumption. Today Bluetooth is mostly used to connect computers to external peripherals like mice, keyboards or headphones. Using Bluetooth for data transfer is not preferred since its data rate is limited to 2 Mbps @intel_corporation_what_2022 @cybersecurity__infrastructure_security_agency_understanding_2021. 
+Bluetooth a short range wireless technology enables connection between two nearby devices without relying on supporting infrastructure very similar to #gls("wifi") Direct. The protocol operates on 2.4 GHz and is features two separate standards today, Bluetooth Classic and #gls("ble", long: true) which is optimized for low energy consumption. Today Bluetooth is mostly used to connect computers to external peripherals like mice, keyboards or headphones. Using Bluetooth for data transfer is not preferred since its data rate is limited to 2 Mbps @intel_corporation_what_2022 @cybersecurity__infrastructure_security_agency_understanding_2021. 
 
 === LoRaWan
 
@@ -67,9 +67,9 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
   )<fig:lorawan>
   //https://lora-alliance.org/wp-content/uploads/2021/10/LA-TC-Stack-01-1536x708.png
 
-=== 5G #gls("sl")
+=== #gls("5g") #gls("sl")
 
-5G #gls("sl") the successor of LTE-Direct is capable of connecting user equipments directly without an intermediate base station @vijitha_weerackody_who_2023. This is generally designed for public safety or military operations used for unmanned vehicles @barnes_how_2023 although approaches existed to introduce it into commercial markets @qualcomm_technologies_inc_lte_2014. Again #gls("ios") peer-to-peer communication would highly benefit from such technolgies but unfortunately no developer support for this technology is given @apple_inc_apple_2024. 
+#gls("5g") #gls("sl") the successor of #gls("lte")-Direct is capable of connecting user equipments directly without an intermediate base station @vijitha_weerackody_who_2023. This is generally designed for public safety or military operations used for #gls("uva")s @barnes_how_2023 although approaches existed to introduce it into commercial markets @qualcomm_technologies_inc_lte_2014. Again #gls("ios") peer-to-peer communication would highly benefit from such technologies but unfortunately no developer support for this technology is given @apple_inc_apple_2024. 
 //https://www.comsoc.org/sites/default/files/styles/768wide/public/images/2023-2023-02/ctn-feb-2023-figure5.png?itok=GVi73s6A
 #figure(
     box(stroke: gray, inset: 1em,
@@ -80,9 +80,9 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
 
 === #gls("nfc")
 
-#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_nodate. Apple makes this technology also accessible to #gls("ios") and iPadOS developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_nodate. 
+#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_nodate. Apple makes this technology also accessible to #gls("ios") and #gls("ipados") developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_nodate. 
 
-=== UWB
+=== #gls("uwb")
 
 Apple allows developers to access their #gls("uwb") interface on iPhones and Apple Watches through the Nearby Interaction framework @apple_inc_nearby_nodate which is built to locate nearby devices also using the distance and direction. #gls("uwb") in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. In Apples article about the advanced ranging capabilities of second generation UWB chips which are included in iPhone 15 and above they use a maximum distance of 50 meters @apple_inc_extending_nodate. 
 
@@ -122,19 +122,19 @@ The Transport Layer "divides application data into packets, adds a destination a
 
 ====== Nagles Algorithm
 
-Due to the 20 byte TCP header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the TCP protocol. This algorithm inhibits the sending of new TCP segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on #gls("ios") systems @apple_inc_network_nodate-1 and while testing the prototype has lead to highly reduced IP package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
+Due to the 20 byte #gls("tcp") header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the #gls("tcp") protocol. This algorithm inhibits the sending of new #gls("tcp") segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on #gls("ios") systems @apple_inc_network_nodate-1 and while testing the prototype has lead to highly reduced #gls("ip") package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
 
 ===== #gls("udp")
 
 #gls("udp") is a Transport Layer protocol that implements the "fire-and-forget" concept. Packages are sent whenever data is received from the Application Layer without guarantee that they will be delivered or that they will be received in the same order they had been sent. 
 
-===== QUIC
+===== #gls("quic")
 
-QUIC is a Transport Layer protocol that builds upon UDP and is oriented to replace TCP based applications since it also features congestion and error control features. Compared to UDP and TCP QUIC has built in TLS 1.3 support and does not allow non encrypted connections. 
+#gls("quic") is a Transport Layer protocol that builds upon #gls("udp") and is oriented to replace #gls("tcp") based applications since it also features congestion and error control features. Compared to #gls("udp") and #gls("tcp") #gls("quic") has built in #gls("tls") 1.3 support and does not allow non encrypted connections. 
 
 === #gls("awdl")
 
-#gls("awdl") was developed by Apple due to concerns regarding WiFi Alliance's WiFi Direct specification and eventually got adopted by the WiFi Alliance as the basis for Neighbor Awareness Networking (NAN) @cheshire_proximity_2018. It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform @stute_disrupting_2021. 
+#gls("awdl") was developed by Apple due to concerns regarding #gls("wifi") Alliance's #gls("wifi") Direct specification and eventually got adopted by the #gls("wifi") Alliance as the basis for Neighbor Awareness Networking (NAN) @cheshire_proximity_2018. It is based on IEEE 802.11 ad hoc protocol and built to let mobile devices communicate directly with each other without utilizing an intermediary access point. It is heavily used in Apple's Continuity platform @stute_disrupting_2021. 
 
 == Summary
 
@@ -195,4 +195,4 @@ QUIC is a Transport Layer protocol that builds upon UDP and is oriented to repla
 // describe why peertopeer wlan or bluetooth is not yet suitable for long distance communications, 
 // also mention the longest wlan connection, 273km with bigger antennas
 
-// describe what was used on ios device what frameworks exist. how bluetooth was used and how wifi is now used for ptp connections
+// describe what was used on ios device what frameworks exist. how bluetooth was used and how #gls("wifi") is now used for ptp connections
