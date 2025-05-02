@@ -33,7 +33,7 @@ From 2018 on the #gls("owl") project by #gls("seemoo") at TU darmstadt contribut
 
 #figure(
   image("/figures/owl.svg", width: 25%),
-  caption: [Logo of the #gls("owl") project.]
+  caption: [Logo of the #gls("owl") project. @stute_open_2018]
 )<fig:owl>
 
 On the projects first conference the authors presented the operations of the undocumented #gls("awdl") protocol. They used binary and runtime analyses to reconstruct the daemons and frameworks involved in communicating via #gls("awdl") and found that each #gls("awdl") node announces a sequence of Availability Windows indicating that it is ready to communicate with other #gls("awdl") nodes. In the process they also detected that #gls("awdl") connections do not feature any security mechanisms leaving authentication or encryption to the transport and application layers, which the authors claim to be an informed decision by Apple @stute_one_2018.

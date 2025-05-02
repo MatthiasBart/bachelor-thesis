@@ -45,7 +45,7 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
     [#gls("wifi") 6], [802.11ax],
     [#gls("wifi") 5], [802.11ac],
     [#gls("wifi") 4], [802.11n],
-  ) 
+  ), caption: [#gls("wifi") versions and the correlating #gls("ieee") 802.11 standards.]
 )
 
 The #gls("wifi") Direct trademark enables #gls("wifi") devices to connect directly without underlying infrastructure. However this specification has not been widely adopted because of high energy consumption and lack of performance where establishing a connection could take four to ten seconds @camps-mur_device--device_2013. #gls("wifi") Direct is not available in iPhones @quinn_the_eskimo_ios_2015.
