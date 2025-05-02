@@ -60,7 +60,7 @@ Measurements of the average #gls("rtt") shows massive outliers in the inner city
 
 #figure(
   image("/figures/rtt_scenario.png", width: 75%),
-  caption: [RTT per scenario.]
+  caption: [#gls("rtt") per scenario.]
 )<fig:rtt_scenario>
 
 Measurements of the Jitter do not show any reliabilities on the surroundings. Although the Jitter might seem worse in the Forest on the first sight, comparing it to the outliers and the median of the other scenarios it seems that this assumptions is based on how the data is represented and some randomly increased outliers. 
@@ -98,15 +98,61 @@ Data shows that connection quality indeed depends on the surroundings but cannot
 
 === Effects of the Transport Protocol
 
+The second hypothesis claims that #gls("ptp") connection quality depends on the Transport Layer protocol used. Considering the measured metrics this hypothesis can be proven correct. 
 
+#figure(
+  image("/figures/rtt_protocol_scenario.png", width: 75%),
+  caption: [#gls("rtt") per protocol and scenario.]
+)<fig:rtt_protocol>
+
+#gls("tcp") has significant lower #gls("rtt") compared to #gls("udp") or #gls("quic") which is attributed to Nagle's Algorithm. What is fascinating however is that #gls("quic") achieves lower #gls("rtt") than #gls("udp") even though #gls("quic") is based on #gls("udp") and includes error correction and reliable delivery. Also previous tests have shown that #gls("quic") does not implement comparable algorithms like Nagle's Algorithm and always sends the same number of #gls("ip") packages as #gls("udp") does. 
+
+#figure(
+  image("/figures/jitter_protocol_scenario.png", width: 75%),
+  caption: [Jitter per protocol and scenario.]
+)<fig:jitter_protocol>
+
+Again Jitter, like #gls("rtt") is relatively low compared to the other Transport Layer protocols due to Nagle's Algorithm. But what again sticks out is that #gls("quic") has generally lower Jitter than #gls("udp").
+
+#figure(
+  image("/figures/speed_protocol_scenario.png", width: 75%),
+  caption: [Transfer speed per protocol and scenario.]
+)<fig:speed_protocol>
+
+@fig:speed_protocol shows that using #gls("tcp") leads to the least data transfer speed. #gls("udp") is particularly high because of unreliable delivery which makes the time the server received messages very low and leads to a higher transfer speed. #gls("quic") has again performed very well considering reliability of data transfer, has outperformed #gls("tcp") is some scenarios and even #gls("udp") on the Field and in the Forest.
+
+==== Conclusion
+
+Although #gls("tcp") started with some seemingly major advantages due to Nagle's Algorithm #gls("quic") outperformed it in terms of transfer speed in every scenario. Considering the high package loss of #gls("udp") especially when more packages were sent @fig:package_loss_adapted which inevitably lead to a higher transfer speed and the relatively close advantage in transfer speed compared to #gls("quic"), for most applications #gls("quic") might be the best Transport Layer protocol for #gls("awdl").
+
+#figure(
+  image("/figures/package_loss_scenario_adapted.png", width: 75%),
+  caption: [Package loss of #gls("udp") per scenario without tests using only 100 packages.]
+)<fig:package_loss_adapted>
 
 == Other findings
 
-=== Establishing or finding Bonjour service much more difficult than holding connection
+During testing some other incidents happened which were not part of this research but should be shared anyways. 
 
-=== Distance abnahme transfer speed
+=== Establishing connection was difficult
 
-=== the iphone 15 Pro lost more energy than the iphone 12 mini
+Establishing a connection, namely finding the Bonjour service in proximity got increasingly bad with more distance. It came to a point where connection establishment was done very close to only then create the distance that should be tested. 
+
+=== Distance effect on transfer speed
+
+The distance between the #gls("ios") devices had a noticeable impact on the data transfer speed which is very nicely shown by @fig:speed_distance. Data however shows that the transfer speed decreases less from five to ten meters than from one to 5 meters. 
+
+#figure(
+  image("/figures/speed_distance.png", width: 75%),
+  caption: [Transfer speed over distance.]
+)<fig:speed_distance>
+
+While transfer speed decreased over distance no effect on the #gls("rtt") can be seen.
+
+#figure(
+  image("/figures/rtt_distance.png", width: 75%),
+  caption: [#gls("rtt") over distance.]
+)<fig:rtt_distance>
 
 === after having quite big issues on field with 10m we switched to 1/5/10 event though 30 was planned but when testing in underground easily 35m <underground_field>
 
