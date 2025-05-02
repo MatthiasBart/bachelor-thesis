@@ -154,9 +154,9 @@ While transfer speed decreased over distance no effect on the #gls("rtt") can be
   caption: [#gls("rtt") over distance.]
 )<fig:rtt_distance>
 
-=== after having quite big issues on field with 10m we switched to 1/5/10 event though 30 was planned but when testing in underground easily 35m <underground_field>
+=== Differences of Field and Underground <underground_field>
 
-maybe because of heat on the field and the good reflectors in the underground
+The first testing scenario was the field. The initial planned distances were 1/10/30 meters but during testing at the distance of 10 meters on the field the connection was so unstable that it was nearly impossible to get data so we decided to change the distance of thirty to five meters. The last testing scenario was the underground where testing overall went very well and we gave some bigger distances another try. There distances over thirty five meters were no problem at all and transferred data super fast. As already mentioned the good connection in the underground could be due to the metal plates mounted on the roof and the walls that perfectly reflect electromagnetic signals and might act as a big antenna. On the other extreme on the field the bad performance could be attributed to the extreme heat since it also was the only place with direct sun light exposure which is generally known to heat up smartphone very much. 
 
 // #todo([
 //   Describe (proof) how your implementation really solved the stated problem. I.e.
