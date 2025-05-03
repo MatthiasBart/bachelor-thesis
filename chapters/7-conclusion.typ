@@ -15,5 +15,6 @@ Another topic we did not focus on in this research per se but was very present i
 To help enthusiasts get started in this field we share the #gls("ios") application as well as the Jupyter Notebook to create the graphics and statistical metrics on GitHub. If any help is needed or questions arise related to these applications we suggest to create an issue on GitHub describing your problem.
 
 #gls("ios") Application: https://github.com/MatthiasBart/PtPPrototype.git
+
 Jupyter Notebook: https://github.com/MatthiasBart/evaluation_notebook.git
 

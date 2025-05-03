@@ -297,12 +297,12 @@ Data transfer metrics of three different transport protocols will be tested. #gl
 
 #figure( 
   table(
-    columns: (auto), 
+    columns: (auto, auto), 
     inset: 10pt,
     table.header([*Metrics*], [*Calculation*]),
     [#gls("rtt") (ms)], [$ overline(R T T) =  1 / N sum_(i=0)^N R T T_i $],
     [Jitter (ms)], [$ J i t t e r = sqrt(1/N sum_(i=0)^N (R T T_i - overline(R T T))^2)$],
-    [Data Rate (Mbps)], [$ D a t a R a t e = (c o u n t * s i z e) / d u r a t i o n $]
+    [Data Rate (Mbps)], [$ D a t a R a t e = (c o u n t * s i z e) / (d u r a t i o n) $]
   ),
   caption: [Metrics used to evaluate protocols.]
 )
