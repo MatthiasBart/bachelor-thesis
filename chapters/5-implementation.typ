@@ -2,6 +2,8 @@
 
 = Implementation <implementation>
 
+After discussing the broad approach to testing in @concept @fig:implementation_obfuscated nicely shows the things already covered. The following section tries to get more narrow on defining the tools used and the testing done to fill the below image with more information.
+
 #figure(
   box(stroke: gray, inset: 1em,
     image("/figures/implementation_obfuscated.jpg", width: 75%)
@@ -37,7 +39,7 @@ The server views purpose is to present the user the state of each connection and
 
 ==== Client Views
 
-The client view is split into to seperate steps since the client needs to find nearby peers and connect to them. Only after a successful connection was established the testing can begin.
+The client view is split into separate steps since the client needs to find nearby peers and connect to them. Only after a successful connection was established the testing can begin.
 
 ===== Browser View
 
@@ -63,13 +65,13 @@ Apple provides different frameworks for #gls("ptp") connections using different 
 
 In an approach to give a brief overview about Apples networking #gls("api")s, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") #gls("wifi") support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like #gls("tls"), #gls("tcp"), and #gls("udp") for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
-Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones #gls("uwb") chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples #gls("wwdc") distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021.
+Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones #gls("uwb") chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples #gls("wwdc") distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021. However in Apples article about the advanced ranging capabilities of second generation UWB chips which are included in iPhone 15 and above they use a maximum distance of 50 meters @apple_inc_extending_nodate. 
 
-Following Apples recommendations documented in a technote about choosing the right networking #gls("api"), the Networking framework is used for establishing a connection and transferring data. @apple_inc_tn3151_2023
+Nevertheless following Apples recommendations documented in a tech note about choosing the right networking #gls("api"), the Networking framework is suggested for establishing a connection and transferring data. @apple_inc_tn3151_2023
 
 === Configuration
 
-Different transport protocols can be used to establish a connection. Following the single responsibility principle the transport protocols and their configurations are injected into the server and client implementations to create the corresponding connections. The transport protocols for which a server and client will be created are listed in a central singleton responsible for creating the server and client objects for each protocol which are injected to the view models. 
+Different transport protocols can be used to establish a connection. Following the single responsibility principle the transport protocols and their configurations are injected into the server and client implementations to create the corresponding connections. The selected transport protocols for which a server and client will be created are listed in a central singleton responsible for creating the server and client objects for each protocol which are injected to the view models. 
 
 #figure(
     align(
@@ -91,8 +93,7 @@ Different transport protocols can be used to establish a connection. Following t
     ),
 ) <lst:configuration_injection>
 
-The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of #gls("tcp"), #gls("udp") and #gls("quic") cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local #gls("mdns") name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used both in `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local #gls("awdl") broadcasting. 
-
+The `TransportProtocol` itself is an enum, where each case is representing a transport protocol used while testing. The enumeration consists of #gls("tcp"), #gls("udp") and #gls("quic") cases and their configurations are accessed through the `parameters` and `type` computed properties. The `type` property delivers the local #gls("mdns") name used to advertise and browse for the service via Bonjour. The `parameter` property delivers the `NWParameters` configurations used in both `NWListener` and `NWBrowser` to configure the network stack for these objects. It is important to set the `includePeerToPeer` property to enable local #gls("awdl") broadcasting. 
 
 #figure(
     align(
@@ -108,7 +109,7 @@ The `TransportProtocol` itself is an enum, where each case is representing a tra
 
 Since #gls("quic") has built in support for secure connections and requires #gls("tls") v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
 
-After adding it to the bundle the application must read the secure identity and add it to #gls("quic")'s `NWParameters`  `securityProtocolOptions` for client and server.
+After adding it to the bundle @apple_inc_bundle_nodate the application must read the secure identity and add it to #gls("quic")'s `NWParameters`  `securityProtocolOptions` for client and server.
 
 #figure(
     align(
@@ -134,7 +135,7 @@ This enables the application to establish a secure QUIC connection.
 
 === Connection Establishment
 
-Connection Establishment is done via Bonjour using the Network Framework. The servers register a listener using the `NWListener` class and the `NWParameters` and local #gls("mdns") record from the injected transport protocols to listen for incoming network connections to that service. Once an inbound connection is received the listener object calls the `newConnectionHandler` method previously set when configuring the listener object. When the method is invoked it cancels the previous connection, creates a new one and posts a message to the connection state subject, indicating that a connection has been established. When a listener is created a service object which represents the Bonjour service to advertise the endpoint on the local network is initialized and passed to the listener. 
+Connection Establishment is done via Bonjour using the Network Framework. The servers register a listener using the `NWListener` class and the `NWParameters` and local #gls("mdns") record from the injected transport protocols to listen for incoming network connections to that service. Once an inbound connection is received the listener object calls the `newConnectionHandler` method previously set when configuring the listener object. When the method is invoked it cancels the previous connection, creates a new one and posts a message to the connection state subject, indicating that a connection has been established. When a listener object is created a service object which represents the Bonjour service to advertise the endpoint on the local network is initialized and passed to the listener. 
 
 #figure(
     align(
@@ -146,7 +147,7 @@ Connection Establishment is done via Bonjour using the Network Framework. The se
     ),
 ) <lst:start_listener>
 
-The clients instantiate a `NWBrowser` object used to browse for available network services. When the browser object finds new Bonjour services it calls the `browseResultsChangedHandler` method. This method is previously configured to write the results to `browserResults` subject which can be observed by the view model. Once the user selects a browse result in the `BrowserView` this instance is passed to the `createConnection` method which cancels the old connections, sets the new one for further use and reports an error in case the connection failed. 
+The clients instantiate a `NWBrowser` object used to browse for available network services. When the browser object finds new Bonjour services it calls the `browseResultsChangedHandler` method. This method is previously configured to write the results to `browserResults` subject which can be observed by the view model. Once the user selects a browser result in the `BrowserView` this instance is passed to the `createConnection` method which cancels the old connections, sets the new one for further use and reports an error in case the connection failed. 
 
 #figure(
     align(
@@ -158,11 +159,11 @@ The clients instantiate a `NWBrowser` object used to browse for available networ
     ),
 ) <lst:start_connection>
 
-==== Injecting a concrete Implementation of a Protocol 
-//TODO
-injecting ConnectionImpl to Client and serverimpl so i can create a new object inside
+// ==== Injecting a concrete Implementation of a Protocol 
+// //TODO
+// injecting ConnectionImpl to Client and serverimpl so i can create a new object inside
 
-==== Adding local domains to Info.plist 
+==== Adding local domains to Info.plist <adding_local_domains>
 
 Bonjour services which are browsed for must be listed in the Info.plist using the `NSBonjourServices` key. The format is similar to the ones used to configure the `NWBrowser` and `NWListener` objects, composed of the application and transport protocol like "\_myservice.\_tcp". The Info.plist file is an information property list file that contains information and configuration about the application bundle @apple_inc_information_nodate. 
 
@@ -172,7 +173,7 @@ In the case of the test application the aforementioned key contains the followin
 - "\_txtchat.\_tcp"
 - "\_txtchatquic.\_udp"
 
-One can notice that two entries using #gls("udp") as the transport protocol exist. This is because the application should advertise and browse for #gls("udp") and the #gls("udp") based QUIC protocol simultaneously. Without using a second service entry Bonjour would automatically rename the service entry which would break the logic for displaying and selecting the browser results. 
+One can notice that two entries using #gls("udp") as the transport protocol exist. This is because the application should advertise and browse for #gls("udp") and the #gls("udp") based #gls("quic") protocol simultaneously. Without using a second service entry Bonjour would automatically rename the service entry which would break the logic for displaying and selecting the browser results. 
 
 ==== Displaying and Selecting Advertisers
 
@@ -183,7 +184,7 @@ Local advertisers are displayed based on their human readable service instance n
   caption: [Graphic showing the Bonjour naming convention. @apple_inc_bonjour_2013]
 )<fig:bonjour_naming>
 
-In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in Listing NWListener @apple_inc_uikit_nodate. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
+In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in @fig:browser_view @apple_inc_uikit_nodate. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
 
 #figure(
     align(
@@ -205,7 +206,7 @@ In case of this test application the Bonjour service name is configured using th
     ),
 ) <lst:listening_browser_result_changes>
 
-Using the same service type like mentioned in the previous Section, Bonjour would automatically rename the service if it detects the same service on the local network @apple_inc_bonjour_2013.
+Using the same service type like mentioned in the previous section @adding_local_domains Bonjour would automatically rename the service if it detects the same service on the local network @apple_inc_bonjour_2013.
 
 #figure(
     align(
@@ -228,7 +229,7 @@ The human readable service instance name is not identical and users could not ch
 
 Whenever a connection is ready a `DataTransferReport` is started which provides metrics about data being sent and received on a connection like data size in bytes, the number of #gls("ip") packages or #gls("rtt"). 
 
-Besides that the application also measures the testing start and end time and implements an own approach to measure #gls("rtt") since DataTransferReport only takes #gls("tcp")'s control packages into account. Before the configured number of packages with the configured number of bytes get sent 100 separate packages to measure #gls("rtt") and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average #gls("rtt") and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
+Besides that the application also measures the testing start and end time and implements an own approach to measure #gls("rtt") since `DataTransferReport` only takes #gls("tcp")'s control packages into account. Before the configured number of packages with the configured number of bytes are sent to measure transfer speed 1000 separate packages to measure #gls("rtt") and jitter are emitted. These packages contain the time the package was emitted and is recognized and sent back from the testing server. When received again on the testing client, the time in the package and the new local current time are compared and the difference is stored to later calculate the average #gls("rtt") and the Jitter. To get precise timing measurements the kernel function `mach_absolute_time` is used which returns current value of a clock that increments monotonically in tick units. This value needs to be converted to nanoseconds using a time base containing information about the duration of a tick.
 
 #figure(
     align(
@@ -258,9 +259,9 @@ Testing is done using an iPhone 12 mini and an iPhone 15 Pro both using the curr
 
 === Places 
 
-Testing is done in four different places representing typical places for iPhone users. One testing environment will be the underground station which is dense in people on a small space. Another environment will be the inner city of vienna which is also dense in people but more open than the underground. The next environment will be a free field with perfect conditions for radio broadcasting since minimal other signals or objects like persons could disturb the signal. The last place that will be tested is the forest since it may have the same density of obstacles but also like the filed minimal radio frequency disturbances. @loizeau_comparison_2023
+Testing is done in four different places representing typical places for iPhone users. One testing environment will be an underground station which is dense in people on a small space. Another environment will be the inner city of vienna which is also dense in people but more open than the underground. The next environment will be a free field with perfect conditions for radio broadcasting since minimal other signals or objects like persons could disturb the signal. The last place that will be tested is the forest since it may have the same density of obstacles as the inner city or the underground but also like the field minimal in #gls("rfemf") disturbances that could negatively impact the connection. @loizeau_comparison_2023
 
-=== Data sizes and distance
+=== Data sizes and distance <size_number>
 
 Data size of the whole testing process is composed of the number of packages that are sent and the size of each package. Both can vary as well as the distance between the connected devices. Testing will be done with the following values each combined with all values of the other categories. 
 
@@ -272,8 +273,8 @@ Data size of the whole testing process is composed of the number of packages tha
     [*Number of Packages*], [*Size of Package in Bytes*], [*Distance in Meters*]
     ),
     [100], [128], [1],
-    [1000], [4096], [5],
-    [10 000], [9216], [10], 
+    [1 000], [4 096], [5],
+    [10 000], [9 216], [10], 
   ), caption: [Definition of test scenarios.],
 ) 
 
@@ -292,22 +293,38 @@ Data transfer metrics of three different transport protocols will be tested. #gl
   ), caption: [Transport Protocols used for testing.],
 ) 
 
+#gls("rtt") and Jitter are measured on the client and tested separately from the transfer speed. The variations listed in @size_number are only relevant for transfer speed since the other two metrics are tested before using 1000 distinct packages including the kernel time. The #gls("rtt") used to evaluate the findings will be the average #gls("rtt") of these 1000 packages that are sent per cycle.
+
 #figure( 
   table(
     columns: (auto), 
     inset: 10pt,
-    table.header([*Metrics*]),
-    [#gls("rtt")], [Jitter], [Data Rate]
+    table.header([*Metrics*], [*Calculation*]),
+    [#gls("rtt") (ms)], [$ overline(R T T) =  1 / N sum_(i=0)^N R T T_i $],
+    [Jitter (ms)], [$ J i t t e r = sqrt(1/N sum_(i=0)^N (R T T_i - overline(R T T))^2)$],
+    [Data Rate (Mbps)], [$ D a t a R a t e = (c o u n t * s i z e) / d u r a t i o n $]
   ),
   caption: [Metrics used to evaluate protocols.]
 )
 
-$ overline(R T T) =  1 / N sum_(i=0)^N R T T_i$
-
-$ J i t t e r = sqrt(1/N sum_(i=0)^N (R T T_i - overline(R T T))^2)$
 == Summary 
 
-Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (#gls("tcp"), #gls("udp") and #gls("quic")) separately and the metrics are displayed to the user ready for recording. Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of Vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices.
+Testing is done using a prototype application written in SwiftUI enabling the user to browse and advertise nearby services via Bonjour and connect to them. Once two devices are connected testing can be started for each transport protocol (#gls("tcp"), #gls("udp") and #gls("quic")) and the metrics are displayed to the user ready for recording and saving as #gls("csv"). Testing will be done in four different scenarios each representing a typical place for iPhone users including the underground, the inner city of Vienna, a free field and the forest. Moreover different numbers of packages and package sizes will be sent in varying distances between the devices. For every combination of package size, number of packages, distance and transport protocol two distinct rounds will be done resulting in 162 individual tests per scenario. Before these tests to measure data transfer speed are executed #gls("rtt") and Jitter are tested 5 times with 1000 packages for each distance and transport protocol resulting in 45 individual tests per scenario.
+
+#figure( 
+  table(
+    columns: (auto, auto, auto, auto, auto, auto), 
+    inset: 10pt,
+    table.header([*Metrics*], [*Scenarios*], [*Protocols*], [*Distances in Meters*], [*Number of Packages*], [*Package size in Bytes*]),
+    [#gls("rtt")], [Underground], [#gls("tcp")], [1], [100], [128], 
+    [Jitter], [Inner City],  [#gls("udp")], [5], [1 000], [4 096], 
+    [Data Rate], [Free Field], [#gls("quic")], [10], [10 000], [9 216],
+    [], [Forest], [], [], [], []
+  ),
+  caption: [Definition of testing scenarios and variations.]
+)
+
+After getting more precise on how testing will be done the aforementioned @fig:implementation_obfuscated can be filled out as follows.
 
 #figure(
   box(stroke: gray, inset: 1em,
@@ -316,18 +333,6 @@ Testing is done using a prototype application written in SwiftUI enabling the us
   caption: [Abstract representation of scientific concept]
 )<fig:implementation>
 
-#figure( 
-  table(
-    columns: (auto, auto, auto, auto, auto, auto), 
-    inset: 10pt,
-    table.header([*Metrics*], [*Scenarios*], [*Protocols*], [*Distances in Meters*], [*Number of Packages*], [*Package size in Bytes*]),
-    [#gls("rtt")], [Underground], [#gls("tcp")], [1], [100], [128], 
-    [Jitter], [Inner City],  [#gls("udp")], [5], [1000], [4 096], 
-    [Data Rate], [Free Field], [#gls("quic")], [10], [10 000], [9216],
-    [], [Forest], [], [], [], []
-  ),
-  caption: [Definition of testing scenarios and variations.]
-)
 
 
 //The QUIC protocol has significant advantages over #gls("tcp"). If you’re building a custom network protocol, consider using QUIC instead of #gls("tcp"). https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api

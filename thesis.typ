@@ -60,10 +60,10 @@
 #include "./chapters/1-intro.typ"
 #pagebreak()
 
-#include "./chapters/2-related.typ"
+#include "./chapters/2-background.typ"
 #pagebreak()
 
-#include "./chapters/3-background.typ"
+#include "./chapters/3-related.typ"
 #pagebreak()
 
 #include "./chapters/4-concept.typ"

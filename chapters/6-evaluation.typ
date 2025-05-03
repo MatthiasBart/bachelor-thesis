@@ -2,7 +2,7 @@
 
 = Results and Evaluation 
 
-The following section shows the scenarios the testings were executed and presents the metrics individually before discussing the hypothesis. Testing has been done on 1.Mai 2025 in Vienna around noon. The weather was sunny and it had around 25 degrees celsius.
+The following section shows the scenarios the testings were executed and interprets the tested metrics. Testing has been done on 1.Mai 2025 in Vienna around noon. The weather was sunny and it had around 25 degrees celsius.
 
 #figure(
   image("/figures/weather.png", width: 60%),
@@ -49,7 +49,7 @@ Testing in the Underground started at around 14:02 and ended at around 14:12 at 
 
 === Effects of the surroundings
 
-The first hypothesis claims that direct #gls("ptp") communication between #gls("ios") devices depends on the surroundings and functions worse in crowded areas. Data shows that this is not the case in general, although when a pack of people walked between the devices transfer speed got seemingly worse which can also be seen at increased outliers of #gls("rtt") in the inner city. 
+The first hypothesis claims that direct #gls("ptp") #gls("awdl") communication between #gls("ios") devices depends on the surroundings and functions worse in crowded areas. Data shows that this is not the case in general, although when a pack of people walked between the devices transfer speed got seemingly worse which can also be seen at increased outliers of #gls("rtt") and Jitter in the inner city. 
 
 #figure(
   image("/figures/speed_scenario.png", width: 75%),
@@ -63,7 +63,7 @@ Measurements of the average #gls("rtt") shows massive outliers in the inner city
   caption: [#gls("rtt") per scenario.]
 )<fig:rtt_scenario>
 
-Measurements of the Jitter do not show any reliabilities on the surroundings. Although the Jitter might seem worse in the Forest on the first sight, comparing it to the outliers and the median of the other scenarios it seems that this assumptions is based on how the data is represented and some randomly increased outliers. 
+Measurements of the Jitter do not show any reliabilities on the surroundings. Although the Jitter might seem worse in the Forest on the first sight, comparing it to the outliers and the median of the other scenarios it seems that this assumptions is based on how the data is represented and some randomly increased density in upper outliers. 
 
 #figure(
   image("/figures/jitter_scenario.png", width: 75%),
@@ -85,7 +85,7 @@ This is also supported by a comparison of the statistical values of the Jitter i
     )
 ) <jitter_stats>
 
-Measurements of the package loss show that the connection worked best in the underground while not seeing big differences comparing the other scenarios.
+Measurements of the package loss showed that the connection worked best in the underground while not seeing big differences comparing the other scenarios.
 
 #figure(
   image("/figures/package_loss_scenario.png", width: 75%),
@@ -94,18 +94,18 @@ Measurements of the package loss show that the connection worked best in the und
 
 ==== Conclusion
 
-Data shows that connection quality indeed depends on the surroundings but cannot be linked directly to function worse in crowded areas. While #gls("rfemf") seems to have no effect at all, blocking the direct sight of view severely decreased connection quality. This can be seen in the extreme outliers of #gls("rtt") in the inner city which can be attributed to a group of people walking between the testing devices. This did not happen in the forest because trees and bushes did not move to block view of sight completely during testing. Data also shows that connection quality was best in the underground. This can be attributed to all the metal panels installed on the roof and walls in the underground stations which might better reflect electro magnetic signals.
+Data shows that connection quality indeed depends on the surroundings but cannot be linked directly to function worse in crowded areas. While #gls("rfemf") seems to have no effect at all, blocking the direct sight of view severely decreased connection quality. This can be seen in the extreme outliers of #gls("rtt") and Jitter in the inner city which can be attributed to a group of people walking between the testing devices. This did not happen in the forest because trees and bushes did not move to block view of sight completely during testing. Contrary to initial assumptions data also shows that connection quality was best in the underground. This could be attributed to all the metal panels installed on the roof and walls in the underground stations which might better reflect electro magnetic signals.
 
 === Effects of the Transport Protocol
 
-The second hypothesis claims that #gls("ptp") connection quality depends on the Transport Layer protocol used. Considering the measured metrics this hypothesis can be proven correct. 
+The second hypothesis claims that #gls("ptp") #gls("awdl") connection quality depends on the Transport Layer protocol used. Considering the measured metrics this hypothesis can be proven correct. 
 
 #figure(
   image("/figures/rtt_protocol_scenario.png", width: 75%),
   caption: [#gls("rtt") per protocol and scenario.]
 )<fig:rtt_protocol>
 
-#gls("tcp") has significant lower #gls("rtt") compared to #gls("udp") or #gls("quic") which is attributed to Nagle's Algorithm. What is fascinating however is that #gls("quic") achieves lower #gls("rtt") than #gls("udp") even though #gls("quic") is based on #gls("udp") and includes error correction and reliable delivery. Also previous tests have shown that #gls("quic") does not implement comparable algorithms like Nagle's Algorithm and always sends the same number of #gls("ip") packages as #gls("udp") does. 
+#gls("tcp") has significant lower #gls("rtt") compared to #gls("udp") or #gls("quic") which is attributed to Nagle's Algorithm. What is fascinating however is that #gls("quic") achieves lower #gls("rtt") than #gls("udp") even though #gls("quic") is based on #gls("udp") and includes error correction and reliable delivery. Also previous tests using the testing prototype have shown that #gls("quic") does not implement comparable algorithms like Nagle's Algorithm and always sends the same number of #gls("ip") packages as #gls("udp") does. 
 
 #figure(
   image("/figures/jitter_protocol_scenario.png", width: 75%),
@@ -119,11 +119,11 @@ Again Jitter, like #gls("rtt") is relatively low compared to the other Transport
   caption: [Transfer speed per protocol and scenario.]
 )<fig:speed_protocol>
 
-@fig:speed_protocol shows that using #gls("tcp") leads to the least data transfer speed. #gls("udp") is particularly high because of unreliable delivery which makes the time the server received messages very low and leads to a higher transfer speed. #gls("quic") has again performed very well considering reliability of data transfer, has outperformed #gls("tcp") is some scenarios and even #gls("udp") on the Field and in the Forest.
+@fig:speed_protocol shows that using #gls("tcp") leads to the least data transfer speed. #gls("udp") is particularly high because of unreliable delivery which makes the time the server received messages very low and leads to a higher transfer speed. #gls("quic") has again performed very well considering reliability of data transfer, has outperformed #gls("tcp") in some scenarios and even #gls("udp") on the Field and in the Forest.
 
 ==== Conclusion
 
-Although #gls("tcp") started with some seemingly major advantages due to Nagle's Algorithm #gls("quic") outperformed it in terms of transfer speed in every scenario. Considering the high package loss of #gls("udp") especially when more packages were sent @fig:package_loss_adapted which inevitably lead to a higher transfer speed and the relatively close advantage in transfer speed compared to #gls("quic"), for most applications #gls("quic") might be the best Transport Layer protocol for #gls("awdl").
+Although #gls("tcp") started with some seemingly major advantages due to Nagle's Algorithm #gls("quic") outperformed it in terms of transfer speed in every scenario. Considering the high package loss of #gls("udp") especially when more packages were sent @fig:package_loss_adapted which inevitably lead to a higher transfer speed and the relatively close advantage in transfer speed compared to #gls("quic") for most applications #gls("quic") might be the best Transport Layer protocol for #gls("awdl").
 
 #figure(
   image("/figures/package_loss_scenario_adapted.png", width: 75%),
@@ -136,7 +136,7 @@ During testing some other incidents happened which were not part of this researc
 
 === Establishing connection was difficult
 
-Establishing a connection, namely finding the Bonjour service in proximity got increasingly bad with more distance. It came to a point where connection establishment was done very close to only then create the distance that should be tested. 
+Establishing a connection namely finding the Bonjour service in proximity got increasingly bad with more distance. It came to a point where connection establishment was done very close to only then create the distance that should be tested. 
 
 === Distance effect on transfer speed
 

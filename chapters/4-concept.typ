@@ -1,6 +1,6 @@
 #import "global.typ": *
 
-= Concept 
+= Concept <concept>
 
 The following introduces the abstract design of how direct #gls("ptp") communication between #gls("ios") devices is tested and measured for evaluation in this thesis. The measurement setup should try to systematically quantify how the performance of #gls("ptp") #gls("ios") connection is and how it changes under different surroundings. Different approaches to solve this problem do exist, which are briefly evaluated and compared among each other. 
 
@@ -12,7 +12,7 @@ Using Apple's Continuity features to send and receive data on different #gls("io
 
 === #gls("ios") Application
 
-#gls("ios") provides several #gls("api") that allow a third party developer to access various underlying technologies to establish #gls("ptp") connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple is also an interface available to any third party developer and can therefore be implemented in any #gls("ios") application without the need to bypass any restrictions.
+#gls("ios") provides several #gls("api") that allow a third party developer to access various underlying technologies to establish #gls("ptp") connections. The software could directly record how much data is sent and received mitigating overhead of measurement logic. Using the frameworks provided by Apple also utilizes an interface available to any third party developer and can therefore be implemented in any #gls("ios") application without the need to bypass any restrictions.
 
 === Jailbreaking 
 
@@ -20,11 +20,11 @@ Jailbreaking is a term used to describe the bypassing of the security mechanism 
 
 == Experiment Design
 
-After evaluating the aforementioned concepts the decision was taken to build an #gls("ios") Application establishing and intercepting the #gls("ptp") connection to measure connection metrics. It is the most practicable considering the use for a wide mass, because staying in the boundaries imposed by Apple and using only first party frameworks makes developing and distributing in the App Store easier. The application needs to be installed on two nearby devices to establish a connection and transfer data. Furthermore since iPhones are typically used under various circumstances and surroundings testing should also cover representable scenarios for common places visited by iPhone users. 
+After evaluating the aforementioned concepts the decision was taken to build an #gls("ios") Application establishing and intercepting the #gls("ptp") connection to measure connection metrics. It is the most practicable considering the use for a wide mass, because staying in the boundaries imposed by Apple and using only first party frameworks makes developing and distributing in the App Store possible. The application needs to be installed on two nearby devices to establish a connection and transfer data. Furthermore since iPhones are typically used under various circumstances and surroundings testing should also cover representable scenarios for common places visited by iPhone users. 
 
 === Prototype
 
-The prototype should be installable on arbitrary #gls("ios") devices and should serve as both client and server. The client must be capable of discovering nearby peers and sending a connection request after user instruction. The server must be capable of advertising a service that clients can find and handling incoming connection requests. Both must be able to display the metrics that the applications measured to the user and should support a method to abort ongoing connections to start new advertisers/discoverers. 
+The prototype should be installable on arbitrary #gls("ios") devices and should serve as both client and server. The client must be capable of discovering nearby peers and sending a connection request after user instruction. The server must be capable of advertising a service that clients can find and handling incoming connection requests. Both must be able to display and store the metrics that the applications measured to the user and should support a method to abort ongoing connections to start new advertisers/discoverers. 
 
 === Testing
 
