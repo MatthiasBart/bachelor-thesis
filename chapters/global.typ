@@ -19,7 +19,7 @@
 //         https://github.com/typst/packages/tree/main/packages/preview/fh-joanneum-iit-thesis)
 //    Copy the lib.typ to a (sub)folder of this project and
 //    set the path accordingly.
-#import "@preview/fh-joanneum-iit-thesis:2.0.5": *
+#import "@preview/fh-joanneum-iit-thesis:2.1.2": *
 
 // Anytime you might simply override custom macros, such as:
 // #let quote(message, by) = {
