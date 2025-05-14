@@ -53,6 +53,8 @@
 
 // Include as many chapters as you like
 // e.g.:
+#show heading.where(level: 5): set heading(numbering: none)
+#show heading.where(level: 6): set heading(numbering: none)
 
 #include "./chapters/acknowledgements.typ"
 #pagebreak()
