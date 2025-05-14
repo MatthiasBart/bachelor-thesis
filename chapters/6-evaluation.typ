@@ -119,7 +119,7 @@ Again Jitter, like #gls("rtt") is relatively low compared to the other Transport
   caption: [Transfer speed per protocol and scenario.]
 )<fig:speed_protocol>
 
-@fig:speed_protocol shows that using #gls("tcp") leads to the least data transfer speed. #gls("udp") is particularly high because of unreliable delivery which makes the time the server received messages very low and leads to a higher transfer speed. #gls("quic") has again performed very well considering reliability of data transfer, has outperformed #gls("tcp") in some scenarios and even #gls("udp") on the Field and in the Forest.
+@fig:speed_protocol shows that using #gls("tcp") leads to the lowest data transfer speed. #gls("udp") is particularly high because of unreliable delivery which makes the time the server received messages very low and leads to a higher transfer speed. #gls("quic") has again performed very well considering reliability of data transfer, has outperformed #gls("tcp") in some scenarios and even #gls("udp") on the Field and in the Forest.
 
 ==== Conclusion
 
