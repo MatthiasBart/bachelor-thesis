@@ -17,7 +17,7 @@ The application is written in #gls("swift") using the  #gls("ide") #gls("xcode")
 
 === User Interface
 
-The #gls("gui") is developed using SwiftUI @apple_inc_swiftui_nodate, a declarative way to build applications across all Apple platforms. Considering the aforementioned features the application is split into five different screens each one serving a specific purpose in the process of establishing the connection and transferring data. The screens are listed below in the order the user would walk through during a testing procedure and are called views to match terminology of the #gls("mvvm") pattern. 
+The #gls("gui") is developed using SwiftUI @apple_inc_swiftui_2025, a declarative way to build applications across all Apple platforms. Considering the aforementioned features the application is split into five different screens each one serving a specific purpose in the process of establishing the connection and transferring data. The screens are listed below in the order the user would walk through during a testing procedure and are called views to match terminology of the #gls("mvvm") pattern. 
 
 ==== Decision View
 
@@ -61,11 +61,11 @@ The testing views purpose is to present the user the state of each connection an
 
 === Networking Frameworks 
 
-Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In #gls("ios"), the framework uses infrastructure #gls("wifi") networks, #gls("ptp") Wi-Fi, and Bluetooth personal area networks for the underlying transport. In #gls("macos") and #gls("tvos"), it uses infrastructure #gls("wifi"), #gls("ptp") #gls("wifi"), and Ethernet" @apple_inc_multipeer_nodate. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of #gls("ios") 11 @quinn_the_eskimo_ios_2017. 
+Apple provides different frameworks for #gls("ptp") connections using different layers of abstraction or different underlying technologies. One of these frameworks is called Multipeer Connectivity. Newport describes it as an implementation of the mobile telephone model #cite(<newport_gossip_2017>, form: "year") in his article about gossip in smartphone #gls("ptp") networks. Apple states, the framework "supports the discovery of services provided by nearby devices and supports communicating with those services through message-based data, streaming data, and resources (such as files). In #gls("ios"), the framework uses infrastructure #gls("wifi") networks, #gls("ptp") Wi-Fi, and Bluetooth personal area networks for the underlying transport. In #gls("macos") and #gls("tvos"), it uses infrastructure #gls("wifi"), #gls("ptp") #gls("wifi"), and Ethernet" @apple_inc_multipeer_2025. Contrary to this excerpt of the documentation, tests and information gathered from Apple's developer forum conclude that Mulipeer Connectivty does not support Bluetooth for #gls("ptp") networking anymore and got disabled with the release of #gls("ios") 11 @quinn_the_eskimo_ios_2017. 
 
 In an approach to give a brief overview about Apples networking #gls("api")s, Apple describes Multipeer Connectivity as a high-level interface to Apples #gls("ptp") #gls("wifi") support and also introduces the Network Framework, which is considered a low-level interface by Apple engineers @quinn_the_eskimo_network_2024. Apples Documentation states developers should use this framework when they need direct access to protocols like #gls("tls"), #gls("tcp"), and #gls("udp") for their custom application protocols. The Network framework features opt-in support for #gls("ptp") connection establishment via #gls("awdl") and also does not support connecting via Bluetooth, which is accessible through the Core Bluetooth Framework. @apple_inc_tn3151_2023
 
-Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones #gls("uwb") chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_nodate. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples #gls("wwdc") distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021. However in Apples article about the advanced ranging capabilities of second generation UWB chips which are included in iPhone 15 and above they use a maximum distance of 50 meters @apple_inc_extending_nodate. 
+Nearby Interaction is yet another framework to establish #gls("ptp") connections. It uses the iPhones #gls("uwb") chip to "locate and interact with nearby devices using identifiers, distance, and direction" @apple_inc_nearby_2025. These chips are usually used in smaller distances to precisely locate compatible hardware, so in examples from Apples #gls("wwdc") distances of one and a half to three meters are shown which does not meet the requirements for this experiments @apple_inc_explore_2021. However in Apples article about the advanced ranging capabilities of second generation UWB chips which are included in iPhone 15 and above they use a maximum distance of 50 meters @apple_inc_extending_2025. 
 
 Nevertheless following Apples recommendations documented in a tech note about choosing the right networking #gls("api"), the Networking framework is suggested for establishing a connection and transferring data. @apple_inc_tn3151_2023
 
@@ -109,7 +109,7 @@ The `TransportProtocol` itself is an enum, where each case is representing a tra
 
 Since #gls("quic") has built in support for secure connections and requires #gls("tls") v1.3 a secure identity composed of a certificate and a private key has been created and added to the applications bundle. 
 
-After adding it to the bundle @apple_inc_bundle_nodate the application must read the secure identity and add it to #gls("quic")'s `NWParameters`  `securityProtocolOptions` for client and server.
+After adding it to the bundle @apple_inc_bundle_2025 the application must read the secure identity and add it to #gls("quic")'s `NWParameters`  `securityProtocolOptions` for client and server.
 
 #figure(
     align(
@@ -165,7 +165,7 @@ The clients instantiate a `NWBrowser` object used to browse for available networ
 
 ==== Adding local domains to Info.plist <adding_local_domains>
 
-Bonjour services which are browsed for must be listed in the Info.plist using the `NSBonjourServices` key. The format is similar to the ones used to configure the `NWBrowser` and `NWListener` objects, composed of the application and transport protocol like "\_myservice.\_tcp". The Info.plist file is an information property list file that contains information and configuration about the application bundle @apple_inc_information_nodate. 
+Bonjour services which are browsed for must be listed in the Info.plist using the `NSBonjourServices` key. The format is similar to the ones used to configure the `NWBrowser` and `NWListener` objects, composed of the application and transport protocol like "\_myservice.\_tcp". The Info.plist file is an information property list file that contains information and configuration about the application bundle @apple_inc_information_2025. 
 
 In the case of the test application the aforementioned key contains the following entries.
 
@@ -184,7 +184,7 @@ Local advertisers are displayed based on their human readable service instance n
   caption: [Graphic showing the Bonjour naming convention. @apple_inc_bonjour_2013]
 )<fig:bonjour_naming>
 
-In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in @fig:browser_view @apple_inc_uikit_nodate. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
+In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in @fig:browser_view @apple_inc_uikit_2025. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
 
 #figure(
     align(

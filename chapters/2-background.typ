@@ -6,25 +6,25 @@ This section tries to describe and familiarize with concepts of networking topol
 
 == Infrastructure Networks 
 
-The #gls("nist") defines infrastructure networks as "a wireless network that requires the use of an infrastructure device, such as an access point or a base station, to facilitate communication between client devices" @nist_infrastructure_nodate. Using underlying infrastructure that spans over wide areas let users communicate to seemingly anywhere. This is achieved due to a widespread net of connected computers called the internet, which is defined by the #gls("ietf") as "the single, interconnected, worldwide system of commercial, governmental, educational, and other computer networks that share (a) the protocol suite specified by the #gls("iab") (#gls("rfc", long: true) 2026) and (b) the name and address spaces managed by the #gls("icann") @shirey_internet_2007. While the user is connected he can communicate to nearly anywhere but when out of reach of the next entry point the user can not even transfer data to nearby device, no matter how close these might be. 
+The #gls("nist") defines infrastructure networks as "a wireless network that requires the use of an infrastructure device, such as an access point or a base station, to facilitate communication between client devices" @nist_infrastructure_2018. Using underlying infrastructure that spans over wide areas let users communicate to seemingly anywhere. This is achieved due to a widespread net of connected computers called the internet, which is defined by the #gls("ietf") as "the single, interconnected, worldwide system of commercial, governmental, educational, and other computer networks that share (a) the protocol suite specified by the #gls("iab") (#gls("rfc", long: true) 2026) and (b) the name and address spaces managed by the #gls("icann") @shirey_internet_2007. While the user is connected he can communicate to nearly anywhere but when out of reach of the next entry point the user can not even transfer data to nearby device, no matter how close these might be. 
 
 == Ad-hoc Networks
 
-The #gls("nist") defines ad-hoc networks as "a wireless network that allows easy connection establishment between wireless client devices in the same physical area without the use of an infrastructure device, such as an access point or a base station" @nist_adhoc_nodate. Even when the next entry point to the internet is out of reach nearby devices can communicate with each other but are limited to the nodes that form this new separate network. 
+The #gls("nist") defines ad-hoc networks as "a wireless network that allows easy connection establishment between wireless client devices in the same physical area without the use of an infrastructure device, such as an access point or a base station" @nist_adhoc_2022. Even when the next entry point to the internet is out of reach nearby devices can communicate with each other but are limited to the nodes that form this new separate network. 
 
 == Satellite phones<satellite>
 
-While satellite phones seemingly solve the mentioned problems they are not widely spread in the day-to-day use and only used for emergency services or roadside assistance in modern iPhones @apple_inc_connect_2025. Another problem that is increasingly present is space debris which has more than doubled since 2007 and is yet to increase with more and more space missions emerging. These junks of different parts of satellites or rockets can potentially destroy more satellites which again leads to more space debris or outages in GPS or satellite phoning services @european_space_agency_about_nodate. 
+While satellite phones seemingly solve the mentioned problems they are not widely spread in the day-to-day use and only used for emergency services or roadside assistance in modern iPhones @apple_inc_connect_2025. Another problem that is increasingly present is space debris which has more than doubled since 2007 and is yet to increase with more and more space missions emerging. These junks of different parts of satellites or rockets can potentially destroy more satellites which again leads to more space debris or outages in GPS or satellite phoning services @european_space_agency_about_2017. 
 
 === Starlink Direct to Cell<starlink>
 
-While Starlink operates on similar ideas they offer multiple advantages over normal geostationary satellites. While geostationary satellites orbit at 35.786 kilometers Starlink satellites orbit much closer at about 550 kilometers from the Earth reducing latency and decreasing space traffic in the geostationary field. Starlink also claims that their satellites include a collision avoidance system which notices potential collisions and actively dodges the other object @starlink_satellite_nodate.
+While Starlink operates on similar ideas they offer multiple advantages over normal geostationary satellites. While geostationary satellites orbit at 35.786 kilometers Starlink satellites orbit much closer at about 550 kilometers from the Earth reducing latency and decreasing space traffic in the geostationary field. Starlink also claims that their satellites include a collision avoidance system which notices potential collisions and actively dodges the other object @starlink_satellite_2025.
 
 #figure(
     box(stroke: gray, inset: 1em,
       image("/figures/starlink.png", width: 55%)
     ),
-    caption: [Abstract structure of Starlink's network. @starlink_satellite_nodate]
+    caption: [Abstract structure of Starlink's network. @starlink_satellite_2025]
   )<fig:starlink>
 
 
@@ -34,7 +34,7 @@ While <satellite> and <starlink> solve the issue of dead spots, they also rely o
 
 === #gls("wifi")
 
-#gls("wifi") is a trademark for #gls("ieee") wireless communication standard 802.11 based technologies which already exists for over two decades. The #gls("ieee") 802.11 standard defines the protocols that are used to establish a connection with current #gls("wifi") wireless nodes, including routers or access points whereas the correlating #gls("wifi") versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_nodate.
+#gls("wifi") is a trademark for #gls("ieee") wireless communication standard 802.11 based technologies which already exists for over two decades. The #gls("ieee") 802.11 standard defines the protocols that are used to establish a connection with current #gls("wifi") wireless nodes, including routers or access points whereas the correlating #gls("wifi") versions is just used for marketing purposes and matches an underlying 802.11 specification @wi-fi_alliance_discover_2023 @cisco_systems_inc_what_2025.
 
 #figure(
   table(
@@ -56,7 +56,7 @@ Bluetooth a short range wireless technology enables connection between two nearb
 
 === LoRaWan
 
-LoRaWan specification is a Low Power, Wide Area networking specification created to connect #gls("iot") devices to the internet. The specification features key requirements for the #gls("iot") use such as bi-directional communication, end-to-end security or location services. Also this specification is optimized to use little energy consumption since LoRaWan usually target #gls("iot") devices that are far away and not connected to any cables. It normally operates in unlicensed frequency bands and is capable of communicating up to 15 kilometers in rural areas. While this key features would also perfectly suit #gls("ios") #gls("ptp") communication no support for this technology is given on iPhones @lora_alliance_what_nodate.
+LoRaWan specification is a Low Power, Wide Area networking specification created to connect #gls("iot") devices to the internet. The specification features key requirements for the #gls("iot") use such as bi-directional communication, end-to-end security or location services. Also this specification is optimized to use little energy consumption since LoRaWan usually target #gls("iot") devices that are far away and not connected to any cables. It normally operates in unlicensed frequency bands and is capable of communicating up to 15 kilometers in rural areas. While this key features would also perfectly suit #gls("ios") #gls("ptp") communication no support for this technology is given on iPhones @lora_alliance_what_2024.
 
 #figure(
     box(stroke: gray, inset: 1em,
@@ -78,11 +78,11 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
 
 === #gls("nfc")
 
-#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_nodate. Apple makes this technology also accessible to #gls("ios") and #gls("ipados") developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_nodate. 
+#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_2025. Apple makes this technology also accessible to #gls("ios") and #gls("ipados") developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_2025. 
 
 === #gls("uwb")
 
-#gls("uwb") in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. Apple allows developers to access their #gls("uwb") interface on iPhones and Apple Watches through the Nearby Interaction framework @apple_inc_nearby_nodate which is built to locate nearby devices also using the distance and direction.
+#gls("uwb") in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. Apple allows developers to access their #gls("uwb") interface on iPhones and Apple Watches through the Nearby Interaction framework @apple_inc_nearby_2025 which is built to locate nearby devices also using the distance and direction.
 
 == #gls("ios")
 
@@ -120,7 +120,7 @@ The Transport Layer "divides application data into packets, adds a destination a
 
 ====== Nagles Algorithm
 
-Due to the 20 byte #gls("tcp") header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the #gls("tcp") protocol. This algorithm therefore inhibits the sending of new #gls("tcp") segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on #gls("ios") systems @apple_inc_network_nodate-1 and while testing the prototype has lead to highly reduced #gls("ip") package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
+Due to the 20 byte #gls("tcp") header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the #gls("tcp") protocol. This algorithm therefore inhibits the sending of new #gls("tcp") segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on #gls("ios") systems @apple_inc_network_2025-1 and while testing the prototype has lead to highly reduced #gls("ip") package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
 
 ===== #gls("udp")
 
