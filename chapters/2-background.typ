@@ -78,11 +78,11 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
 
 === #gls("nfc")
 
-#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_2025. Apple makes this technology also accessible to #gls("ios") and #gls("ipados") developers but explicitely states that it is not supported in other Apple platforms @apple_inc_nfc_2025. 
+#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_2025. Apple makes this technology also accessible to #gls("ios") and #gls("ipados") developers but explicitely states that it is not supported in other Apple platforms #footnote("https://developer.apple.com/design/human-interface-guidelines/nfc"). 
 
 === #gls("uwb")
 
-#gls("uwb") in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. Apple allows developers to access their #gls("uwb") interface on iPhones and Apple Watches through the Nearby Interaction framework @apple_inc_nearby_2025 which is built to locate nearby devices also using the distance and direction.
+#gls("uwb") in general is a radio technology focused on precise ranging and locating using a low energy density over a large radio spectrum @android_developers_ultra-wideband_2025. Apple allows developers to access their #gls("uwb") interface on iPhones and Apple Watches through the Nearby Interaction framework #footnote("https://developer.apple.com/nearby-interaction/") which is built to locate nearby devices also using the distance and direction.
 
 == #gls("ios")
 
@@ -120,7 +120,7 @@ The Transport Layer "divides application data into packets, adds a destination a
 
 ====== Nagles Algorithm
 
-Due to the 20 byte #gls("tcp") header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the #gls("tcp") protocol. This algorithm therefore inhibits the sending of new #gls("tcp") segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on #gls("ios") systems @apple_inc_network_2025-1 and while testing the prototype has lead to highly reduced #gls("ip") package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
+Due to the 20 byte #gls("tcp") header there has been a relatively high overhead when sending small packages which in worst case could lead to congestion collapse considering the error prevention of the #gls("tcp") protocol. This algorithm therefore inhibits the sending of new #gls("tcp") segments as long as no previously transmitted data stays unacknowledged. This algorithm is enabled by default on #gls("ios") systems #footnote("https://developer.apple.com/documentation/network/nwprotocoltcp/options/nodelay") and while testing the prototype has lead to highly reduced #gls("ip") package number sent compared to the data slices sent from the Application Layer @nagle_congestion_1984. 
 
 ===== #gls("udp")
 
