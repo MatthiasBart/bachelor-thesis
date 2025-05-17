@@ -8,7 +8,7 @@ After discussing the broad approach to testing in @concept @fig:implementation_o
   box(stroke: gray, inset: 1em,
     image("/figures/implementation_obfuscated.jpg", width: 75%)
   ),
-  caption: [Abstract representation of scientific concept]
+  caption: [Abstract representation of testing concept without implementation details.]
 )<fig:implementation_obfuscated>
 
 == Prototype 
@@ -25,7 +25,7 @@ This view is the first a tester sees when opening the application and is respons
 
 #figure(
   image("/figures/decision.PNG", width: 20%),
-  caption: [Screenshot of decision screen.]
+  caption: [Screenshot of decision screen to select server/client configuration.]
 )<fig:decision_view>
 
 ==== Server View
@@ -34,7 +34,7 @@ The server views purpose is to present the user the state of each connection and
 
 #figure(
   image("/figures/server.PNG", width: 20%),
-  caption: [Screenshot of server screen.]
+  caption: [Screenshot of server screen showing underlying protocols and associated metrics.]
 )<fig:server_view>
 
 ==== Client Views
@@ -47,7 +47,7 @@ The browser view lists all nearby servers found. Through a tap on an item the cl
 
 #figure(
   image("/figures/browser.PNG", width: 20%),
-  caption: [Screenshot of browser screen.]
+  caption: [Screenshot of browser screen to select nearby advertisers.]
 )<fig:browser_view>
 
 ===== Testing View
@@ -56,7 +56,7 @@ The testing views purpose is to present the user the state of each connection an
 
 #figure(
   image("/figures/testing.PNG", width: 20%),
-  caption: [Screenshot of testing screen.]
+  caption: [Screenshot of testing screen to start testing and display associated information.]
 )<fig:testing_view>
 
 === Networking Frameworks 
@@ -184,7 +184,7 @@ Local advertisers are displayed based on their human readable service instance n
   caption: [Graphic showing the Bonjour naming convention. @apple_inc_bonjour_2013]
 )<fig:bonjour_naming>
 
-In case of this test application the Bonjour service name is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" which can be seen in @fig:browser_view @apple_inc_uikit_2025. This name is extracted from the bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view. 
+In case of this test application the Bonjour service name od the server device is configured using the `UIDevice.current.name` which represents a generic device name like "iPad" or "iPhone" @apple_inc_uikit_2025. This name is extracted from the Bonjour `NWEndpoint` on the client side and listed in the Browser View @fig:browser_view so the user can choose the server device he wants to test. 
 
 #figure(
     align(
@@ -300,9 +300,9 @@ Data transfer metrics of three different transport protocols will be tested. #gl
     columns: (auto, auto), 
     inset: 10pt,
     table.header([*Metrics*], [*Calculation*]),
-    [#gls("rtt") (ms)], [$ overline(R T T) =  1 / N sum_(i=0)^N R T T_i $],
-    [Jitter (ms)], [$ J i t t e r = sqrt(1/N sum_(i=0)^N (R T T_i - overline(R T T))^2)$],
-    [Data Rate (Mbps)], [$ D a t a R a t e = (c o u n t * s i z e) / (d u r a t i o n) $]
+    [#gls("rtt") (ms)], [$overline(R T T) =  1 / N sum_(i=0)^N R T T_i$],
+    [Jitter (ms)], [$J i t t e r = sqrt(1/N sum_(i=0)^N (R T T_i - overline(R T T))^2)$],
+    [Data Rate (Mbps)], [$D a t a R a t e = (c o u n t * s i z e) / (d u r a t i o n)$]
   ),
   caption: [Metrics used to evaluate protocols.]
 )
@@ -324,7 +324,7 @@ Testing is done using a prototype application written in SwiftUI enabling the us
   caption: [Definition of testing scenarios and variations.]
 )
 
-After getting more precise on how testing will be done the aforementioned @fig:implementation_obfuscated can be filled out as follows.
+After getting more precise on how testing will be done the aforementioned @fig:implementation_obfuscated can be filled out as follows including the specific testing environments, measured data and protocol stack.
 
 #figure(
   box(stroke: gray, inset: 1em,
@@ -333,7 +333,7 @@ After getting more precise on how testing will be done the aforementioned @fig:i
   caption: [Abstract representation of scientific concept]
 )<fig:implementation>
 
-
+//TODO 
 
 //The QUIC protocol has significant advantages over #gls("tcp"). If you’re building a custom network protocol, consider using QUIC instead of #gls("tcp"). https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
 
