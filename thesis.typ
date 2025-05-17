@@ -79,3 +79,5 @@
 
 #include "./chapters/glossary.typ"
 #pagebreak()
+
+//TODO: Specify the title, subtitle, author, submission date, study, language, your name, and supervisor/advisor in the main thesis.typ file. Then compile with typst compile thesis.typ. Finally, remove all TODOs (todo marcos) within your typst ource code.

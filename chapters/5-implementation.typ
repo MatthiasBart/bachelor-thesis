@@ -159,10 +159,6 @@ The clients instantiate a `NWBrowser` object used to browse for available networ
     ),
 ) <lst:start_connection>
 
-// ==== Injecting a concrete Implementation of a Protocol 
-// //TODO
-// injecting ConnectionImpl to Client and serverimpl so i can create a new object inside
-
 ==== Adding local domains to Info.plist <adding_local_domains>
 
 Bonjour services which are browsed for must be listed in the Info.plist using the `NSBonjourServices` key. The format is similar to the ones used to configure the `NWBrowser` and `NWListener` objects, composed of the application and transport protocol like "\_myservice.\_tcp". The Info.plist file is an information property list file that contains information and configuration about the application bundle #footnote("https://developer.apple.com/documentation/bundleresources/information-property-list"). 

@@ -52,7 +52,7 @@ The #gls("wifi") Direct trademark enables #gls("wifi") devices to connect direct
 
 === Bluetooth
 
-Bluetooth a short range wireless technology enables connection between two nearby devices without relying on supporting infrastructure very similar to #gls("wifi") Direct. The protocol operates on 2.4 GHz and it features two separate standards today, Bluetooth Classic and #gls("ble", long: true) which is optimized for low energy consumption. Today Bluetooth is mostly used to connect computers to external peripherals like mice, keyboards or headphones. Using Bluetooth for data transfer is not preferred since its data rate is very limited. @intel_corporation_what_2022 @cybersecurity__infrastructure_security_agency_understanding_2021. The benefit of using Bluetooth is its wide spread and compatibility between different vendors. 
+Bluetooth a short range wireless technology enables connection between two nearby devices without relying on supporting infrastructure very similar to #gls("wifi") Direct. The protocol operates on 2.4 GHz and it features two separate standards today, Bluetooth Classic and #gls("ble", long: true) which is optimized for low energy consumption. Today Bluetooth is mostly used to connect computers to external peripherals like mice, keyboards or headphones. Using Bluetooth for data transfer is not preferred since its data rate is very limited. @intel_corporation_what_2022 @cybersecurity_and_infrastructure_security_agency_understanding_2021. The benefit of using Bluetooth is its wide spread and compatibility between different vendors. 
 
 === LoRaWan
 
