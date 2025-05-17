@@ -56,9 +56,6 @@
 #show heading.where(level: 5): set heading(numbering: none)
 #show heading.where(level: 6): set heading(numbering: none)
 
-#include "./chapters/acknowledgements.typ"
-#pagebreak()
-
 #include "./chapters/1-intro.typ"
 #pagebreak()
 
