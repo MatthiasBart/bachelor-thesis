@@ -16,7 +16,7 @@ Some years later in 2013 ShAir was developed as by #cite(<dubois_shair_2013>, fo
     box(stroke: gray, inset: 1em,
       image("/figures/shair.png", width: 75%)
     ),
-    caption: [12 Devices sharing images using local radio broadcasting. @dubois_shair_2013]
+    caption: flex-caption([12 Devices sharing images using local radio broadcasting. @dubois_shair_2013], [Data sharing via local radio broadcast. @dubois_shair_2013])
   )<fig:shair>
 
 Since then support for direct #gls("ptp") connections has matured on various mobile operating systems, including #gls("ios") and its Multipeer Connectivity Framework which allows nodes to advertise itself, discover nearby advertisers and attempt to connect to detected nearby advertiser. The concept of that model motivated #cite(<newport_gossip_2017>, form: "author") to develop a formal definition and comparison of gossip algorithms. He describes and analyses differences in algorithm parameters and how they influence data spreading in a #gls("manet") where the goal is that messages spread to the entire network (#cite(<newport_gossip_2017>, form: "year")). The author claims that these algorithms can help to establish peer-to-peer meshes that support infrastructure-free networking and communication. He presents the discontinued FireChat application as an example which offered group chats using smartphone peer-to-peer services such as Bluetooth, #gls("wifi") and the Multipeer Connectivity Framework. According to the author this application has been adopted in multiple governmental protest or festivals that were located out of reach of cell towers, but unfortunately did not release a new version since 2018.
@@ -30,11 +30,6 @@ Although approaches existed to also introduce #gls("d2d") communication to the c
 == Apple Ecosystem and TU Darmstadt
 
 From 2018 on the #gls("owl") project by #gls("seemoo") at TU Darmstadt contributed several papers to research on Apple's wireless ecosystem @stute_open_2018. Their goal was to assess security and privacy concerns as well as enable cross-platform compatibility with other vendors. They started to investigate #gls("awdl") which is heavily used in Apple's Continuity platform. While reverse engineering the 802.11 #gls("wifi") based protocol the authors stumbled across various security concerns which they mainly focused on next to Apple's #gls("ble") usage in following papers until 2021. 
-
-#figure(
-  image("/figures/owl.svg", width: 25%),
-  caption: [Logo of the #gls("owl") project. @stute_open_2018]
-)<fig:owl>
 
 On the projects first conference the authors presented the operations of the undocumented #gls("awdl") protocol. They used binary and runtime analyses to reconstruct the daemons and frameworks involved in communicating via #gls("awdl") and found that each #gls("awdl") node announces a sequence of Availability Windows indicating that it is ready to communicate with other #gls("awdl") nodes. In the process they also detected that #gls("awdl") connections do not feature any security mechanisms leaving authentication or encryption to the transport and application layers, which the authors claim to be an informed decision by Apple @stute_one_2018.
 

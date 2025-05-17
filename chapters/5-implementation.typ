@@ -280,12 +280,9 @@ Data transfer metrics of three different transport protocols will be tested. #gl
 
 #figure(
   table(
-    columns: (auto),
+    columns: (auto, auto, auto, auto),
     inset: 10pt,
-    table.header(
-    [*Protocols*]
-    ),
-    [#gls("tcp")], [#gls("udp")], [#gls("quic")]
+    [*Protocols*], [#gls("tcp")], [#gls("udp")], [#gls("quic")]
   ), caption: [Transport Protocols used for testing.],
 ) 
 
@@ -326,7 +323,7 @@ After getting more precise on how testing will be done the aforementioned @fig:i
   box(stroke: gray, inset: 1em,
     image("/figures/implementation.jpg", width: 75%)
   ),
-  caption: [Abstract representation of testing concept including implementation details and protocol stack.]
+  caption: flex-caption([Abstract representation of testing concept including implementation details and protocol stack.], [Abstract representation of testing concept including details.])
 )<fig:implementation>
 
 After collecting the described data like shown above they will be visualized and used to test the hypotheses in the following @evaluation.

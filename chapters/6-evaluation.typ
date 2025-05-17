@@ -2,10 +2,10 @@
 
 = Results and Evaluation <evaluation>
 
-The following section shows the scenarios the testings were executed and interprets the tested metrics. Testing has been done on 1.Mai 2025 in Vienna around noon. The weather was sunny and it had around 25 degrees celsius.
+The following section shows the scenarios the testings were executed at and interprets the tested metrics. Testing has been done on 1.Mai 2025 in Vienna around noon. The weather was sunny and it had around 25 degrees celsius.
 
 #figure(
-  image("/figures/weather.png", width: 60%),
+  image("/figures/weather.png", width: 48%),
   caption: [Weather at day of testing.]
 )<fig:weather>
 
@@ -14,7 +14,7 @@ The following section shows the scenarios the testings were executed and interpr
 Testing on the field started at around 11:38 and ended at around 12:15 at the coordinates `48,22695° N, 16,24221° E`. 
 
 #figure(
-  image("/figures/field.jpeg", width: 75%),
+  image("/figures/field.jpeg", width: 48%),
   caption: [Field at time of testing.]
 )<fig:field>
 
@@ -23,7 +23,7 @@ Testing on the field started at around 11:38 and ended at around 12:15 at the co
 Testing in the forest started at around 12:21 and ended at around 12:37 at the coordinates `48,22605° N, 16,24379° E`.
 
 #figure(
-  image("/figures/forest.jpeg", width: 35%),
+  image("/figures/forest.jpeg", width: 30%),
   caption: [Forest at time of testing.]
 )<fig:forest>
 
@@ -32,7 +32,7 @@ Testing in the forest started at around 12:21 and ended at around 12:37 at the c
 Testing in the inner city of Vienna started at around 13:31 and ended at around 13:47 at the coordinates `48,20837° N, 16,37043° E`.
 
 #figure(
-  image("/figures/inner_city.jpeg", width: 35%),
+  image("/figures/inner_city.jpeg", width: 30%),
   caption: [Inner city of vienna at time of testing.]
 )<fig:inner_city>
 
@@ -41,7 +41,7 @@ Testing in the inner city of Vienna started at around 13:31 and ended at around 
 Testing in the Underground started at around 14:02 and ended at around 14:12 at the coordinates `48,20815° N, 16,37162° E`.
 
 #figure(
-  image("/figures/underground.jpeg", width: 75%),
+  image("/figures/underground.jpeg", width: 48%),
   caption: [Underground at time of testing.]
 )<fig:underground>
 
@@ -156,7 +156,7 @@ While transfer speed decreased over distance no effect on the #gls("rtt") can be
 
 === Differences of Field and Underground <underground_field>
 
-The first testing scenario was the field. The initial planned distances were 1/10/30 meters but during testing at the distance of 10 meters on the field the connection was so unstable that it was nearly impossible to get data so we decided to change the distance of thirty to five meters. The last testing scenario was the underground where testing overall went very well and we gave some bigger distances another try. There distances over thirty five meters were no problem at all and transferred data super fast. As already mentioned the good connection in the underground could be due to the metal plates mounted on the roof and the walls that perfectly reflect electromagnetic signals and might act as a big antenna. On the other extreme on the field the bad performance could be attributed to the extreme heat since it also was the only place with direct sun light exposure which is generally known to heat up smartphone very much. 
+The first testing scenario was the field. The initial planned distances were 1/10/30 meters but during testing at the distance of 10 meters on the field the connection was so unstable that it was nearly impossible to get data so we decided to change the distance of thirty to five meters. The last testing scenario was the underground where testing overall went very well and we gave some bigger distances another try. There distances over thirty five meters were no problem at all and transferred data super fast. As already mentioned the good connection in the underground could be due to the metal plates mounted on the roof and the walls that perfectly reflect electromagnetic signals and might act as a big antenna. On the other extreme on the field the bad performance could be attributed to the extreme heat since it also was the only place with direct sun light exposure which is generally known to heat up smartphones very much. 
 
 // #todo([
 //   Describe (proof) how your implementation really solved the stated problem. I.e.

@@ -1,5 +1,8 @@
 func createConnection(with browserResult: NWBrowser.Result) -> Error? {
-    let nwConnection = NWConnection(to: browserResult.endpoint, using: transportProtocol.parameters)
+    let nwConnection = NWConnection(
+        to: browserResult.endpoint,
+        using: transportProtocol.parameters
+    )
         
     self.connection?.cancel()
     self.connection = nil

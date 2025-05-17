@@ -14,10 +14,10 @@ Fortunately, many different technologies already exist to gain access to wide ar
 As of 2024 4 billion people worldwide are carrying smartphones @statista_research_department_number_2024 with them. A large portion of them are developed and manufactured by one of the most valuable companies in the world today. Since 2007 when the first iPhone was released on 27th of June Apple has sold more than 2.8 billion devices @sherif_apple_2025. This makes #gls("ios") one of the most used mobile operating systems worldwide with a current market share of 27% @sherif_market_2025. #gls("ios") also already utilizes several #gls("ptp") technologies which are predominantly used by Apples Continuity @apple_inc_continuity_2024 which bundles applications like AirDrop or AirPlay, #gls("uc"), #gls("ho") or #gls("wifi") #gls("pws") for contacts that want to join your network. 
 
 #figure(
-    box(stroke: gray, inset: 1em,
+    box(stroke: gray, inset: 0.3em,
       image("/figures/continuity_owl_summary.png", width: 75%)
     ),
-    caption: [Summary of technologies encompassed by the Continuity platform. @stute_usenix_2021]
+    caption: flex-caption([Summary of technologies encompassed by the Continuity platform. @stute_usenix_2021], [Summary of Continuity platform. @stute_usenix_2021])
   )<fig:continuity_summary>
 
 Apple already makes use of #gls("ptp") communications and also offers developers a way to do so with various frameworks that can be used. Under the hood of Apples Continuity platform however there mostly two #gls("ptp") technologies used, #gls("ble") and a proprietary #gls("wifi")-Direct alternative #gls("awdl"). #gls("awdl") can originally only communicate with devices of the Apple ecosystem and although Bluetooth is more versatile, compatible with devices from other vendors and has improved range and speed in mobile end devices in recent years, #gls("awdl") is the recommended technology to establish direct links between #gls("ios") devices @apple_inc_peer--peer_2023.
