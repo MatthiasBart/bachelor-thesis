@@ -78,7 +78,7 @@ LoRaWan specification is a Low Power, Wide Area networking specification created
 
 === #gls("nfc")
 
-#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards @nfc_forum_nfc_2025. Apple makes this technology also accessible to #gls("ios") and #gls("ipados") developers but explicitely states that it is not supported in other Apple platforms #footnote("https://developer.apple.com/design/human-interface-guidelines/nfc"). 
+#gls("nfc") is a communication technology which operates at a base frequency of 13.56 Mhz. It can transfer data with a typical range of 2cm and data rates up to 1.7 Mbps. The technology is also used to connect to non powered peripherals such as bank cards #footnote("https://nfc-forum.org/learn/nfc-technology/"). Apple makes this technology also accessible to #gls("ios") and #gls("ipados") developers but explicitely states that it is not supported in other Apple platforms #footnote("https://developer.apple.com/design/human-interface-guidelines/nfc"). 
 
 === #gls("uwb")
 
