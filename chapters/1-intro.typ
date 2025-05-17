@@ -42,7 +42,7 @@ This research should help assess feasibility of applications that want to utiliz
 
 Which aspects influence the #gls("ptp") #gls("awdl") connection quality on #gls("ios") devices and what are they capable of?
 
-*Hypothesis*
+*Hypotheses*
 
 $H_1$
 
