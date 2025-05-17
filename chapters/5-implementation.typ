@@ -24,7 +24,12 @@ The #gls("gui") is developed using SwiftUI #footnote("https://developer.apple.co
 This view is the first a tester sees when opening the application and is responsible for configuring the next steps of testing. Depending on the decision the tester makes the application is initialized as a client that browses for nearby services or as a server that advertises a service to nearby clients. 
 
 #figure(
-  image("/figures/decision.PNG", width: 20%),
+  box(
+    stroke: gray,
+    height: 193pt,
+    width: 20%,
+    image("/figures/decision.PNG", width: 98%)
+  ),
   caption: [Screenshot of decision screen to select server/client configuration.]
 )<fig:decision_view>
 

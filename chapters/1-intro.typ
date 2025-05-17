@@ -14,9 +14,7 @@ Fortunately, many different technologies already exist to gain access to wide ar
 As of 2024 4 billion people worldwide are carrying smartphones @statista_research_department_number_2024 with them. A large portion of them are developed and manufactured by one of the most valuable companies in the world today. Since 2007 when the first iPhone was released on 27th of June Apple has sold more than 2.8 billion devices @sherif_apple_2025. This makes #gls("ios") one of the most used mobile operating systems worldwide with a current market share of 27% @sherif_market_2025. #gls("ios") also already utilizes several #gls("ptp") technologies which are predominantly used by Apples Continuity @apple_inc_continuity_2024 which bundles applications like AirDrop or AirPlay, #gls("uc"), #gls("ho") or #gls("wifi") #gls("pws") for contacts that want to join your network. 
 
 #figure(
-    box(stroke: gray, inset: 0.3em,
-      image("/figures/continuity_owl_summary.png", width: 75%)
-    ),
+    image("/figures/continuity_owl_summary.png", width: 75%),
     caption: flex-caption([Summary of technologies encompassed by the Continuity platform. @stute_usenix_2021], [Summary of Continuity platform. @stute_usenix_2021])
   )<fig:continuity_summary>
 
@@ -38,7 +36,8 @@ After all the described aspects have been taken into consideration, the Network 
 
 This research should help assess feasibility of applications that want to utilize #gls("awdl") connections on iPhones. It will compare different transport layer protocols (#gls("tcp"), #gls("udp") and #gls("quic")) in different locations that represent common places (City, Underground, Field and Forrest) to cover various characteristics of real life scenarios. The tests will vary in distance, size of packages and number of packages. The Network Framework is used to quantify the connection quality through metrics like #gls("rtt"), Jitter, package loss and data transfer speed.
 
-*Research Questions*
+#pagebreak()
+*Research Question*
 
 Which aspects influence the #gls("ptp") #gls("awdl") connection quality on #gls("ios") devices and what are they capable of?
 
