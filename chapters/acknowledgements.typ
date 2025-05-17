@@ -1,4 +1,3 @@
 #import "global.typ": *
 
-#todo([ Optionally, you might add an *Acknowledgements* section (in German
-  *Danksagung*) to say thank you or give credits to someone. ])
+I would like to express my sincere gratitude to all those who have supported and contributed to this project.

@@ -20,7 +20,7 @@
       key: "manet", short: "MANET", long: "Mobile Ad Hoc Networks", desc: [Decentralized type of a wireless network. Each node participates in routing.]
     ), 
     (
-      key: "d2d", short: "D2D", long: "device-to-device", desc: [Used to describe communication between user equipments in cellular networks without using an intermediary base station.]
+      key: "d2d", short: "D2D", long: "Device-to-Device", desc: [Used to describe communication between user equipments in cellular networks without using an intermediary base station.]
     ), 
     (
       key: "ue", short: "UE", long: "User Equipment", desc: [Any device used directly by an end user in cellular networks.]
@@ -194,13 +194,13 @@
       key: "wwdc", short: "WWDC", long: "World Wide Developer Conference", desc: [Conference held annually by Apple to share new technology.]
     ), 
     (
-      key: "xcode", short: "XCode", desc: [Integrated development environment used to develop applications for the Apple ecosystem.]
+      key: "xcode", short: "Xcode", desc: [Integrated development environment used to develop applications for the Apple ecosystem.]
     ), 
     (
       key: "swift", short: "Swift", docs: [General purpose language initially developed by Apple maintained by an open source community.]
     ),
     (
-      key: "csv", short: "CSV", long: "Comma-separated Values ", desc: [A human readable, plain text file format using commas to separate the values.],
+      key: "csv", short: "CSV", long: "Comma Separated Values ", desc: [A human readable, plain text file format using commas to separate the values.],
     )
 )
 

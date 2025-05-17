@@ -12,7 +12,7 @@ The #gls("nist") defines infrastructure networks as "a wireless network that req
 
 The #gls("nist") defines ad-hoc networks as "a wireless network that allows easy connection establishment between wireless client devices in the same physical area without the use of an infrastructure device, such as an access point or a base station" @nist_adhoc_2022. Even when the next entry point to the internet is out of reach nearby devices can communicate with each other but are limited to the nodes that form this new separate network. 
 
-== Satellite phones<satellite>
+== Satellite Phones<satellite>
 
 While satellite phones seemingly solve the mentioned problems they are not widely spread in the day-to-day use and only used for emergency services or roadside assistance in modern iPhones @apple_inc_connect_2025. Another problem that is increasingly present is space debris which has more than doubled since 2007 and is yet to increase with more and more space missions emerging. These junks of different parts of satellites or rockets can potentially destroy more satellites which again leads to more space debris or outages in GPS or satellite phoning services @european_space_agency_about_2017. 
 
@@ -28,7 +28,7 @@ While Starlink operates on similar ideas they offer multiple advantages over nor
   )<fig:starlink>
 
 
-== Specific Ad-hoc technologies 
+== Specific Ad-hoc Technologies 
 
 While <satellite> and <starlink> solve the issue of dead spots, they also rely on infrastructure which needs to be taken care of or can be damaged. The following is an incomprehensive list of ad hoc technologies.
 
