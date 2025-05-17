@@ -249,7 +249,7 @@ To transfer testing data the `NWConnection` class and its synchronous `send` and
       fhjcode(code: read("/code-snippets/startTesting_signature.swift")),
     ),
     caption: flex-caption(
-      [Signature of the startTesting method that is provided by client objects.], [Signature of the startTesting methods.],
+      [Signature of the `startTesting` method that is provided by client objects.], [Signature of the startTesting methods.],
     ),
 ) <lst:startTesting_method>
 
@@ -324,16 +324,16 @@ Testing is done using a prototype application written in SwiftUI enabling the us
   caption: [Definition of testing scenarios and variations.]
 )
 
-After getting more precise on how testing will be done the aforementioned @fig:implementation_obfuscated can be filled out as follows including the specific testing environments, measured data and protocol stack.
+After getting more precise on how testing will be done the aforementioned @fig:implementation_obfuscated can be filled out as follows adding the specific testing environments, measured data and protocol stack.
 
 #figure(
   box(stroke: gray, inset: 1em,
     image("/figures/implementation.jpg", width: 75%)
   ),
-  caption: [Abstract representation of scientific concept]
+  caption: [Abstract representation of testing concept including implementation details and protocol stack.]
 )<fig:implementation>
 
-//TODO 
+After collecting the described data like shown above they will be visualized and used to test the hypotheses in the following @evaluation.
 
 //The QUIC protocol has significant advantages over #gls("tcp"). If you’re building a custom network protocol, consider using QUIC instead of #gls("tcp"). https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api
 

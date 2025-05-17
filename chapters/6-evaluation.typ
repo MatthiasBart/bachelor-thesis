@@ -1,6 +1,6 @@
 #import "global.typ": *
 
-= Results and Evaluation 
+= Results and Evaluation <evaluation>
 
 The following section shows the scenarios the testings were executed and interprets the tested metrics. Testing has been done on 1.Mai 2025 in Vienna around noon. The weather was sunny and it had around 25 degrees celsius.
 
@@ -105,7 +105,7 @@ The second hypothesis claims that #gls("ptp") #gls("awdl") connection quality de
   caption: [#gls("rtt") per protocol and scenario.]
 )<fig:rtt_protocol>
 
-#gls("tcp") has significant lower #gls("rtt") compared to #gls("udp") or #gls("quic") which is attributed to Nagle's Algorithm. What is fascinating however is that #gls("quic") achieves lower #gls("rtt") than #gls("udp") even though #gls("quic") is based on #gls("udp") and includes error correction and reliable delivery. Also previous tests using the testing prototype have shown that #gls("quic") does not implement comparable algorithms like Nagle's Algorithm and always sends the same number of #gls("ip") packages as #gls("udp") does. 
+#gls("tcp") has significant lower #gls("rtt") compared to #gls("udp") or #gls("quic") which is attributed to Nagle's Algorithm. What is fascinating however is that #gls("quic") achieves lower #gls("rtt") than #gls("udp") even though #gls("quic") is based on #gls("udp") and on top includes error correction and reliable delivery. Also previous tests using the testing prototype have shown that #gls("quic") does not implement comparable algorithms like Nagle's Algorithm and always sends the same number of #gls("ip") packages as #gls("udp") does. 
 
 #figure(
   image("/figures/jitter_protocol_scenario.png", width: 75%),
